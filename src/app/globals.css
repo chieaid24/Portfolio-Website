@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,500;1,9..40,500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
 @import "tailwindcss";
 
@@ -11,6 +11,8 @@
   --background-dark: #FFEDD8;
   --custom-red: #FF7D7D;
   --custom-orange: #FFC88A;
+  --light-grey-text: #919191;
+  --dark-grey-text: #383838;
 }
 
 @theme {
@@ -18,12 +20,12 @@
   --color-foreground: var(--foreground);
   --color-custom-red: var(--custom-red);
   --color-custom-orange: var(--custom-orange);
+  --color-light-grey-text: var(--light-grey-text);
+  --color-dark-grey-text: var(--dark-grey-text);
 
   --color-background-light: var(--background-light);
   --color-background-dark: var(--background-dark);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-dm-sans: 'DM Sans', Arial, Helvetica, sans-serif;
+  --font-dm-sans: 'DM Sans';
   --font-italiana: 'Italiana', serif;
 }
 
@@ -37,5 +39,4 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
