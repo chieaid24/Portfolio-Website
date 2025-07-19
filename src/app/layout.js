@@ -8,8 +8,6 @@ const dmSans = DM_Sans({
 });
 
 
-
-
 export const metadata = {
   title: {
     default: "AIDAN CHIEN",
@@ -23,7 +21,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={dmSans.variable}>
       <body
         className={`${dmSans.variable} antialiased`}
       >

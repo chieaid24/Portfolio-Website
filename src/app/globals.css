@@ -13,6 +13,7 @@
   --custom-orange: #FFC88A;
   --light-grey-text: #919191;
   --dark-grey-text: #383838;
+  --dark-grey-footer: #747474;
 }
 
 @theme {
@@ -22,10 +23,11 @@
   --color-custom-orange: var(--custom-orange);
   --color-light-grey-text: var(--light-grey-text);
   --color-dark-grey-text: var(--dark-grey-text);
+  --color-dark-grey-footer: var(--dark-grey-footer);
 
   --color-background-light: var(--background-light);
   --color-background-dark: var(--background-dark);
-  --font-dm-sans: 'DM Sans';
+  --font-dm-sans: 'DM Sans', sans-serif;
   --font-italiana: 'Italiana', serif;
 }
 
