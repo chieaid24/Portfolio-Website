@@ -14,6 +14,7 @@ export default function Footer() {
                     <Link href="mailto:aidan.chien@uwaterloo.ca">
                         <Image
                             src="/grey-email-icon.svg"
+                            alt="Email Icon"
                             width={24}
                             height={24}
                             className="h-[2.6em] w-auto">
@@ -23,6 +24,7 @@ export default function Footer() {
                         target="_blank">
                         <Image
                             src="/linkedin_icon.svg"
+                            alt="LinkedIn Icon"
                             width={24}
                             height={24}
                             className="h-[2.6em] w-auto">
@@ -32,6 +34,7 @@ export default function Footer() {
                         target="_blank">
                         <Image
                             src="/github_icon.svg"
+                            alt="GitHub Icon"
                             width={24}
                             height={24}
                             className="h-[2.8em] w-auto mt-[-5%]">

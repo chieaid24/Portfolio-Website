@@ -2,12 +2,13 @@ import Header from "./components/Header";
 import MaxWidthWrapper from "./components/MaxWidthWrapper";
 import ProjectCard from "./components/ProjectCard";
 import projects from "./data/projects";
+import Footer from "./components/Footer";
 
 
 export default function Home() {
   return (
     <>
-      <div className="bg-background-dark font-dm-sans"> {/**hero div */}
+      <div className="bg-background-dark font-dm-sans text-dark-grey-text"> {/**hero div */}
         <Header />
         <div className="relative min-h-screen w-full">
           <MaxWidthWrapper>
@@ -24,12 +25,12 @@ export default function Home() {
           </MaxWidthWrapper>
         </div>
       </div>
-      <div className="bg-background-light"> {/**project section */}
+      <div className="bg-background-light text-dark-grey-text"> {/**project section */}
         <MaxWidthWrapper>
           <h1 className="font-bold text-7xl pt-15">
             My Projects
           </h1>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 gap-y-20 mt-10 mb-32">
             {projects.map((project) => (
               <ProjectCard
                 key={project.slug}
@@ -43,6 +44,15 @@ export default function Home() {
             ))}
           </div>
         </MaxWidthWrapper>
+        <div className="flex flex-col items-center pt-10 bg-background-dark text-dark-grey-text font-dm-sans text-8xl tracking-tighter font-semibold"> {/**want to cash out? section */}
+            <h1>
+              Want to <span className="animate-pulse gradient-text-custom font-semibold">cash out?</span>
+            </h1>
+            <h1 className="">
+              Let's connect!
+            </h1>
+        </div>
+        <Footer />
       </div>
     </>
   );

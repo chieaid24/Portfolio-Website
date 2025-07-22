@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,500;1,9..40,500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Unna:ital,wght@1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oooh+Baby&display=swap');
 @import "tailwindcss";
 
 
@@ -12,6 +14,7 @@
   --custom-red: #FF7D7D;
   --custom-orange: #FFC88A;
   --light-grey-text: #919191;
+  --card-light-grey: #9C9C9C;
   --dark-grey-text: #383838;
   --dark-grey-footer: #747474;
 }
@@ -22,6 +25,7 @@
   --color-custom-red: var(--custom-red);
   --color-custom-orange: var(--custom-orange);
   --color-light-grey-text: var(--light-grey-text);
+  --color-card-light-grey: var(--card-light-grey);
   --color-dark-grey-text: var(--dark-grey-text);
   --color-dark-grey-footer: var(--dark-grey-footer);
 
@@ -29,6 +33,8 @@
   --color-background-dark: var(--background-dark);
   --font-dm-sans: 'DM Sans', sans-serif;
   --font-italiana: 'Italiana', serif;
+  --font-unna: 'Unna', serif;
+  --font-oh-baby: 'Oooh Baby', cursive;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -41,4 +47,24 @@
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+.unna-italic {
+  font-family: var(--font-unna);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.unna-bold-italic {
+  font-family: var(--font-unna);
+  font-style: italic;
+  font-weight: 700;
+}
+
+
+.gradient-text-custom {
+  background: linear-gradient(90deg, var(--custom-red), var(--custom-orange));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
