@@ -3,6 +3,7 @@ import MaxWidthWrapper from "./components/MaxWidthWrapper";
 import ProjectCard from "./components/ProjectCard";
 import projects from "./data/projects";
 import Footer from "./components/Footer";
+import Link from "next/link"
 
 
 export default function Home() {
@@ -44,14 +45,19 @@ export default function Home() {
             ))}
           </div>
         </MaxWidthWrapper>
-        <div className="flex flex-col items-center pt-10 bg-background-dark text-dark-grey-text font-dm-sans text-8xl tracking-tighter font-semibold"> {/**want to cash out? section */}
-            <h1>
-              Want to <span className="animate-pulse gradient-text-custom font-semibold">cash out?</span>
-            </h1>
-            <h1 className="">
-              Let's connect!
-            </h1>
-        </div>
+          <div className="flex flex-col items-center my-[-10px] pt-10 bg-background-dark text-dark-grey-text font-dm-sans text-8xl tracking-tighter font-semibold"> {/**want to cash out? section */}
+            <div>
+              <Link href="mailto:aidan.chien@uwaterloo.ca"
+              className="group hover:scale-110 hover:translate-y-[-15px] transition-all duration-300 items-center inline-flex flex-col ">
+                <h1>
+                  Want to <span className="group-hover:animate-new-pulse group-hover:gradient-text-red-animated gradient-text-custom font-semibold animated-underline">cash out?</span>
+                </h1>
+                <h1 className="">
+                  Let's connect!
+                </h1>
+              </Link>
+            </div>
+          </div>
         <Footer />
       </div>
     </>

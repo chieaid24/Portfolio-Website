@@ -17,7 +17,7 @@ export default function Footer() {
                             alt="Email Icon"
                             width={24}
                             height={24}
-                            className="h-[2.6em] w-auto">
+                            className="h-[2.6em] w-auto hover:translate-y-[-2px] transition-all duration-200">
                         </Image>
                     </Link>
                     <a href="https://www.linkedin.com/in/aidanchien/"
@@ -27,7 +27,7 @@ export default function Footer() {
                             alt="LinkedIn Icon"
                             width={24}
                             height={24}
-                            className="h-[2.6em] w-auto">
+                            className="h-[2.6em] w-auto hover:translate-y-[-2px] transition-all duration-200">
                         </Image>
                     </a>
                     <a href="https://github.com/chieaid24"
@@ -37,7 +37,7 @@ export default function Footer() {
                             alt="GitHub Icon"
                             width={24}
                             height={24}
-                            className="h-[2.8em] w-auto mt-[-5%]">
+                            className="h-[2.8em] w-auto mt-[-5%] hover:translate-y-[-2px] transition-all duration-200">
                         </Image>
                     </a>
                 </div>

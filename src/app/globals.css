@@ -35,6 +35,9 @@
   --font-italiana: 'Italiana', serif;
   --font-unna: 'Unna', serif;
   --font-oh-baby: 'Oooh Baby', cursive;
+
+  --animate-new-pulse: pulse 1.5s cubic-bezier(0.42, 0, 0.58, 1) infinite
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -67,4 +70,28 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.animated-underline {
+  position: relative;
+  display: inline-block;
+}
+
+
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  width: 98%;
+  height: 5px;
+  bottom: 0;
+  left: 0;
+  background: #ffa185;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease-in-out;
+}
+
+/* Change from .animated-underline:hover to parent hover */
+.group:hover .animated-underline::after {
+  transform: scaleX(1);
 }
