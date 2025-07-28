@@ -20,7 +20,6 @@ export default function Header() {
                 // scrolling up
                 setShowHeader(true);
             }
-
             setLastScrollY(currentScrollY);
         };
         window.addEventListener("scroll", handleScroll);
@@ -56,7 +55,7 @@ export default function Header() {
                     <Link href="/about" className="hover:text-custom-red transition-colors">
                         about
                     </Link>
-                    <Link href="/projects/pmi-auto-generator" target="_blank" rel="noopener noreferrer" className="hover:text-custom-red transition-colors">
+                    <Link href="/documents/Aidan_Chien_resume.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-custom-red transition-colors">
                         resume
                     </Link>
                 </div>

@@ -7,32 +7,6 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
 });
-// const unna = localFont({
-//   src: [
-//     {
-//       path: 'public/fonts/Unna/Unna-Regular.ttf',
-//       weight: '400',
-//       style: 'normal',
-//     },
-//     {
-//       path: './fonts/Unna/Unna-Bold.ttf',
-//       weight: '700',
-//       style: 'normal',
-//     },
-//     {
-//       path: './fonts/Unna/Unna-Italic.ttf',
-//       weight: '400',
-//       style: 'italic',
-//     },
-//     {
-//       path: './fonts/Unna/Unna-BoldItalic.ttf',
-//       weight: '700',
-//       style: 'italic',
-//     },
-//   ],
-//   variable: '--font-your-font',
-//   display: 'swap',
-// })
 
 export const metadata = {
   title: {

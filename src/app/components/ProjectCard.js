@@ -31,7 +31,8 @@ export default function ProjectCard({ title, generated_with, ticket_no, skills_u
                             <Image src="/illu_card_1.svg" 
                             width={459}
                             height={132}
-                            className/>
+                            alt="Project ticket"
+                            />
                             <div className="absolute inset-0 flex flex-col justify-center items-center z-10 text-black w-full ml-[4px]">
                                 <div className="font-bold text-[0.7rem] mb-[-5px] mt-[-5px] text-black opacity-50">
                                     CASHOUT VOUCHER
@@ -42,7 +43,7 @@ export default function ProjectCard({ title, generated_with, ticket_no, skills_u
                                 <div className="overflow-hidden mt-[-5px] w-[240px] h-[30px] opacity-12">
                                     <Image
                                         src="/barcode_hireme.svg"
-                                        alt=""
+                                        alt="Barcode"
                                         width={800}
                                         height={10}
                                         className=""

@@ -1,20 +1,63 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useState } from 'react';
 import Header from "./components/Header";
 import MaxWidthWrapper from "./components/MaxWidthWrapper";
 import ProjectCard from "./components/ProjectCard";
-import projects from "./data/projects";
+import { projects } from "./data/projects"; // Updated import
 import Footer from "./components/Footer";
-import Link from "next/link"
+import Link from "next/link";
+import HeroSlot from "./components/HeroSlot";
 
 
 export default function Home() {
+  const [randomTickets, setRandomTickets] = useState({});
+
+  useEffect(() => {
+    const generateTicketNumbers = () => {
+      const used = new Set();
+      const ticketMap = {};
+
+      projects.forEach((project) => {
+        let ticket;
+        do {
+          const num = Math.floor(Math.random() * 99) + 1;
+          ticket = num < 10 ? `0${num}` : num.toString();
+        } while (used.has(ticket));
+        used.add(ticket);
+        ticketMap[project.slug] = ticket;
+      });
+
+      setRandomTickets(ticketMap);
+    };
+
+    generateTicketNumbers();
+
+    const hash = window.location.hash;
+    if (hash === '#projects') {
+      setTimeout(() => {
+        const section = document.getElementById('projects');
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setTimeout(() => {
+            history.replaceState(null, '', window.location.pathname);
+          }, 1000);
+        }
+      }, 100);
+    }
+  }, []);
+
   return (
     <>
       <div className="bg-background-dark font-dm-sans text-dark-grey-text"> {/**hero div */}
         <Header />
-        <div className="relative min-h-screen w-full">
+        <div id="hero" className="relative min-h-screen w-full">
+
           <MaxWidthWrapper>
             <div className="flex flex-col gap-10 pt-10">
-              <div className="w-[95%] h-110 self-center bg-background-light shadow-[-4px_4px_4px_rgba(0,0,0,0.25)]"> {/* dummy div for the slot machine */}
+              <div className="flex items-center justify-center w-[95%] h-110 self-center bg-background-light shadow-[-4px_4px_4px_rgba(0,0,0,0.25)]"> {/* dummy div for the slot machine */}
+                <HeroSlot />
               </div>
               <h1 className="text-left font-semibold text-4xl">
                 Hi, I'm Aidan, a systems engineer passionate about efficient <span className="text-custom-red">design</span> and <span className="text-custom-red">development</span>.
@@ -26,7 +69,7 @@ export default function Home() {
           </MaxWidthWrapper>
         </div>
       </div>
-      <div className="bg-background-light text-dark-grey-text"> {/**project section */}
+      <div id="projects" className="bg-background-light text-dark-grey-text"> {/**project section */}
         <MaxWidthWrapper>
           <h1 className="font-bold text-7xl pt-15">
             My Projects
@@ -37,27 +80,28 @@ export default function Home() {
                 key={project.slug}
                 title={project.title}
                 generated_with={project.generated_with}
-                ticket_no={project.ticket_no}
+                ticket_no={randomTickets[project.slug] ?? '--'}
                 skills_used={project.skills_used}
                 image={project.image}
                 slug={project.slug}
+                alt={project.title}
               />
             ))}
           </div>
         </MaxWidthWrapper>
-          <div className="flex flex-col items-center my-[-10px] pt-10 bg-background-dark text-dark-grey-text font-dm-sans text-8xl tracking-tighter font-semibold"> {/**want to cash out? section */}
-            <div>
-              <Link href="mailto:aidan.chien@uwaterloo.ca"
+        <div className="flex flex-col items-center my-[-10px] pt-10 bg-background-dark text-dark-grey-text font-dm-sans text-8xl tracking-tighter font-semibold"> {/**want to cash out? section */}
+          <div>
+            <Link href="mailto:aidan.chien@uwaterloo.ca"
               className="group hover:scale-110 hover:translate-y-[-15px] transition-all duration-300 items-center inline-flex flex-col ">
-                <h1>
-                  Want to <span className="group-hover:animate-new-pulse group-hover:gradient-text-red-animated gradient-text-custom font-semibold animated-underline">cash out?</span>
-                </h1>
-                <h1 className="">
-                  Let's connect!
-                </h1>
-              </Link>
-            </div>
+              <h1>
+                Want to <span className="group-hover:animate-new-pulse group-hover:gradient-text-red-animated gradient-text-custom font-semibold animated-underline">cash out?</span>
+              </h1>
+              <h1 className="">
+                Let's connect!
+              </h1>
+            </Link>
           </div>
+        </div>
         <Footer />
       </div>
     </>

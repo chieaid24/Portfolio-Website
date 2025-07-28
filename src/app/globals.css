@@ -95,3 +95,8 @@ body {
 .group:hover .animated-underline::after {
   transform: scaleX(1);
 }
+
+.custom-bold {
+  font-weight: bold;
+  color: var(--color-custom-red);
+}
