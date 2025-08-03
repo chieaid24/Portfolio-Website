@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useAnimate } from 'framer-motion';
 import RotatingText from './RotatingText.js';
 import Image from 'next/image';
@@ -10,10 +10,84 @@ export default function HeroSlot() {
   const leverRef = useRef(null);
   const shadowRef = useRef(null);
   const [scope, animate] = useAnimate();
+  const [hasBeenClicked, setHasBeenClicked] = useState(false);
+  const jiggleTimeoutRef = useRef(null);
 
   const duration = 0.6;
   const milliDuration = duration * 1000;
 
+  // Jiggle animation function
+  const jiggleAnimation = async () => {
+    if (hasBeenClicked) return; // Don't jiggle if already clicked
+
+    const JiggleXPromise = animate(
+      scope.current,
+      {
+        x: [0, -2, 0, -1, 0, -1, 0],
+      },
+      {
+        duration: 0.7,
+        ease: 'easeInOut',
+        times: [0, 0.15, 0.3, 0.45, 0.6, 0.75, 1],
+      }
+    );
+
+    // const JiggleYPromise = animate(
+    //   scope.current,
+    //   {
+    //     y: [0, 2, 0, 1, 0, 1, 0],
+    //   },
+    //   {
+    //     duration: 0.7,
+    //     ease: 'easeInOut',
+    //     times: [0, 0.15, 0.3, 0.45, 0.6, 0.75, 1],
+    //   }
+    // );
+
+    const PulsePromise = animate(
+      scope.current,
+      {
+        fill: ['#FF7D7D', '#ffb0b0', '#FF7D7D'],
+      },
+      {
+        duration: 1,
+        ease: 'easeInOut',
+        times: [0, 0.2, 1],
+      }
+    );
+    await Promise.all([JiggleXPromise, PulsePromise]);
+  };
+
+  // Start jiggle cycle
+  const startJiggleCycle = () => {
+    if (hasBeenClicked) return;
+
+    const scheduleNextJiggle = () => {
+      jiggleTimeoutRef.current = setTimeout(() => {
+        if (!hasBeenClicked) {
+          jiggleAnimation().then(() => {
+            if (!hasBeenClicked) {
+              scheduleNextJiggle();
+            }
+          });
+        }
+      }, 2500);
+    };
+
+    scheduleNextJiggle();
+  };
+
+  // Effect to start the jiggle cycle when component mounts
+  useEffect(() => {
+    startJiggleCycle();
+
+    // Cleanup timeout on unmount
+    return () => {
+      if (jiggleTimeoutRef.current) {
+        clearTimeout(jiggleTimeoutRef.current);
+      }
+    };
+  }, [hasBeenClicked]);
 
   function animateShadow({ ref, from, to, duration = 300 }) {
     const startTime = performance.now();
@@ -37,21 +111,22 @@ export default function HeroSlot() {
   }
 
   const leverAnim = async () => {
-
     await animate(leverRef.current, {
       rotate: [30, 150, 150, 30],
-
     }, {
       duration: duration,
       times: [0, 0.507, 0.6, 1],
       transformOrigin: 'center',
       ease: 'easeInOut',
-
     });
   };
 
-
   const pullLever = async () => {
+    // Mark as clicked and clear any pending jiggle timeouts
+    setHasBeenClicked(true);
+    if (jiggleTimeoutRef.current) {
+      clearTimeout(jiggleTimeoutRef.current);
+    }
 
     // Step 1: Smoothly increase the shadow
     if (shadowRef.current) {
@@ -63,7 +138,7 @@ export default function HeroSlot() {
       });
     }
 
-    // Start the animation, but don’t await it yet
+    // Start the animation, but don't await it yet
     const yAnimation = animate(
       scope.current,
       {
@@ -81,7 +156,6 @@ export default function HeroSlot() {
       scope.current,
       {
         x: [0, 20, 0, 0, 20, 0],
-
       },
       {
         duration: duration,
@@ -110,7 +184,6 @@ export default function HeroSlot() {
   };
 
   return (
-
     <div>
       <div className="flex justify-between mb-[-80px]"> {/**top corners div */}
         <Image src="/hero/corner_tl.svg" alt="Top Left Corner" width={60} height={60} />
