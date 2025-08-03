@@ -1,3 +1,4 @@
+
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,6 +7,7 @@ import Header from '../../components/Header';
 import MaxWidthWrapper from '../../components/MaxWidthWrapper';
 import Footer from '../../components/Footer';
 import BackToProjects from '../../components/BackToProjects';
+import ModelSection from '../../components/ModelSection';
 
 // Generate static params for all projects (optional, for static generation)
 export async function generateStaticParams() {
@@ -14,10 +16,10 @@ export async function generateStaticParams() {
     }));
 }
 
-
 // Generate metadata for each project page
 export async function generateMetadata({ params }) {
-    const project = getProjectBySlug(params.slug);
+    const { slug } = await params;
+    const project = getProjectBySlug(slug);
 
     if (!project) {
         return {
@@ -46,6 +48,12 @@ const renderParagraphs = (paragraphs) => {
         </p>
     ));
 };
+
+// Helper function to check if file is a .glb model
+const isGLBFile = (filePath) => {
+    return filePath && filePath.toLowerCase().endsWith('.glb');
+};
+
 
 export default function ProjectPage({ params }) {
     const project = getProjectBySlug(params.slug);
@@ -85,15 +93,24 @@ export default function ProjectPage({ params }) {
                         <p className="text-2xl font-regular mb-15">
                             {project.summary}
                         </p>
-                        {/* Project image */}
-                        <div className="relative w-full h-100 aspect-[16/10] mb-15 rounded-lg overflow-hidden shadow-lg">
-                            <Image
-                                src={project.image}
-                                alt={project.title}
-                                fill
-                                className="object-cover scale-110"
-                            />
+
+                        {/* Project image - conditionally render 3D model or regular image */}
+                        <div className="mb-15">
+                            {isGLBFile(project.page_image_one) ? (
+                                <ModelSection modelPath={project.page_image_one} />
+                            ) : (
+                                <div className="relative w-full h-100 aspect-[16/10] rounded-lg overflow-hidden shadow-lg">
+                                    <Image
+                                        src={project.page_image_one}
+                                        alt={project.title}
+                                        fill
+                                        className="object-cover scale-110"
+                                    />
+                                </div>
+                            )}
                         </div>
+
+
                         {/* Tools Used Section */}
                         <div className="mb-20">
                             <h1 className="font-bold text-5xl mb-15">
@@ -114,15 +131,21 @@ export default function ProjectPage({ params }) {
                             </div>
                         </div>
 
-                        {/**optional second image MAYBE MAKE THIS A GIF OR SOMETHING*/}
-                        {project.second_image && (
-                            <div className="relative w-full h-100 aspect-[16/10] mb-15 rounded-lg overflow-hidden shadow-lg">
-                                <Image
-                                    src={project.second_image}
-                                    alt={project.title}
-                                    fill
-                                    className="object-cover scale-110"
-                                />
+                        {/**optional second image - conditionally render 3D model or regular image */}
+                        {project.page_image_two && (
+                            <div className="mb-15">
+                                {isGLBFile(project.page_image_two) ? (
+                                    <ModelSection modelPath={project.page_image_two} />
+                                ) : (
+                                    <div className="relative w-full h-100 aspect-[16/10] rounded-lg overflow-hidden shadow-lg">
+                                        <Image
+                                            src={project.page_image_two}
+                                            alt={project.title}
+                                            fill
+                                            className="object-cover scale-110"
+                                        />
+                                    </div>
+                                )}
                             </div>
                         )}
 

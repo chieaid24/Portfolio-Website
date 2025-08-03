@@ -1,7 +1,6 @@
 import { DM_Sans } from "next/font/google";
-import { Unna } from "next/font/google";
-import localFont from 'next/font/local'
 import "./globals.css";
+import ScrollProgressBarClient from "./components/ScrollProgressBarClient";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -25,6 +24,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${dmSans.variable} antialiased`}
       >
+        <ScrollProgressBarClient />
         {children}
       </body>
     </html>

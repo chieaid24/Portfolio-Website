@@ -122,8 +122,8 @@ export default function HeroSlot() {
             {/* Rotating Text */}
             <RotatingText
               ref={textRef}
-              texts={['AIDAN', 'ENG', 'DES', 'INVE', 'CLIM', 'FILM', 'STU', 'GYM', 'CODE', 'CAD', 'TECH', 'REELS', 'GAME', 'UI/UX', 'WEB', 'AI', 'NYT', 'SLEEP',]}
-              texts2={['CHIEN', 'INEER', 'IGNER', 'NTOR', 'BER', 'MAKER', 'DENT', 'GOER', 'ADDICT', 'HEAD', 'MAVEN', 'SNOB', 'NERD', 'FAN', 'DEV', 'FIEND', 'GAMER', 'LOVER',]}
+              texts={['AIDAN', 'ENG', 'DES', 'INVE', 'CLIM', 'FILM', 'STU', 'GYM', 'CODE', 'CAD', 'REELS', 'GAME', 'UI/UX', 'WEB', 'AI', 'NYT', 'SLEEP',]}
+              texts2={['CHIEN', 'INEER', 'IGNER', 'NTOR', 'BER', 'MAKER', 'DENT', 'GOER', 'ADDICT', 'HEAD', 'SNOB', 'NERD', 'FAN', 'DEV', 'FIEND', 'GAMER', 'LOVER',]}
               mainClassName="overflow-visible px-2 sm:px-2 md:px-3 text-9xl bg-background-light text-dark-grey-text font-italiana py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
               staggerFrom="last"
               initial={{ y: '-100%' }}

@@ -2,9 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import CardLabel from "./CardLabel.js";
-import Barcode from 'react-barcode';
-import DownloadableBarcode from "./DonBar.js";
 
 export default function ProjectCard({ title, generated_with, ticket_no, skills_used, image, slug }) {
     return (

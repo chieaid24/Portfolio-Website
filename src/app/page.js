@@ -16,7 +16,7 @@ export default function Home() {
 
   useEffect(() => {
     const generateTicketNumbers = () => {
-      const used = new Set();
+      const used = new Set(['69']);
       const ticketMap = {};
 
       projects.forEach((project) => {
@@ -52,57 +52,58 @@ export default function Home() {
     <>
       <div className="bg-background-dark font-dm-sans text-dark-grey-text"> {/**hero div */}
         <Header />
-        <div id="hero" className="relative min-h-screen w-full">
-
-          <MaxWidthWrapper>
-            <div className="flex flex-col gap-10 pt-10">
-              <div className="flex items-center justify-center w-[95%] h-110 self-center bg-background-light shadow-[-4px_4px_4px_rgba(0,0,0,0.25)]"> {/* dummy div for the slot machine */}
-                <HeroSlot />
+        <div>
+          <div id="hero" className="relative min-h-screen w-full">
+            <MaxWidthWrapper>
+              <div className="flex flex-col gap-10 pt-10">
+                <div className="flex items-center justify-center w-[95%] h-110 self-center bg-background-light shadow-[-4px_4px_4px_rgba(0,0,0,0.25)]"> {/* dummy div for the slot machine */}
+                  <HeroSlot />
+                </div>
+                <h1 className="text-left font-semibold text-4xl">
+                  Hi, I'm Aidan, a systems engineer passionate about efficient <span className="text-custom-red">design</span> and <span className="text-custom-red">development</span>.
+                </h1>
+                <h3 className="font-normal text-2xl">
+                  I'm someone who gets genuinely excited about learning new things—whether it's a coding trick, a design tool, or just figuring out how something works. I love chasing ideas that push me to grow and create in new ways. If you're curious what that looks like in action, check out my projects below—I promise they're more fun than your average to-do list!
+                </h3>
               </div>
-              <h1 className="text-left font-semibold text-4xl">
-                Hi, I'm Aidan, a systems engineer passionate about efficient <span className="text-custom-red">design</span> and <span className="text-custom-red">development</span>.
-              </h1>
-              <h3 className="font-normal text-2xl">
-                I'm someone who gets genuinely excited about learning new things—whether it's a coding trick, a design tool, or just figuring out how something works. I love chasing ideas that push me to grow and create in new ways. If you're curious what that looks like in action, check out my projects below—I promise they're more fun than your average to-do list!
-              </h3>
+            </MaxWidthWrapper>
+          </div>
+        </div>
+        <div id="projects" className="bg-background-light text-dark-grey-text"> {/**project section */}
+          <MaxWidthWrapper>
+            <h1 className="font-bold text-7xl pt-15">
+              My Projects
+            </h1>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 gap-y-20 mt-10 mb-32">
+              {projects.map((project) => (
+                <ProjectCard
+                  key={project.slug}
+                  title={project.title}
+                  generated_with={project.generated_with}
+                  ticket_no={randomTickets[project.slug] ?? '--'}
+                  skills_used={project.skills_used}
+                  image={project.image}
+                  slug={project.slug}
+                  alt={project.title}
+                />
+              ))}
             </div>
           </MaxWidthWrapper>
-        </div>
-      </div>
-      <div id="projects" className="bg-background-light text-dark-grey-text"> {/**project section */}
-        <MaxWidthWrapper>
-          <h1 className="font-bold text-7xl pt-15">
-            My Projects
-          </h1>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 gap-y-20 mt-10 mb-32">
-            {projects.map((project) => (
-              <ProjectCard
-                key={project.slug}
-                title={project.title}
-                generated_with={project.generated_with}
-                ticket_no={randomTickets[project.slug] ?? '--'}
-                skills_used={project.skills_used}
-                image={project.image}
-                slug={project.slug}
-                alt={project.title}
-              />
-            ))}
+          <div className="flex flex-col items-center my-[-10px] pt-10 bg-background-dark text-dark-grey-text font-dm-sans text-8xl tracking-tighter font-semibold"> {/**want to cash out? section */}
+            <div>
+              <Link href="mailto:aidan.chien@uwaterloo.ca"
+                className="group hover:scale-110 hover:translate-y-[-15px] transition-all duration-300 items-center inline-flex flex-col ">
+                <h1>
+                  Want to <span className="group-hover:animate-new-pulse group-hover:gradient-text-red-animated gradient-text-custom font-semibold animated-underline">cash out?</span>
+                </h1>
+                <h1 className="">
+                  Let's connect!
+                </h1>
+              </Link>
+            </div>
           </div>
-        </MaxWidthWrapper>
-        <div className="flex flex-col items-center my-[-10px] pt-10 bg-background-dark text-dark-grey-text font-dm-sans text-8xl tracking-tighter font-semibold"> {/**want to cash out? section */}
-          <div>
-            <Link href="mailto:aidan.chien@uwaterloo.ca"
-              className="group hover:scale-110 hover:translate-y-[-15px] transition-all duration-300 items-center inline-flex flex-col ">
-              <h1>
-                Want to <span className="group-hover:animate-new-pulse group-hover:gradient-text-red-animated gradient-text-custom font-semibold animated-underline">cash out?</span>
-              </h1>
-              <h1 className="">
-                Let's connect!
-              </h1>
-            </Link>
-          </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
     </>
   );

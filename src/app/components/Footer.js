@@ -15,7 +15,7 @@ export default function Footer() {
                         <Image
                             src="/grey-email-icon.svg"
                             alt="Email Icon"
-                            width={24}
+                            width={23}
                             height={24}
                             className="h-[2.6em] w-auto hover:translate-y-[-2px] transition-all duration-200">
                         </Image>
@@ -35,8 +35,8 @@ export default function Footer() {
                         <Image
                             src="/github_icon.svg"
                             alt="GitHub Icon"
-                            width={24}
-                            height={24}
+                            width={25}
+                            height={25}
                             className="h-[2.8em] w-auto mt-[-5%] hover:translate-y-[-2px] transition-all duration-200">
                         </Image>
                     </a>
