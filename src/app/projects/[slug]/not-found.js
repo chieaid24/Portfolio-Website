@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import Header from '../../components/Header';
-import MaxWidthWrapper from '../../components/MaxWidthWrapper';
+import Header from '@/components/Header';
+import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 
 export default function NotFound() {
     return (

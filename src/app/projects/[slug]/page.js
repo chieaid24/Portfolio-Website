@@ -2,12 +2,12 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getProjectBySlug, projects } from '../../data/projects';
-import Header from '../../components/Header';
-import MaxWidthWrapper from '../../components/MaxWidthWrapper';
-import Footer from '../../components/Footer';
-import BackToProjects from '../../components/BackToProjects';
-import ModelSection from '../../components/ModelSection';
+import { getProjectBySlug, projects } from '@/app/data/projects';
+import Header from '@/components/Header';
+import MaxWidthWrapper from '@/components/MaxWidthWrapper';
+import Footer from '@/components/Footer';
+import BackToProjects from '@/components/BackToProjects';
+import ModelSection from '@/components/ModelSection';
 
 // Generate static params for all projects (optional, for static generation)
 export async function generateStaticParams() {
@@ -84,7 +84,7 @@ export default function ProjectPage({ params }) {
                                         src="/icons/Github_red.svg"
                                         width={100}
                                         height={100}
-                                        className=""
+                                        className="hover:opacity-80 hover:-translate-y-1 transition duration-200"
                                         alt="Github logo" />
                                 </Link>
                             </div>

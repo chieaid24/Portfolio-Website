@@ -1,7 +1,7 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import AboutImage from "../components/AboutImage";
-import MaxWidthWrapper from "../components/MaxWidthWrapper";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import AboutImage from "@/components/AboutImage";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
 export const metadata = {
   title: 'ABOUT',

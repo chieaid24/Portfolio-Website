@@ -2,13 +2,13 @@
 
 import { useEffect } from 'react';
 import { useState } from 'react';
-import Header from "./components/Header";
-import MaxWidthWrapper from "./components/MaxWidthWrapper";
-import ProjectCard from "./components/ProjectCard";
-import { projects } from "./data/projects"; // Updated import
-import Footer from "./components/Footer";
+import Header from "@/components/Header";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import ProjectCard from "@/components/ProjectCard";
+import { projects } from "@/app/data/projects"; // Updated import
+import Footer from "@/components/Footer";
 import Link from "next/link";
-import HeroSlot from "./components/HeroSlot";
+import HeroSlot from "@/components/HeroSlot";
 
 
 export default function Home() {
@@ -94,7 +94,7 @@ export default function Home() {
               <Link href="mailto:aidan.chien@uwaterloo.ca"
                 className="group hover:scale-110 hover:translate-y-[-15px] transition-all duration-300 items-center inline-flex flex-col ">
                 <h1>
-                  Want to <span className="group-hover:animate-new-pulse group-hover:gradient-text-red-animated gradient-text-custom font-semibold animated-underline">cash out?</span>
+                  Want to <span className="group-hover:animate-new-pulse group-hover:gradient-text-red-animated gradient-text-custom font-semibold animated-underline pr-0.5">cash out?</span>
                 </h1>
                 <h1 className="">
                   Let's connect!

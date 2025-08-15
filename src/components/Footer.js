@@ -10,8 +10,8 @@ export default function Footer() {
                         © 2025 AIDAN CHIEN. All rights reserved.<br />Designed and developed by AIDAN CHIEN.
                     </p>
                 </div>
-                <div className="flex gap-15 justify-center items-center">
-                    <Link href="mailto:aidan.chien@uwaterloo.ca">
+                <div className="flex gap-12 justify-center items-center">
+                    {/* <Link href="mailto:aidan.chien@uwaterloo.ca">
                         <Image
                             src="/grey-email-icon.svg"
                             alt="Email Icon"
@@ -19,7 +19,7 @@ export default function Footer() {
                             height={24}
                             className="h-[2.6em] w-auto hover:translate-y-[-2px] transition-all duration-200">
                         </Image>
-                    </Link>
+                    </Link> */}
                     <a href="https://www.linkedin.com/in/aidanchien/"
                         target="_blank">
                         <Image

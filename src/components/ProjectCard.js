@@ -13,7 +13,7 @@ export default function ProjectCard({ title, generated_with, ticket_no, skills_u
                             src={image}
                             alt={title}
                             fill
-                            className="object-cover z-0 transition-transform duration-300 saturate-70 group-hover:saturate-100 group-hover:scale-101" />
+                            className="object-cover z-0 transition-transform duration-300 group-hover:scale-101" />
                         <ul className="absolute w-full flex flex-wrap justify-end gap-4 pt-5 pr-5 text-[16px]"> {/**skills used div */}
                             {skills_used.map((lang, i) => (
                                 <li key={i} className="bg-custom-red px-2 py-[1px] rounded-md text-white font-semibold tracking-wider opacity-90 hover:opacity-80 transition-opacity duration-200">

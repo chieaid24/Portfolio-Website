@@ -47,7 +47,7 @@ export default function HeroSlot() {
     const PulsePromise = animate(
       scope.current,
       {
-        fill: ['#FF7D7D', '#ffb0b0', '#FF7D7D'],
+        fill: ['#FF7D7D', '#fcc7c7', '#FF7D7D'],
       },
       {
         duration: 1,
@@ -71,7 +71,7 @@ export default function HeroSlot() {
             }
           });
         }
-      }, 2500);
+      }, 1500);
     };
 
     scheduleNextJiggle();

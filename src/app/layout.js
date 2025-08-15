@@ -1,6 +1,6 @@
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
-import ScrollProgressBarClient from "./components/ScrollProgressBarClient";
+import ScrollProgressBarClient from "@/components/ScrollProgressBarClient";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",

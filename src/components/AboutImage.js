@@ -20,7 +20,7 @@ export default function AboutImage() {
                     width={400}
                     height={400}
                     onMouseEnter={() => setImageHovered(true)}
-                    onMouseLeave={() => setImageHovwered(false)}
+                    onMouseLeave={() => setImageHovered(false)}
                     className="rounded-md shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]"
                 />
                 <div>

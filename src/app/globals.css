@@ -47,6 +47,11 @@
   }
 }
 
+::selection {
+  background-color: #7D7DFF; /* custom red */
+  color: white;              /* text color when selected */
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
