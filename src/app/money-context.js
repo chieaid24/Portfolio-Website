@@ -22,6 +22,44 @@ function reducer(state, action) {
   }
 }
 
+/** ---------- helpers for category-based rewards ---------- **/
+
+// Round to fixed decimals (max 2 by default)
+const roundTo = (n, decimals = 2) => {
+  const f = Math.pow(10, decimals);
+  return Math.round(n * f) / f;
+};
+
+// Random number in [min, max], rounded to `decimals`
+const randInRange = (min, max, decimals = 2) => roundTo(Math.random() * (max - min) + min, decimals);
+
+// Return a random amount based on the reward "kind" (PLACEHOLDER tuning)
+function amountFor(kind) {
+  switch (kind) {
+    case 'link':
+      return randInRange(3, 8, 2);
+
+    case 'project':
+      // Placeholder: SHOULD RETURN A PRE CREATED REWARD AMOUNT PASSED AS AN OPTIONS 3RD PARAMETER
+      return randInRange(20, 50, 0);
+
+    case 'redtext':
+      return 0.75;
+
+    case 'egg':
+    // Placeholder: for hidden egg, should still be a range
+      return randInRange(1, 5, 2);
+
+    case 'lever':
+      // Placeholder: should return a value from 0.1-3.7, create a new function that is weighted, so rarely get lots of money
+      return randInRange(0, 20, 2);
+
+    default:
+      // Unknown kinds award 0 by default
+      return 0;
+  }
+}
+
 export function MoneyProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, { balance: 0, awarded: {} });
   const [ready, setReady] = useState(false);
@@ -48,16 +86,40 @@ export function MoneyProvider({ children }) {
 
   const api = useMemo(() => ({
     ...state,
-    awardOnce: (id, amount) => {
+
+    /**
+     * Award once per `rewardId`, computing the amount from a category string.
+     * @param {string} id - stable reward id (e.g., "proj:ai-dashboard")
+     * @param {'redtext'|'project'|'link'|'egg'|'lever'} kind - reward category
+     * @returns {boolean} true if paid (first time), false otherwise
+     */
+    awardOnce: (id, kind) => {
       if (state.awarded[id]) return false;
+
+      // Validate category
+      const allowed = new Set(['redtext', 'project', 'link', 'egg', 'lever']);
+      if (!allowed.has(kind)) {
+        if (process.env.NODE_ENV !== 'production') {
+          // helpful console warning in dev
+          // eslint-disable-next-line no-console
+          console.warn(`awardOnce: invalid kind "${kind}" for id "${id}"`);
+        }
+        return false;
+      }
+
+      const amount = amountFor(kind);
+      if (amount <= 0) return false; // nothing to award
+
       dispatch({ type: 'AWARD', id, amount });
       return true;
     },
+
     spend: (amount) => {
       if (state.balance < amount) return false;
       dispatch({ type: 'SPEND', amount });
       return true;
     },
+
     hasAward: (id) => !!state.awarded[id],
     reset: () => dispatch({ type: 'RESET' }),
     ready

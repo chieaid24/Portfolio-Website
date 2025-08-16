@@ -32,18 +32,6 @@ export default function HeroSlot() {
       }
     );
 
-    // const JiggleYPromise = animate(
-    //   scope.current,
-    //   {
-    //     y: [0, 2, 0, 1, 0, 1, 0],
-    //   },
-    //   {
-    //     duration: 0.7,
-    //     ease: 'easeInOut',
-    //     times: [0, 0.15, 0.3, 0.45, 0.6, 0.75, 1],
-    //   }
-    // );
-
     const PulsePromise = animate(
       scope.current,
       {
@@ -248,7 +236,7 @@ export default function HeroSlot() {
             width="150"
             height="500"
             viewBox="0 0 150 100"
-            className="z-10 translate-x-[-47px] translate-y-[-10px]"
+            className="z-10 translate-x-[-49px] translate-y-[-10px]"
           > {/**lever ball svg */}
             <defs>
               <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">

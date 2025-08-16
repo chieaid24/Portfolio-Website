@@ -1,7 +1,8 @@
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AboutImage from "@/components/AboutImage";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import RedText from '@/components/RedText';
+
 
 export const metadata = {
   title: 'ABOUT',
@@ -11,9 +12,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <>
-
-      <div className="bg-background-light text-dark-grey-text">
-        <Header />
+      <div className="pt-20 bg-background-light text-dark-grey-text">
         <MaxWidthWrapper>
           <div className="flex justify-start mt-6 sm:mt-8 lg:mt-12">  {/* Outer div that is a flex box so text acts as a single line of text when window shrinks + is centered as well */}
             <h1 className="text-8xl text-center text-dark-grey-text"> {/* Makes it so when text is shrunk, its paragraph alignment is center */}
@@ -29,8 +28,8 @@ export default function AboutPage() {
 
             <div className="flex justify-self-start text-left flex-col text-3xl text-dark-grey-text space-y-6">
               <p className="mt-0">
-                I'm a <span className="font-bold text-custom-red">Systems Design Engineering </span>
-                student at the <span className="font-bold text-custom-red">University of Waterloo</span>!
+                I'm a <RedText rewardId="red:about:syde">Systems Design Engineering</RedText>
+                {" "}student at the <RedText rewardId="red:about:uwaterloo">University of Waterloo</RedText>!
               </p>
               <p>
                 I take pride in my ability to design and develop <span className="font-bold">high quality solutions</span> for <span className="font-bold">software, mechanical, and electrical</span> systems.

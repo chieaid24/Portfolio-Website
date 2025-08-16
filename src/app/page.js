@@ -1,14 +1,13 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useState } from 'react';
-import Header from "@/components/Header";
+import { useEffect, useState } from 'react';
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/app/data/projects"; // Updated import
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import HeroSlot from "@/components/HeroSlot";
+import RedText from '@/components/RedText';
 
 
 export default function Home() {
@@ -50,8 +49,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-background-dark font-dm-sans text-dark-grey-text"> {/**hero div */}
-        <Header />
+      <div className="pt-15 bg-background-dark font-dm-sans text-dark-grey-text"> {/**hero div */}
         <div>
           <div id="hero" className="relative min-h-screen w-full">
             <MaxWidthWrapper>
@@ -60,7 +58,7 @@ export default function Home() {
                   <HeroSlot />
                 </div>
                 <h1 className="text-left font-semibold text-4xl">
-                  Hi, I'm Aidan, a systems engineer passionate about efficient <span className="text-custom-red">design</span> and <span className="text-custom-red">development</span>.
+                  Hi, I'm Aidan, a systems engineer passionate about efficient <RedText rewardId="red:home:design" weight={"semibold"}>design</RedText> and <RedText rewardId="red:home:development" weight={"semibold"}>development</RedText>.
                 </h1>
                 <h3 className="font-normal text-2xl">
                   I'm someone who gets genuinely excited about learning new things—whether it's a coding trick, a design tool, or just figuring out how something works. I love chasing ideas that push me to grow and create in new ways. If you're curious what that looks like in action, check out my projects below—I promise they're more fun than your average to-do list!

@@ -2,8 +2,8 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import RewardLink from '@/components/RewardLink';
 import { getProjectBySlug, projects } from '@/app/data/projects';
-import Header from '@/components/Header';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import Footer from '@/components/Footer';
 import BackToProjects from '@/components/BackToProjects';
@@ -64,8 +64,7 @@ export default function ProjectPage({ params }) {
 
     return (
         <>
-            <div className="bg-background-light font-dm-sans text-dark-grey-text min-h-screen">
-                <Header />
+            <div className="pt-20 bg-background-light font-dm-sans text-dark-grey-text min-h-screen">
                 <MaxWidthWrapper>
                     <div className="pt-18 pb-15">
                         {/* Project header */}
@@ -79,14 +78,18 @@ export default function ProjectPage({ params }) {
                                         '{project.subtitle}'
                                     </h3>
                                 </div>
-                                <Link href={project.github_link} target="_blank" className="mt-[-40px]">
+                                <RewardLink 
+                                href={project.github_link} 
+                                target="_blank" 
+                                className="mt-[-40px]"
+                                rewardId={`${project.slug}:github`}>
                                     <Image
                                         src="/icons/Github_red.svg"
                                         width={100}
                                         height={100}
                                         className="hover:opacity-80 hover:-translate-y-1 transition duration-200"
                                         alt="Github logo" />
-                                </Link>
+                                </RewardLink>
                             </div>
                         </div>
                         {/**Summary text */}

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import RedText from "@/components/RedText"
 
 const generateRandomTicketNo = () => {
     const randomNum = Math.floor(Math.random() * 99) + 1; // 1-99
@@ -64,9 +65,9 @@ export const projects = [
         page_image_two: '/pmi_auto_generator/pmi_card.png',
         github_link: 'https://github.com/chieaid24/PMI-Auto-Generator-Desc',
         subtitle: "a machinist's best friend",
-        summary: <>Manually transferring info from a <span className="custom-bold">technical drawing</span> to a 3D <span className="custom-bold">CAD model</span> can be tedious and the worst part of a machinist's day. Keep scrolling to find out how I cut production time by <span className="custom-bold">30 percent</span>! </>,
+        summary: <>Manually transferring info from a <RedText rewardId="red:pmi:technical-drawing">technical drawing</RedText> to a 3D <RedText rewardId="red:pmi:CAD-model">CAD model</RedText> can be tedious and the worst part of a machinist's day. Keep scrolling to find out how I cut production time by <RedText rewardId="red:pmi:30-percent">30 percent</RedText>! </>,
         tool_paragraphs: [
-            <>I used <span className="custom-bold">Python</span> for the logic and <span className="custom-bold">AutoHotKey</span> for easy interfacing with applications. I also utilized MBDVidia's OCR for data extraction and file conversion.</>,
+            <>I used <RedText rewardId="red:pmi:python">Python</RedText> for the logic and <RedText rewardId="red:pmi:ahk">AutoHotKey</RedText> for easy interfacing with applications. I also utilized MBDVidia's OCR for data extraction and file conversion.</>,
         ],
         why_paragraphs: [
             <>
@@ -81,16 +82,16 @@ export const projects = [
                 Building on a blank 3D model and a PDF containing the necessary specifications, this is a Python application built to automatically attach all diameter annotations directly onto the 3D model. To format the files as needed, I created an AutoHotKey script to run on MBDVidia, the MBD software we used in the shop to attach the annotations. With a generated UI, the program guides the user to extract the annotations from the PDF into an Excel sheet, and convert the 3D model .stl or .sldprt file to a .qif file.
             </>,
             <>
-                The .qif file is the key that my program relies on, as its XML structure allows me to parse and insert information without a GUI. This unlocks automation and greater speed capabilities, which I take advantage of through this project. Now, using Python with NumPy and openpyxl, it scrapes the Excel file and formats each entry to scan for diameter annotations. I've picked diameter annotations because the shop mostly worked with turned (cylindrical) parts, so diameter annotations made up about one-third of all dimensions.
+                The .qif file is the key that my program relies on, as its <RedText rewardId="red:pmi:xml">XML structure</RedText> allows me to parse and insert information without a GUI. This unlocks automation and greater speed capabilities, which I take advantage of through this project. Now, using Python with NumPy and openpyxl, it scrapes the Excel file and formats each entry to scan for diameter annotations. I've picked diameter annotations because the shop mostly worked with turned (cylindrical) parts, so diameter annotations made up about one-third of all dimensions.
             </>,
             <>
-                The program then gets all of the dimensions from the model .qif file and cross-references each with the desired diameter dimensions. Lastly, it inserts those annotations onto the model. Then the user can simply open the .qif file and attach the rest of the annotations manually with the help of my <Link href="/projects/mbd-macro"><span className="hover:opacity-80 transition font-semibold italic">MBD Macro</span></Link>. This project single-handedly saves around 30% of the total annotation time, and the full process takes only about 60 seconds to complete.
+                The program then gets all of the dimensions from the model .qif file and cross-references each with the desired diameter dimensions. Lastly, it inserts those annotations onto the model. Then the user can simply open the .qif file and attach the rest of the annotations manually with the help of my <Link href="/projects/mbd-macro"><span className="hover:opacity-80 transition font-semibold">MBD Macro</span></Link>. This project single-handedly saves around 30% of the total annotation time, and the full process takes only about 60 seconds to complete.
             </>
         ],
 
         learning_paragraphs: [
             <>
-                I strengthened my Python and scripting skills, as well as my understanding of best practices for writing scalable and intuitive code such that non-experts could understand and use it effectively. This included creating Standard Operating Procedures (SOP) documentation and oral presentations to the team. Some challenges that I faced included extracting data from non-standard part drawing PDFs, as well as completely reverse-engineering the QIF format with few available resources. This project also attracted the attention of the company's CEO, who invited me to present my work to the parent company, and I received a light round of applause as I concluded.
+                I strengthened my Python and scripting skills, as well as my understanding of best practices for writing scalable and intuitive code such that non-experts could understand and use it effectively. This included creating <RedText rewardId="red:pmi:sop">Standard Operating Procedures</RedText> (SOP) documentation and oral presentations to the team. Some challenges that I faced included extracting data from non-standard part drawing PDFs, as well as completely reverse-engineering the QIF format with few available resources. This project also attracted the attention of the company's CEO, who invited me to present my work to the parent company, and I received a light round of applause as I concluded.
             </>,
         ],
     },
@@ -104,9 +105,9 @@ export const projects = [
         page_image_one: '/personal_website/card_image.jpg',
         github_link: 'https://github.com/chieaid24/Personal-Website',
         subtitle: "a portfolio that performs",
-        summary: <>A plain resume displaying my projects is boring and, frankly, too easy to make. Find out how I built the <span className="custom-bold">very website</span> you're on <span className="custom-bold">from scratch!</span> </>,
+        summary: <>A plain resume displaying my projects is boring and, frankly, too easy to make. Find out how I built the <RedText rewardId="red:website:very-website">very website</RedText> you're on <RedText rewardId="red:website:scratch">from scratch!</RedText> </>,
         tool_paragraphs: [
-            <>The main framework I used was <span className="custom-bold">Next.js</span> with <span className="custom-bold">React</span>, styled using <span className="custom-bold">Tailwind CSS</span> and <span className="custom-bold">Framer Motion</span>. I also used <span className="custom-bold">Node.js</span> to connect with REST APIs for real-time updates, <span className="custom-bold">Figma</span> to prototype the interface, and <span className="custom-bold">Illustrator</span> to create my logo and other assets.</>,
+            <>The main framework I used was <RedText rewardId="red:website:next">Next.js</RedText> with <RedText rewardId="red:website:react">React</RedText>, styled using <RedText rewardId="red:website:tailwind">Tailwind CSS</RedText> and <RedText rewardId="red:website:framer">Framer Motion</RedText>. I also used <RedText rewardId="red:website:node">Node.js</RedText> to connect with REST APIs for real-time updates, <RedText rewardId="red:website:figma">Figma</RedText> to prototype the interface, and <RedText rewardId="red:website:illustrator">Illustrator</RedText> to create my logo and other assets.</>,
         ],
         why_paragraphs: [
             <>
@@ -139,10 +140,10 @@ export const projects = [
         page_image_two: '/models/remoteholder.glb',
         github_link: 'https://github.com/chieaid24/Design_Portfolio/tree/main/SOLIDWORKS/BUILD%20PICS',
         subtitle: "where form meets fully functional",
-        summary: <>A messy and unorganized workspace is both <span className="custom-bold">unprofessional</span> and <span className="custom-bold">inefficient</span>. Keep reading to find out how I solved problems while creating <span className="custom-bold">conversation pieces</span> for the office!</>,
+        summary: <>A messy and unorganized workspace is both <RedText rewardId="red:tools:unprofessional">unprofessional</RedText> and <RedText rewardId="red:tools:inefficient">inefficient</RedText>. Keep reading to find out how I solved problems while creating <RedText rewardId="red:tools:conversation-pieces">conversation pieces</RedText> for the office!</>,
         tool_paragraphs: [
             <>
-                I designed everything in <span className="custom-bold">SOLIDWORKS</span> and printed with the Markforged software, on FDM carbon-fiber reinforced filaments. I also sanded and spray painted when necessary.
+                I designed everything in <RedText rewardId="red:tools:solidworks">SOLIDWORKS</RedText> and printed with the Markforged software, on FDM carbon-fiber reinforced filaments. I also sanded and spray painted when necessary.
             </>,
         ],
         why_paragraphs: [
@@ -161,7 +162,7 @@ export const projects = [
 
         learning_paragraphs: [
             <>
-                In the design process, incorporating UX considerations and real-life measurements allowed me to create ergonomic yet functional pieces for the workspace. Additionally, I designed for manufacturability by putting into account possible manufacturing failure and ensuring ease of printing. All in all, I was able to quickly and elegantly solve a physical problem in my office, while reinforcing my team's brand identity.
+                In the design process, incorporating <RedText rewardId="red:tools:ux-considerations">UX considerations</RedText> and real-life measurements allowed me to create ergonomic yet functional pieces for the workspace. Additionally, I designed for manufacturability by putting into account possible manufacturing failure and ensuring ease of printing. All in all, I was able to quickly and elegantly solve a physical problem in my office, while reinforcing my team's brand identity.
             </>,
         ],
     },
@@ -175,9 +176,9 @@ export const projects = [
         page_image_one: '/mbd_macro/mbd_card.png',
         github_link: 'https://github.com/chieaid24/MBD-Macro',
         subtitle: "streamlining software to your workflow",
-        summary: <>Being a machinist requires you to <span className="custom-bold">spend hours</span> annotating and processing every part that comes through the shop. I built an app that increases your efficiency by <span className="custom-bold">up to 100%</span>—keep scrolling to learn more!</>,
+        summary: <>Being a machinist requires you to <RedText rewardId="red:mbd:spend-hours">spend hours</RedText> annotating and processing every part that comes through the shop. I built an app that increases your efficiency by <RedText rewardId="red:mbd:100%">up to 100%</RedText>—keep scrolling to learn more!</>,
         tool_paragraphs: [
-            <>The script is built in <span className="custom-bold">AutoHotKey</span>, a <span className="custom-bold">C++</span> based scripting language for easy interfacing with applications, and built for Capvidia's <span className="custom-bold">MBDVidia</span>.</>,
+            <>The script is built in <RedText rewardId="red:mbd:ahk">AutoHotKey</RedText>, a <RedText rewardId="red:mbd:cpp">C++</RedText> based scripting language for easy interfacing with applications, and built for Capvidia's <RedText rewardId="red:mbd:mbdvidia">MBDVidia</RedText>.</>,
         ],
         why_paragraphs: [
             <>
@@ -189,23 +190,23 @@ export const projects = [
         ],
         what_paragraphs: [
             <>
-                This is an application that, when launched, creates a graphical overlay and event listeners on top of MBDVidia, enabling hotkey-based controls that trigger scripts, manipulate windows, and interact with GUI elements. This means that previously manual and tedious processes become nearly instantaneous. This program supports the creation of dimensional and geometric tolerances by setting keybinds to common functions. To achieve this, the program uses multithreaded processing and image detection, as well as window and keyboard/mouse manipulation.
+                This is an application that, when launched, creates a graphical overlay and event listeners on top of MBDVidia, enabling hotkey-based controls that trigger scripts, manipulate windows, and interact with <RedText rewardId="red:mbd:gui">GUI elements</RedText>. This means that previously manual and tedious processes become nearly instantaneous. This program supports the creation of dimensional and geometric tolerances by setting keybinds to common functions. To achieve this, the program uses multithreaded processing and image detection, as well as window and keyboard/mouse manipulation.
             </>,
             <>
-                For example, for dimensional tolerances (tolerancing the distance between two planes), after the hotkey is pressed, the program listens for the user's inputs and when necessary, will automatically pop up a chat box, which the user can input their desired tolerance and the macro will do the rest of the work. For most dimensions, this process is 2 to 3 times faster than entering the information manually, and there are failsafes to dismiss the macro when the tolerance requires more manual input. In addition, the program includes overall quality of life improvements that increase both efficiency and user experience. More information can be found on the {" "}
-                <a
+                For example, for dimensional tolerances (tolerancing the distance between two planes), after the hotkey is pressed, the program listens for the user's inputs and when necessary, will automatically pop up a chat box, which the user can input their desired tolerance and the macro will do the rest of the work. For most dimensions, this process is <RedText rewardId="red:mbd:2-3">2 to 3 times</RedText> faster than entering the information manually, and there are failsafes to dismiss the macro when the tolerance requires more manual input. In addition, the program includes overall quality of life improvements that increase both efficiency and user experience. More information can be found on the {" "}
+                <Link
                     href="https://github.com/chieaid24/MBD-Macro"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:opacity-80 transition font-semibold italic"
-                >GitHub</a>
+                    className="hover:opacity-80 transition font-semibold"
+                >GitHub</Link>
                 , which goes through all the possible shortcuts and explanations.
             </>,
         ],
 
         learning_paragraphs: [
             <>
-                Completing this process improved my user experience design skills, as it required me to consider all possibilities, such as ease of learning (ex. UI indicators) and incorporating failsafes (ex. LOTS of error handling). Additionally, improving existing software forced me to think creatively, taking advantage of its strengths while finding workarounds for its limitations.
+                Completing this process improved my <RedText rewardId="red:mbd:ux">user experience design</RedText> skills, as it required me to consider all possibilities, such as ease of learning (ex. UI indicators) and incorporating failsafes (ex. LOTS of error handling). Additionally, improving existing software forced me to think creatively, taking advantage of its strengths while finding workarounds for its limitations.
             </>,
         ],
     },
