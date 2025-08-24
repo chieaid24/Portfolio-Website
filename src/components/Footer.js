@@ -15,7 +15,6 @@ export default function Footer() {
             href="https://www.linkedin.com/in/aidanchien/"
             target="_blank"
             rewardId="footer:linkedin"
-            kind="link"
           >
             <Image
               src="/linkedin_icon.svg"

@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useMoney } from '@/lib/money-context';
 
-export default function RewardLink({ rewardId, kind, onClick, children, ...rest }) {
+export default function RewardLink({ rewardId, kind = "link", onClick, children, className, ...rest }) {
   const { awardOnce, hasAward } = useMoney();
   const claimed = hasAward(rewardId);
 
@@ -14,7 +14,7 @@ export default function RewardLink({ rewardId, kind, onClick, children, ...rest 
         onClick?.(e);
       }}
       data-reward-id={rewardId}
-      className={claimed ? 'opacity-80' : ''}
+      className={`transition-all duration-200 ${claimed ? 'opacity-90' : 'opacity-100'} ${className}`}
     >
       {children}
     </Link>

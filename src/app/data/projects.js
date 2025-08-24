@@ -1,11 +1,20 @@
 import Link from 'next/link';
-import RedText from "@/components/RedText"
+import RedText from "@/components/RewardRedText"
+
 
 const generateRandomTicketNo = () => {
     const randomNum = Math.floor(Math.random() * 99) + 1; // 1-99
     return randomNum < 10 ? `0${randomNum}` : randomNum.toString();
 };
 
+const generateRandomTicketAmount = () => {
+  const min = 15000;
+  const max = 18000;
+  // pick a multiple of 10 within [min, max]
+  const steps = Math.floor((max - min) / 10); // 300 steps of 10
+  const value = min + Math.floor(Math.random() * (steps + 1)) * 10;
+  return value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+};
 
 /*  EMPTY TEMPLATE FOR NEW PROJECT!
 
@@ -13,7 +22,8 @@ const generateRandomTicketNo = () => {
         slug: '', 
         title: '',
         generated_with: 'PYTHON + AHK', // appears on Card, what tools did you use?
-        ticket_no: generateRandomTicketNo(),
+        ticket_no: "25", //hard coded fall back value that will appear if actual random generation goes wrong,
+        fallback_value: "17,230.00", //fallback ticket value that should be in this format (between 15000 and 18000, with comma, rounded to 10s place)
         skills_used: ['Python', 'OOP'], // red labels that appear on Card
         image: '/pmi_auto_generator/PMI Card2.png', // Card background image
         page_image_one: '/pmi_auto_generator/pmi_card.png', // image on the Page 1, this can also be a 3D model in the .glb format
@@ -58,7 +68,8 @@ export const projects = [
         slug: 'pmi-auto-generator',
         title: 'PMI Auto Generator',
         generated_with: 'PYTHON + AHK',
-        ticket_no: generateRandomTicketNo(),
+        ticket_no: "26",
+        fallback_value: "16,230.00",
         skills_used: ['Python', 'OOP'],
         image: '/pmi_auto_generator/PMI Card2.png',
         page_image_one: '/pmi_auto_generator/pmi_card.png',
@@ -99,7 +110,8 @@ export const projects = [
         slug: 'personal-website',
         title: 'Personal Website',
         generated_with: 'NEXT + TAILWIND',
-        ticket_no: generateRandomTicketNo(),
+        ticket_no: "73",
+        fallback_value: "17,390.00",
         skills_used: ['React', 'Web Development', 'Full Stack Development'],
         image: '/personal_website/card_image.jpg',
         page_image_one: '/personal_website/card_image.jpg',
@@ -133,7 +145,8 @@ export const projects = [
         slug: '3d-tools',
         title: '3D Printed Tools',
         generated_with: 'SOLIDWORKS',
-        ticket_no: generateRandomTicketNo(),
+        ticket_no: "41",
+        fallback_value: "16,180.00",
         skills_used: ['CAD', '3D Printing'],
         image: '/3d_tools/3d_card.png',
         page_image_one: '/models/keyassembly03.glb',
@@ -170,7 +183,8 @@ export const projects = [
         slug: 'mbd-macro',
         title: 'MBD Macro',
         generated_with: 'AUTOHOTKEY',
-        ticket_no: generateRandomTicketNo(),
+        ticket_no: "94",
+        fallback_value: "17,270.00",
         skills_used: ['Workflow Optimization', 'Machining'],
         image: '/mbd_macro/mbd_card.png',
         page_image_one: '/mbd_macro/mbd_card.png',

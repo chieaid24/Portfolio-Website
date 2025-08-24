@@ -4,6 +4,7 @@ import { useMoney } from '@/lib/money-context';
 
 export default function RedText({
   rewardId,
+  kind = 'redtext',
   children,
   weight = 'bold',   // 'bold' | 'semibold'
   className = '',
@@ -16,7 +17,7 @@ export default function RedText({
 
   const handleClick = () => {
     if (claimed) return;
-    const paid = awardOnce(rewardId, 'redtext');
+    const paid = awardOnce(rewardId, kind);
     if (paid) {
       // retrigger animation even if clicked rapidly
       setPopping(false);

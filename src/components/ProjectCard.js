@@ -1,12 +1,22 @@
 'use client';
 
-import Link from "next/link";
+import { useEffect, useState } from "react";
+import RewardProjectLink from "@/components/RewardProjectLink";
 import Image from "next/image";
+import { getOrCreateTicket } from "@/lib/ticket-store";
 
-export default function ProjectCard({ title, generated_with, ticket_no, skills_used, image, slug }) {
+export default function ProjectCard({ title, generated_with, ticket_no, fallback_value, skills_used, image, slug }) {
+    const [ticket, setTicket] = useState({number: ticket_no || '', value: ''});
+
+    useEffect(() => {
+        // seed with the prop once (if present), otherwise generate & persist
+        const t = getOrCreateTicket(slug, {number: ticket_no});
+        setTicket(t);
+    }, [slug, ticket_no]);
+
     return (
         <div>
-            <Link href={`/projects/${slug}`} className="block font-dm-sans group">
+            <RewardProjectLink href={`/projects/${slug}`} className="block font-dm-sans group" rewardId={`project:${slug}`} ticketValue={ticket.value}>
                 <div className="flex relative justify-center">
                     <div className="relative w-[500px] aspect-[2] overflow-hidden rounded-lg shadow-[-4px_4px_4px_0px_rgba(0,0,0,0.25)] ">
                         <Image
@@ -25,10 +35,10 @@ export default function ProjectCard({ title, generated_with, ticket_no, skills_u
                     <div className="absolute -translate-x-[4.4px] translate-y-[125%] group-hover:translate-y-[121%] w-full flex flex-col items-center transition-transform duration-300 group-hover:duration-300 group-hover:scale-102">
                         <div className="relative">
                             {/* <CardLabel /> */}
-                            <Image src="/illu_card_1.svg" 
-                            width={459}
-                            height={132}
-                            alt="Project ticket"
+                            <Image src="/illu_card_1.svg"
+                                width={459}
+                                height={132}
+                                alt="Project ticket"
                             />
                             <div className="absolute inset-0 flex flex-col justify-center items-center z-10 text-black w-full ml-[4px]">
                                 <div className="font-bold text-[0.7rem] mb-[-5px] mt-[-5px] text-black opacity-50">
@@ -46,19 +56,19 @@ export default function ProjectCard({ title, generated_with, ticket_no, skills_u
                                         className=""
                                         style={{ width: '100%', height: 'auto' }} />
                                 </div>
-                                <div className="flex justify-between font-bold w-[235px] opacity-50">
+                                <div className="flex justify-between font-bold w-[260px] opacity-50">
                                     <div className="text-[10px]">GENERATED WITH: {generated_with}</div>
-                                    <div className="text-[10px]">VER 1.0</div>
+                                    <div className="text-[10px]">TICKET # {ticket.number || '—'}</div>
                                 </div>
-                                <div className="font-bold mt-[-2px] text-[14px] opacity-50">
-                                    TICKET # {ticket_no}
+                                <div className="font-bold mt-[-2px] text-[14px] opacity-65">
+                                    ${ticket.value || '—'}
                                 </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
-            </Link>
+            </RewardProjectLink>
         </div>
 
     );

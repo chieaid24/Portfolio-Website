@@ -1,7 +1,7 @@
 import Footer from "@/components/Footer";
 import AboutImage from "@/components/AboutImage";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import RedText from '@/components/RedText';
+import RedText from '@/components/RewardRedText';
 
 
 export const metadata = {
