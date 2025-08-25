@@ -54,32 +54,42 @@ export default function Header() {
                             <div className="leading-none gradient-text-header">
                                 your earnings:
                             </div>
-                            <div className="flex gap-1 items-baseline leading-none">
-                                <div className="leading-none">
-                                    $
-                                </div>
-                                <div className="text-[24px] my-0 leading-none">
-                                    {ready ? <AnimatedBalance value={balance} /> : "—"}
-                                </div>
-                                <div className="leading-none">
-                                    k
-                                </div>
+                            <motion.div
+                                layout
+                                className="flex gap-1 items-baseline leading-none"
+                                transition={{ duration: 1, ease: "easeInOut" }}>
+
+                                <span className="leading-none">$</span>
+
+                                <motion.span
+                                    layout="position"
+                                    className="text-[24px] leading-none "
+                                    transition={{ duration: 1, ease: "easeInOut" }}>
+                                    {ready ? <AnimatedBalance value={balance} className="relative inline-block top-[4px]"/> : "—"}
+                                </motion.span>
+
+                                <motion.span layout="position"
+                                    className="leading-none"
+                                    transition={{ duration: 0.5, ease: "easeInOut" }}>k</motion.span>
+
                                 <motion.div
+                                    layout="position"
                                     key="info"
                                     variants={infoVariants}
                                     initial={false}
                                     animate={walletOpen ? "open" : "closed"}
                                     transition={{ duration: 0.2, ease: "easeOut" }}
-                                    style={{ willChange: 'transform, opacity' }}
+                                    style={{ willChange: "transform,opacity" }}
                                 >
                                     <Image
                                         src="/icons/info_icon_v1-01.svg"
                                         width={14}
                                         height={14}
-                                        alt="Close"
-                                        className={`ml-[5px]`} />
+                                        alt="Info"
+                                        className="ml-[5px] block"
+                                    />
                                 </motion.div>
-                            </div>
+                            </motion.div>
                         </div>
 
                     </button>

@@ -16,7 +16,7 @@ function cn(...classes) {
 }
 
 //sets the default props for everything
-const RotatingText = forwardRef((props, ref) => {
+const RotatingHeroText = forwardRef((props, ref) => {
   const {
     texts,
     texts2,
@@ -242,5 +242,5 @@ const RotatingText = forwardRef((props, ref) => {
   );
 });
 
-RotatingText.displayName = "RotatingText";
-export default RotatingText;
+RotatingHeroText.displayName = "RotatingHeroText";
+export default RotatingHeroText;

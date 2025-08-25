@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useAnimate } from 'framer-motion';
-import RotatingText from './RotatingText.js';
+import RotatingHeroText from './RotatingHeroText.js';
 import Image from 'next/image';
 
 export default function HeroSlot() {
@@ -181,7 +181,7 @@ export default function HeroSlot() {
         <div className="relative overflow-visible min-w-0">
           <div className="absolute top-15 left-35">
             {/* Rotating Text */}
-            <RotatingText
+            <RotatingHeroText
               ref={textRef}
               texts={['AIDAN', 'ENG', 'DES', 'INVE', 'CLIM', 'FILM', 'STU', 'GYM', 'CODE', 'CAD', 'REELS', 'GAME', 'UI/UX', 'WEB', 'AI', 'NYT', 'SLEEP',]}
               texts2={['CHIEN', 'INEER', 'IGNER', 'NTOR', 'BER', 'MAKER', 'DENT', 'GOER', 'ADDICT', 'HEAD', 'SNOB', 'NERD', 'FAN', 'DEV', 'FIEND', 'GAMER', 'LOVER',]}

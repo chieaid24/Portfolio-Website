@@ -1,69 +1,120 @@
 // src/components/AnimatedBalance.jsx
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import RotatingNavText from "@/components/RotatingNavText";
 
-function useAnimatedDelta(value, { ms = 1000 } = {}) {
-  const prev = useRef(value);
-  const [delta, setDelta] = useState(0);
-  const [show, setShow] = useState(false);
+export default function AnimatedBalance({
+  value,
+  holdMs = 1000,
+  rotateMs = 300,
+  className = "",
+  snapDelayMs = 10,
+}) {
+  const prev = useRef(Number(value));
+  const [trio, setTrio] = useState([
+    Number(value).toFixed(2),
+    Number(value).toFixed(2),
+    Number(value).toFixed(2),
+  ]);
+  const [deltaColor, setDeltaColor] = useState("green"); // "green" | "red"
+  const [rtKey, setRtKey] = useState(0);
+  const rtRef = useRef(null);
+  const timers = useRef([]);
+
+  // ---- width measurement + animation ----
+  const contentRef = useRef(null);
+  const [width, setWidth] = useState(0);
+
+  useLayoutEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+
+    const update = () => {
+      const w = el.getBoundingClientRect().width;
+      setWidth(w);
+    };
+
+    // initial measure
+    update();
+
+    // watch for internal content size changes (rotations)
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [rtKey]); // re-measure after we remount RotatingNavText
 
   useEffect(() => {
-    let t;
-    const a = Number(value);
-    const b = Number(prev.current);
-    if (Number.isFinite(a) && Number.isFinite(b) && a !== b) {
-      const d = +(a - b).toFixed(2);
-      setDelta(d);
-      setShow(true);
-      t = setTimeout(() => setShow(false), ms);
+    const next = Number(value);
+    const prevVal = prev.current;
+
+    timers.current.forEach(clearTimeout);
+    timers.current = [];
+
+    if (Number.isFinite(next) && Number.isFinite(prevVal) && next !== prevVal) {
+      const delta = +(next - prevVal).toFixed(2);
+      const deltaStr = `${delta >= 0 ? "+" : "-"}${Math.abs(delta).toFixed(2)}`;
+      const baseStr  = next.toFixed(2);
+      const prevStr  = prevVal.toFixed(2);
+
+      setDeltaColor(delta >= 0 ? "green" : "red");
+
+      // 1) mount snapped to prev (index 0)
+      setTrio([prevStr, deltaStr, baseStr]);
+      setRtKey(k => k + 1);
+
+      // 2) jump to delta (index 1), then later to base (index 2)
+      timers.current.push(setTimeout(() => {
+        rtRef.current?.jumpTo(1);
+        timers.current.push(setTimeout(() => {
+          rtRef.current?.jumpTo(2);
+        }, rotateMs + holdMs));
+      }, snapDelayMs));
+    } else {
+      const b = next.toFixed(2);
+      setTrio([b, b, b]);
     }
-    prev.current = value;
-    return () => t && clearTimeout(t);
-  }, [value, ms]);
 
-  return { show, delta };
-}
-
-export default function AnimatedBalance({ value, ms = 1000, className = "" }) {
-  const { show, delta } = useAnimatedDelta(value, { ms });
+    prev.current = next;
+    return () => {
+      timers.current.forEach(clearTimeout);
+      timers.current = [];
+    };
+  }, [value, holdMs, rotateMs, snapDelayMs]);
 
   return (
-    <div
-      className={`relative inline-block align-baseline tabular-nums ${className}`}
-      style={{ lineHeight: 1 }}
+    // Animate the wrapper's WIDTH so siblings slide smoothly.
+    <motion.span
+      className={`inline-block align-baseline tabular-nums ${className}`}
+      style={{ lineHeight: 1, overflow: "hidden" }}
+      // Animate from previous measured width to new width
+      animate={{ width }}
+      transition={{ duration: 0.2, ease: "easeInOut" }}
     >
-      <AnimatePresence initial={false} mode="popLayout">
-        {show ? (
-          <motion.span
-            key="delta"
-            initial={{ y: 8, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -8, opacity: 0 }}
-            transition={{ duration: 0.22, ease: "easeOut" }}
-            className={delta > 0 ? "text-green-600" : "text-red-600"}
-            style={{ position: "absolute", inset: 0, willChange: "transform,opacity" }}
-          >
-            {delta > 0 ? "+" : "-"}
-            {Math.abs(delta).toFixed(2)}
-          </motion.span>
-        ) : (
-          <motion.span
-            key="base"
-            initial={{ y: 8, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -8, opacity: 0 }}
-            transition={{ duration: 0.22, ease: "easeOut" }}
-            style={{ position: "absolute", inset: 0, willChange: "transform,opacity" }}
-          >
-            {Number(value).toFixed(2)}
-          </motion.span>
-        )}
-      </AnimatePresence>
-
-      {/* Reserve layout space to prevent jitter during swap */}
-      <span className="invisible">{!show ? Number(value).toFixed(2) : `+${Number(delta).toFixed(2)}`}</span>
-    </div>
+      {/* Inner content is measured by ResizeObserver */}
+      <span ref={contentRef} className="inline-block items-baseline">
+        <RotatingNavText
+          key={rtKey}
+          ref={rtRef}
+          texts={trio}
+          auto={false}
+          loop={false}
+          splitBy="words"
+          transition={{ type: "spring", damping: 25, stiffness: 300 }}
+          initial={{ y: "-100%", opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: "100%", opacity: 0 }}
+          staggerFrom="first"
+          animatePresenceMode="popLayout"
+          animatePresenceInitial={false}
+          disableFirstAnimation
+          mainClassName=""
+          splitLevelClassName="inline-flex"
+          elementLevelClassName="inline-block"
+          deltaColor={deltaColor}
+        />
+      </span>
+    </motion.span>
   );
 }

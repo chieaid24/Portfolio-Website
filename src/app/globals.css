@@ -19,6 +19,9 @@
   --dark-grey-text: #383838;
   --dark-grey-footer: #747474;
   --header-light: #B3B3B3;
+
+  --sage-green: #9EE9B4;
+
 }
 
 @theme {
@@ -32,6 +35,7 @@
   --color-dark-grey-text: var(--dark-grey-text);
   --color-dark-grey-footer: var(--dark-grey-footer);
   --color-header-light: var(--header-light);
+  --color-sage-green: var(--sage-green);
 
   --color-background-light: var(--background-light);
   --color-background-dark: var(--background-dark);
