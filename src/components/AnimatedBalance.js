@@ -4,6 +4,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import RotatingNavText from "@/components/RotatingNavText";
+import { useMoney } from '@/lib/money-context';
 
 export default function AnimatedBalance({
   value,
@@ -12,6 +13,10 @@ export default function AnimatedBalance({
   className = "",
   snapDelayMs = 10,
 }) {
+
+  const { overflowTick, underflowTick } = useMoney();
+  const lastOverTickRef = useRef(0);
+  const lastUnderTickRef = useRef(0);
   const prev = useRef(Number(value));
   const [trio, setTrio] = useState([
     Number(value).toFixed(2),
@@ -22,6 +27,11 @@ export default function AnimatedBalance({
   const [rtKey, setRtKey] = useState(0);
   const rtRef = useRef(null);
   const timers = useRef([]);
+
+  const clearTimers = () => { timers.current.forEach(clearTimeout); timers.current = []; };
+
+  // if there is an exception, call a specific function that calls this instead of actually updating balance, keeps it cleaner as balance
+  // is always a number
 
   // ---- width measurement + animation ----
   const contentRef = useRef(null);
@@ -45,26 +55,68 @@ export default function AnimatedBalance({
     return () => ro.disconnect();
   }, [rtKey]); // re-measure after we remount RotatingNavText
 
+  //when the overflowTick increases, it calls this function, which creates the custom animation, saying that it has overflowed
   useEffect(() => {
+    if (overflowTick === 0 || overflowTick === lastOverTickRef.current) return;
+    lastOverTickRef.current = overflowTick;
+
+    const prevStr = prev.current.toFixed(2);
+
+    // Create settings for overflow animation
+    setDeltaColor("red");
+    setTrio([prevStr, "OVERFLOW", prevStr]);
+    setRtKey(k => k + 1);
+
+    timers.current.push(setTimeout(() => {
+      rtRef.current?.jumpTo(1);
+      timers.current.push(setTimeout(() => {
+        rtRef.current?.jumpTo(2);
+      }, rotateMs + holdMs));
+    }, snapDelayMs));
+
+    // do NOT update prev here (balance didn't change)
+    return () => clearTimers();
+  }, [overflowTick]);
+
+  //when the underflow increases, it calls this function, which creates the custom animation, saying that it has underflowed
+  useEffect(() => {
+    if (underflowTick === 0 || underflowTick === lastUnderTickRef.current) return;
+    lastUnderTickRef.current = underflowTick;
+
+    const prevStr = prev.current.toFixed(2);
+
+    // Create settings for overflow animation
+    setDeltaColor("red");
+    setTrio([prevStr, "BROKE", prevStr]);
+    setRtKey(k => k + 1);
+
+    timers.current.push(setTimeout(() => {
+      rtRef.current?.jumpTo(1);
+      timers.current.push(setTimeout(() => {
+        rtRef.current?.jumpTo(2);
+      }, rotateMs + holdMs));
+    }, snapDelayMs));
+
+    // do NOT update prev here (balance didn't change)
+    return () => clearTimers();
+  }, [underflowTick]);
+
+  useEffect(() => {
+    clearTimers();
     const next = Number(value);
     const prevVal = prev.current;
-
-    timers.current.forEach(clearTimeout);
-    timers.current = [];
 
     if (Number.isFinite(next) && Number.isFinite(prevVal) && next !== prevVal) {
       const delta = +(next - prevVal).toFixed(2);
       const deltaStr = `${delta >= 0 ? "+" : "-"}${Math.abs(delta).toFixed(2)}`;
-      const baseStr  = next.toFixed(2);
-      const prevStr  = prevVal.toFixed(2);
+      const baseStr = next.toFixed(2);
+      const prevStr = prevVal.toFixed(2);
 
+      // add jackpot color ! ! ! purple + green gradient? 
       setDeltaColor(delta >= 0 ? "green" : "red");
-
-      // 1) mount snapped to prev (index 0)
       setTrio([prevStr, deltaStr, baseStr]);
       setRtKey(k => k + 1);
 
-      // 2) jump to delta (index 1), then later to base (index 2)
       timers.current.push(setTimeout(() => {
         rtRef.current?.jumpTo(1);
         timers.current.push(setTimeout(() => {
@@ -72,15 +124,13 @@ export default function AnimatedBalance({
         }, rotateMs + holdMs));
       }, snapDelayMs));
     } else {
-      const b = next.toFixed(2);
+      const b = Number.isFinite(next) ? next.toFixed(2) : "—";
       setTrio([b, b, b]);
     }
 
-    prev.current = next;
-    return () => {
-      timers.current.forEach(clearTimeout);
-      timers.current = [];
-    };
+    prev.current = next; // only for real balance changes
+
+    return () => clearTimers();
   }, [value, holdMs, rotateMs, snapDelayMs]);
 
   return (

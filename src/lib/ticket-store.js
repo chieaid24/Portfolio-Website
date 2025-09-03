@@ -12,8 +12,8 @@ export const generateTicketNumber = () => {
 };
 
 export const generateTicketValue = () => {
-  const min = 15000;
-  const max = 18000;
+  const min = 59000;
+  const max = 81000;
   const steps = Math.floor((max - min) / 10);
   const value = min + Math.floor(Math.random() * (steps + 1)) * 10;
   return value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });

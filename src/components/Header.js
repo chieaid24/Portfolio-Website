@@ -1,17 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMoney } from "@/lib/money-context";
 import DevMoneyReset from "@/components/DevMoneyReset"; // <- use your wrapper"
+import OverflowButton from "@/components/OverflowButton";
 import AnimatedBalance from "@/components/AnimatedBalance";
+import RewardLink from "@/components/RewardLink"
+import DevBalanceInput from "@/components/DevBalanceInput"
+
 
 export default function Header() {
     const [showHeader, setShowHeader] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
     const [walletOpen, setWalletOpen] = useState(false);
+    const [holdOpen, setHoldOpen] = useState(false);
+
+
+    const firstBalanceRender = useRef(true);
+    const lastYRef = useRef(0);
 
     const { balance, ready } = useMoney();
 
@@ -20,15 +28,35 @@ export default function Header() {
         open: { opacity: 0, y: -4 },
     };
 
+    // Scroll show/hide, respecting the hold
     useEffect(() => {
-        const handleScroll = () => {
+        const onScroll = () => {
+            if (holdOpen) return;
             const y = window.scrollY;
-            setShowHeader(y <= lastScrollY);
-            setLastScrollY(y);
+            setShowHeader(y <= lastYRef.current);
+            lastYRef.current = y;
         };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [lastScrollY]);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, [holdOpen]); // only rebind when the "hold" changes
+
+    // Pop header when balance changes
+    useEffect(() => {
+        if (!ready) return;
+
+        if (firstBalanceRender.current) {   // skip the first hydrated run
+            firstBalanceRender.current = false;
+            return;
+        }
+
+        setShowHeader(true);
+        setHoldOpen(true);
+
+        const t = window.setTimeout(() => {
+            setHoldOpen(false);
+        }, 2000);
+        return () => window.clearTimeout(t);;
+    }, [balance, ready]);
 
     return (
         <header
@@ -37,7 +65,8 @@ export default function Header() {
         >
             {/* Outer container animates its size smoothly */}
             <motion.div
-                className="pointer-events-auto bg-background-dark w-1/2 mx-auto rounded-xl shadow-[0px_5.471670627593994px_13.679177284240723px_0px_rgba(0,0,0,0.15)] overflow-hidden"
+                className=
+                "pointer-events-auto w-1/2 mx-auto rounded-xl shadow-[0px_5.47px_13.68px_0px_rgba(0,0,0,0.15)] overflow-hidden transition-colors duration-150 bg-background-dark/95"
             >
                 {/* Top row */}
                 <div className="pl-4.5 pr-6 flex items-center justify-between gap-4">
@@ -65,7 +94,7 @@ export default function Header() {
                                     layout="position"
                                     className="text-[24px] leading-none "
                                     transition={{ duration: 1, ease: "easeInOut" }}>
-                                    {ready ? <AnimatedBalance value={balance} className="relative inline-block top-[4px]"/> : "—"}
+                                    {ready ? <AnimatedBalance value={balance} className="relative inline-block top-[4px]" /> : "—"}
                                 </motion.span>
 
                                 <motion.span layout="position"
@@ -96,6 +125,9 @@ export default function Header() {
 
                     <div className="flex items-center gap-2 text-lg">
                         <DevMoneyReset />
+                        <OverflowButton />
+                        <DevBalanceInput />
+                        
                         {/* When closed, show nav; when open, show an (x) button */}
                         <AnimatePresence initial={false} mode="wait">
                             {!walletOpen ? (
@@ -113,20 +145,25 @@ export default function Header() {
                                             last:after:hidden">
                                         home
                                     </Link>
-                                    <Link href="/about" className="relative hover:text-custom-red transition-colors px-5 py-1
+                                    <RewardLink href="/about"
+                                        className="relative hover:text-custom-red transition-colors px-5 py-1
                                             after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2
                                             after:w-[2.5px] after:h-6 after:bg-header-light/80
-                                            last:after:hidden">
+                                            last:after:hidden"
+                                        rewardId="header:about"
+                                        transparent={false}>
                                         about
-                                    </Link>
-                                    <Link
+                                    </RewardLink>
+                                    <RewardLink
                                         href="/documents/Aidan_Chien_resume.pdf"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="hover:text-custom-red transition-colors pl-5 py-1"
+                                        rewardId="header:resume"
+                                        transparent={false}
                                     >
                                         resume
-                                    </Link>
+                                    </RewardLink>
                                 </motion.nav>
                             ) : (
                                 <motion.button

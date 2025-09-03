@@ -38,6 +38,7 @@ export default function RedText({
         }
         disabled={claimed}
         aria-pressed={claimed}
+        data-reward-click
       >
         {children}
       </button>

@@ -50,7 +50,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="pt-15 bg-background-dark font-dm-sans text-dark-grey-text"> {/**hero div */}
+      <div className="pt-25 bg-background-dark font-dm-sans text-dark-grey-text"> {/**hero div */}
         <div>
           <div id="hero" className="relative min-h-screen w-full">
             <MaxWidthWrapper>
@@ -84,13 +84,14 @@ export default function Home() {
                   image={project.image}
                   slug={project.slug}
                   alt={project.title}
+                  fallback_value={[10, project.fallback_value]}
                 />
               ))}
             </div>
           </MaxWidthWrapper>
           <div className="flex flex-col items-center my-[-10px] pt-10 bg-background-dark text-dark-grey-text font-dm-sans text-8xl tracking-tighter font-semibold"> {/**want to cash out? section */}
             <div>
-              <RewardLink href="mailto:aidan.chien@uwaterloo.ca"
+              <RewardLink href="mailto:aidan.chien@uwaterloo.ca" rewardId="home:cash-out"
                 className="group hover:scale-110 hover:translate-y-[-15px] transition-all !duration-300 items-center inline-flex flex-col ">
                 <h1>
                   Want to <span className="group-hover:animate-new-pulse group-hover:gradient-text-red-animated gradient-text-custom font-semibold animated-underline pr-0.5">cash out?</span>

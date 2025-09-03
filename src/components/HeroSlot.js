@@ -1,18 +1,23 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { motion, useAnimate } from 'framer-motion';
 import RotatingHeroText from './RotatingHeroText.js';
 import Image from 'next/image';
+import { useSlotJiggle } from '@/lib/slot-jiggle-context';
+import { useMoney } from "@/lib/money-context"
 
 export default function HeroSlot() {
   const textRef = useRef(null);
   const leverRef = useRef(null);
   const shadowRef = useRef(null);
-  const [scope, animate] = useAnimate();
-  const [hasBeenClicked, setHasBeenClicked] = useState(false);
-  const jiggleTimeoutRef = useRef(null);
+  const leverGroupRef = useRef(null);
 
+  const [scope, animate] = useAnimate();
+  const { awardLever } = useMoney();
+
+  const { hasBeenClicked, markClicked, ready: jiggleReady } = useSlotJiggle();
+  const jiggleTimeoutRef = useRef(null);
   const duration = 0.6;
   const milliDuration = duration * 1000;
 
@@ -46,6 +51,36 @@ export default function HeroSlot() {
     await Promise.all([JiggleXPromise, PulsePromise]);
   };
 
+  // Jiggle animation function
+  const underflowJiggle = async () => {
+
+    const JiggleXPromise = animate(
+      leverGroupRef.current,
+      {
+        x: [0, -2, 0, -1, 0, -1, 0],
+      },
+      {
+        duration: 0.7,
+        ease: 'easeInOut',
+        times: [0, 0.15, 0.3, 0.45, 0.6, 0.75, 1],
+      }
+    );
+
+    const PulsePromise = animate(
+      scope.current,
+      {
+        fill: ['#FF7D7D', '#fcc7c7', '#FF7D7D'],
+      },
+      {
+        duration: 1,
+        ease: 'easeInOut',
+        times: [0, 0.2, 1],
+      }
+    );
+    await Promise.all([JiggleXPromise, PulsePromise]);
+  };
+
+
   // Start jiggle cycle
   const startJiggleCycle = () => {
     if (hasBeenClicked) return;
@@ -65,17 +100,15 @@ export default function HeroSlot() {
     scheduleNextJiggle();
   };
 
-  // Effect to start the jiggle cycle when component mounts
+  // Start jiggle cycle once the context is ready (so we respect localStorage)
   useEffect(() => {
+    if (!jiggleReady) return;     // wait until we've read localStorage
     startJiggleCycle();
-
-    // Cleanup timeout on unmount
     return () => {
-      if (jiggleTimeoutRef.current) {
-        clearTimeout(jiggleTimeoutRef.current);
-      }
+      if (jiggleTimeoutRef.current) clearTimeout(jiggleTimeoutRef.current);
     };
-  }, [hasBeenClicked]);
+  }, [jiggleReady, hasBeenClicked]); // re-check if user clicks in another tab
+
 
   function animateShadow({ ref, from, to, duration = 300 }) {
     const startTime = performance.now();
@@ -111,9 +144,15 @@ export default function HeroSlot() {
 
   const pullLever = async () => {
     // Mark as clicked and clear any pending jiggle timeouts
-    setHasBeenClicked(true);
+    markClicked();
     if (jiggleTimeoutRef.current) {
       clearTimeout(jiggleTimeoutRef.current);
+    }
+
+    const successful = await awardLever();
+    if (!successful) {
+      underflowJiggle();
+      return;
     }
 
     // Step 1: Smoothly increase the shadow
@@ -199,7 +238,7 @@ export default function HeroSlot() {
           </div>
         </div>
         {/* SVG Lever Button */}
-        <div className="flex items-center h-[400px]">
+        <div className="flex items-center h-[400px]" ref={leverGroupRef}>
           <div className="m-5 h-full flex relative items-center"> {/**lever and block div */}
             <svg
               width="90"
@@ -232,6 +271,7 @@ export default function HeroSlot() {
               />
             </svg>
           </div>
+
           <svg
             width="150"
             height="500"
@@ -258,7 +298,8 @@ export default function HeroSlot() {
               }}
               onClick={pullLever}
               className="cursor-pointer"
-            />
+            >
+            </motion.circle>
           </svg>
         </div>
       </div>
@@ -266,6 +307,6 @@ export default function HeroSlot() {
         <Image src="/hero/corner_bl.svg" alt="Bottom Left Corner" width={60} height={60} />
         <Image src="/hero/corner_br.svg" alt="Bottom Right Corner" width={60} height={60} />
       </div>
-    </div>
+    </div >
   );
 }

@@ -1,22 +1,36 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import RewardProjectLink from "@/components/RewardProjectLink";
 import Image from "next/image";
 import { getOrCreateTicket } from "@/lib/ticket-store";
+import Decimal from 'decimal.js';
 
 export default function ProjectCard({ title, generated_with, ticket_no, fallback_value, skills_used, image, slug }) {
-    const [ticket, setTicket] = useState({number: ticket_no || '', value: ''});
+    const [ticket, setTicket] = useState({
+        number: ticket_no ?? "",
+    });
 
     useEffect(() => {
         // seed with the prop once (if present), otherwise generate & persist
-        const t = getOrCreateTicket(slug, {number: ticket_no});
+        const t = getOrCreateTicket(slug, {
+            number: ticket_no,        });
         setTicket(t);
     }, [slug, ticket_no]);
 
+    const addedTicketValue = useMemo(() => {
+        if (!ticket.value) return "0";
+        const clean = String(ticket.value).replace(/[^0-9.-]/g, "");
+        try {
+            return new Decimal(clean).div(1000).toString();
+        } catch {
+            return "0";
+        }
+    }, [ticket.value]);
+
     return (
         <div>
-            <RewardProjectLink href={`/projects/${slug}`} className="block font-dm-sans group" rewardId={`project:${slug}`} ticketValue={ticket.value}>
+            <RewardProjectLink href={`/projects/${slug}`} className="block font-dm-sans group" rewardId={`project:${slug}`} ticketValue={addedTicketValue}>
                 <div className="flex relative justify-center">
                     <div className="relative w-[500px] aspect-[2] overflow-hidden rounded-lg shadow-[-4px_4px_4px_0px_rgba(0,0,0,0.25)] ">
                         <Image
@@ -24,7 +38,7 @@ export default function ProjectCard({ title, generated_with, ticket_no, fallback
                             alt={title}
                             fill
                             className="object-cover z-0 transition-transform duration-300 group-hover:scale-101" />
-                        <ul className="absolute w-full flex flex-wrap justify-end gap-4 pt-5 pr-5 text-[16px]"> {/**skills used div */}
+                        <ul className="absolute w-full flex flex-wrap justify-end gap-3 pt-3 pr-3 text-[16px]"> {/**skills used div */}
                             {skills_used.map((lang, i) => (
                                 <li key={i} className="bg-custom-red px-2 py-[1px] rounded-md text-white font-semibold tracking-wider opacity-90 hover:opacity-80 transition-opacity duration-200">
                                     #{lang}
@@ -61,7 +75,7 @@ export default function ProjectCard({ title, generated_with, ticket_no, fallback
                                     <div className="text-[10px]">TICKET # {ticket.number || '—'}</div>
                                 </div>
                                 <div className="font-bold mt-[-2px] text-[14px] opacity-65">
-                                    ${ticket.value || '—'}
+                                    ${ticket.value || ' ——'}
                                 </div>
                             </div>
                         </div>
