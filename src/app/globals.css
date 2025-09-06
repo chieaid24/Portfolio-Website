@@ -85,6 +85,13 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.gradient-text-jackpot {
+  background: linear-gradient(90deg, #DC74FF, #E59CFF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;                /* helps Firefox */
+  -webkit-text-fill-color: transparent; /* WebKit */
+}
 .gradient-text-header {
   background: linear-gradient(
     90deg,

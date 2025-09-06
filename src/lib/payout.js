@@ -1,8 +1,6 @@
 // src/lib/payout.js
 
 // -------- RNG plumbing -------------------------------------------------------
-// Use crypto RNG if available (browser/Node). Fallback to Math.random.
-// You can also pass your own RNG via config for tests/replay.
 export function makeCryptoRNG() {
   const hasCrypto =
     typeof globalThis !== "undefined" &&
@@ -21,7 +19,6 @@ export function makeCryptoRNG() {
   return { random: Math.random };
 }
 
-// Simple seeded RNG for testing/replay.
 export function makeMulberry32(seed) {
   let t = seed >>> 0;
   return {
@@ -35,7 +32,6 @@ export function makeMulberry32(seed) {
 }
 
 // -------- Distributions ------------------------------------------------------
-// Triangular(a, m, b): bounded, mode at m, O(1) inverse-CDF sampling.
 export function triangularSample(rng, a, m, b) {
   if (!(a <= m && m <= b)) throw new Error("Require a <= m <= b");
   const u = rng.random();
@@ -47,13 +43,10 @@ export function triangularSample(rng, a, m, b) {
   }
 }
 
-// Mean of the triangular distribution: handy for calibration.
 export function triangularEV(a, m, b) {
   return (a + m + b) / 3;
 }
 
-// Power-tail on [m, cap]: x = m + (cap - m) * u^k, k>0.
-// k < 1 → fatter right tail (bigger jackpots), k > 1 → thinner tail.
 export function powerTailSample(rng, m, cap, k) {
   if (!(cap > m)) throw new Error("Require cap > m");
   if (!(k > 0)) throw new Error("Require k > 0");
@@ -61,7 +54,6 @@ export function powerTailSample(rng, m, cap, k) {
   return m + (cap - m) * Math.pow(u, k);
 }
 
-// Mean of power-tail (closed-form): EV = m + (cap - m)/(k + 1)
 export function powerTailEV(m, cap, k) {
   return m + (cap - m) / (k + 1);
 }
@@ -88,7 +80,7 @@ function calibrateP(evTarget, evBase, evTail) {
 export function createPayoutGenerator(cfg) {
   const rng = cfg.rng || makeCryptoRNG();
 
-  // Basic sanity checks for consistent bounds.
+  // Sanity checks
   if (!(cfg.min < cfg.baseMode && cfg.baseMode <= cfg.baseMax && cfg.baseMax <= cfg.cap)) {
     throw new Error("Require min < baseMode <= baseMax <= cap");
   }
@@ -96,12 +88,17 @@ export function createPayoutGenerator(cfg) {
     throw new Error("Require tailStart >= baseMax and tailStart < cap");
   }
 
-  // Closed-form component means → exact EV control.
+  // Component means
   const evBase = triangularEV(cfg.min, cfg.baseMode, cfg.baseMax);
   const evTail = powerTailEV(cfg.tailStart, cfg.cap, cfg.tailK);
 
-  // Compute tail probability p to hit targetEV.
-  const p = calibrateP(cfg.targetEV, evBase, evTail);
+  // 👇 NEW: allow explicit tailWeight; else calibrate to targetEV
+  const hasTailWeight =
+    typeof cfg.tailWeight === "number" && Number.isFinite(cfg.tailWeight);
+  const p = hasTailWeight
+    ? clamp(cfg.tailWeight, 0, 1)
+    : calibrateP(cfg.targetEV, evBase, evTail);
+
   const evOverall = (1 - p) * evBase + p * evTail;
 
   const drawBase = () => {
@@ -115,19 +112,22 @@ export function createPayoutGenerator(cfg) {
   };
 
   return {
-    // Single payout draw from the mixture (O(1), bounded).
     next: () => {
       const u = rng.random();
       const raw = u < p ? drawTail() : drawBase();
       return clamp(raw, cfg.min, cfg.cap);
     },
 
-    // Useful telemetry for UI/debugging/tuning.
     info: () => ({
-      p,
+      p,                    // actual tail probability used
       evBase,
       evTail,
       evOverall,
+      usedTailWeight: hasTailWeight, // true if you forced p via cfg.tailWeight
+      targetEV: cfg.targetEV,
+      evDriftFromTarget: typeof cfg.targetEV === "number"
+        ? evOverall - cfg.targetEV
+        : undefined,
       config: cfg,
     }),
   };

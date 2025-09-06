@@ -1,11 +1,25 @@
 'use client';
 import React, { createContext, useContext, useEffect, useMemo, useReducer, useState, useRef } from 'react';
 import { createPayoutGenerator } from "@/lib/payout.js";
-import { defaultMixtureConfig } from "@/lib/payoutDefault.js";
+import { defaultMixtureConfig } from "@/lib/payout-default.js";
 
 const STORAGE_KEY = 'moneyState_v1';
 const MoneyContext = createContext(null);
-const MAX_BAL = 999.99;
+const MAX_BAL = 9999.99;
+const INIT_BAL = 10.00;
+
+const KINDS = ['redtext', 'project', 'link'];
+const isKind = (k) => KINDS.includes(k);
+
+/* returns an empty quest object, {
+  redtext: { total: 0, done: 0 },
+  project: { total: 0, done: 0 },
+  link:    { total: 0, done: 0 },
+}
+*/
+
+const emptyQuests = () =>
+  KINDS.reduce((acc, k) => { acc[k] = { total: 0, done: 0 }; return acc; }, {});
 
 let __payoutGen = null;
 
@@ -27,11 +41,34 @@ function addWithCap(balance, amount) {
 
 function reducer(state, action) {
   switch (action.type) {
+    case 'INIT': {
+      // generate once on first run
+      const init = INIT_BAL;
+      return {
+        balance: init,
+        awarded: {}, // maps id -> true
+        initBalance: init,
+        registry: {}, // maps id -> kind
+        quests: emptyQuests(), // { redtext:{total,done}, project:{total,done}, link:{...} }
+      };
+    }
     case 'LOAD': {
       const s = action.payload || {};
+
+      // initBalance: use stored if valid, otherwise generate once
+      const storedInit = normalize2(toAmount(s.initBalance));
+      const init = Number.isFinite(storedInit) && storedInit > 0
+        ? storedInit
+        : INIT_BAL;
+
+      // balance: if storage has a value (including 0), use it; else use init
+      const hasStoredBalance = typeof s.balance !== 'undefined';
+      const baseBalance = hasStoredBalance ? s.balance : init;
+
       return {
-        balance: Math.min(MAX_BAL, normalize2(toAmount(s.balance ?? 0))),
+        balance: Math.min(MAX_BAL, normalize2(toAmount(baseBalance))),
         awarded: s.awarded || {},
+        initBalance: init,
       };
     }
     case 'AWARD': {
@@ -57,8 +94,11 @@ function reducer(state, action) {
         ? state
         : { ...state, balance: normalize2(state.balance - spendAmt) };
     }
-    case 'RESET':
-      return { balance: 0, awarded: {} };
+    case 'RESET': {
+
+      // Do NOT generate a new initial value here — we reuse the one we already have.
+      return { balance: INIT_BAL, awarded: {}, initBalance: INIT_BAL };
+    }
     case 'OVERFLOW':
       return state;
     case 'UNDERFLOW':
@@ -128,10 +168,12 @@ function leverPayout() {
 }
 
 export function MoneyProvider({ children }) {
-  const [state, dispatch] = useReducer(reducer, { balance: 0, awarded: {} });
+  const [state, dispatch] = useReducer(reducer, { balance: 0, awarded: {}, initBalance: 8.34 });
   const [ready, setReady] = useState(false);
   const [overflowTick, setOverflowTick] = useState(0);
   const [underflowTick, setUnderflowTick] = useState(0);
+  const [leverPullTick, setLeverPullTick] = useState(0);
+
   const stateRef = useRef(state);
   useEffect(() => { stateRef.current = state; }, [state]);
 
@@ -140,11 +182,16 @@ export function MoneyProvider({ children }) {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
-        if (parsed && typeof parsed.balance !== 'undefined' && parsed.awarded) {
-          dispatch({ type: 'LOAD', payload: parsed });
-        }
+        // relax the guard: load even if some fields are missing
+        dispatch({ type: 'LOAD', payload: parsed || {} });
+      } else {
+        // first-ever run: create initBalance and set balance to it
+        dispatch({ type: 'INIT' });
       }
-    } catch { }
+    } catch {
+      // if parsing fails, also initialize
+      dispatch({ type: 'INIT' });
+    }
     setReady(true);
   }, []);
 
@@ -223,14 +270,15 @@ export function MoneyProvider({ children }) {
         console.log(underflowTick);
         return false;
       }
-
+      setLeverPullTick(t => t + 1);
       dispatch({ type: 'SPEND', amount: cost });
       const payoutAmount = normalize2(leverPayout()); // compute this outside
       window.setTimeout(() => {
         if (Number.isFinite(payoutAmount) && payoutAmount > 0) {
+          setLeverPullTick(t => t + 1);
           dispatch({ type: 'AWARDINF', amount: payoutAmount });
         }
-      }, 500);
+      }, 400);
 
       return true;
     },
@@ -253,9 +301,10 @@ export function MoneyProvider({ children }) {
 
     underflowTick,
     overflowTick,
+    leverPullTick,
     ready
 
-  }), [state, ready, overflowTick, underflowTick]);
+  }), [state, ready, overflowTick, underflowTick, leverPullTick]);
 
   return <MoneyContext.Provider value={api}>{children}</MoneyContext.Provider>;
 }

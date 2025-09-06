@@ -19,7 +19,7 @@ function cn(...classes) {
 const RotatingNavText = forwardRef((props, ref) => {
   const {
     texts,
-    transition = { type: "spring", damping: 25, stiffness: 300 },
+    transition = { type: "spring", damping: 25, stiffness: 0 },
     initial = { y: "100%", opacity: 0 },
     animate = { y: 0, opacity: 1 },
     exit = { y: "-120%", opacity: 0 },
@@ -37,6 +37,7 @@ const RotatingNavText = forwardRef((props, ref) => {
     elementLevelClassName,
     disableFirstAnimation = false,
     deltaColor = "green", // "green" | "red"
+    leverAward, 
     ...rest
   } = props;
 
@@ -153,7 +154,20 @@ const RotatingNavText = forwardRef((props, ref) => {
   // Return the color class *for a specific index*
   const colorForIndex = (idx) => {
     if (idx === 1) {
-      return deltaColor === "green" ? "text-sage-green" : "text-custom-red";
+      switch (deltaColor) {
+        case "green":
+          return "text-sage-green";
+        case "red":
+          return "text-custom-red";
+        case "jackpot":
+          return "gradient-text-jackpot";
+        default:
+          return "text-sage-green";
+      }      
+    }
+    //if first index and it is leveraward (meaning that it is rewarding due to lever pull), make index 1 red (match the last text)
+    else if (idx === 0 && leverAward) {
+      return "text-custom-red";
     }
     return "text-dark-grey-text"; // base / others always grey
   };
@@ -173,7 +187,6 @@ const RotatingNavText = forwardRef((props, ref) => {
         <motion.span
           key={k}
           className={cn(
-            colorForIndex(k),                                     // <-- color tied to this specific index
             splitBy === "lines" ? "flex flex-col w-full" : "flex flex-wrap whitespace-pre-wrap relative"
           )}
           layout
@@ -201,7 +214,7 @@ const RotatingNavText = forwardRef((props, ref) => {
                         array.reduce((s, w) => s + w.characters.length, 0)
                       ),
                     }}
-                    className={cn("inline-block", elementLevelClassName)}
+                    className={cn("inline-block", elementLevelClassName, colorForIndex(k))}
                   >
                     {char}
                   </motion.span>

@@ -5,12 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMoney } from "@/lib/money-context";
-import DevMoneyReset from "@/components/DevMoneyReset"; // <- use your wrapper"
-import OverflowButton from "@/components/OverflowButton";
+
 import AnimatedBalance from "@/components/AnimatedBalance";
 import RewardLink from "@/components/RewardLink"
+import DevMoneyReset from "@/components/DevMoneyReset"; // <- use your wrapper"
+import OverflowButton from "@/components/OverflowButton";
 import DevBalanceInput from "@/components/DevBalanceInput"
-
 
 export default function Header() {
     const [showHeader, setShowHeader] = useState(true);
@@ -80,12 +80,12 @@ export default function Header() {
                     >
                         <div className="px-1.5 py-1 my-1.5 rounded-md inline-flex flex-col items-start  transition-colors duration-250
                   group-hover:bg-black/7">
-                            <div className="leading-none gradient-text-header">
+                            <div className="leading-none gradient-text-header pb-0.5">
                                 your earnings:
                             </div>
                             <motion.div
                                 layout
-                                className="flex gap-1 items-baseline leading-none"
+                                className="flex gap-1 items-baseline leading-none pt-0 -translate-y-0.5"
                                 transition={{ duration: 1, ease: "easeInOut" }}>
 
                                 <span className="leading-none">$</span>
@@ -124,10 +124,11 @@ export default function Header() {
                     </button>
 
                     <div className="flex items-center gap-2 text-lg">
+
                         <DevMoneyReset />
                         <OverflowButton />
                         <DevBalanceInput />
-                        
+
                         {/* When closed, show nav; when open, show an (x) button */}
                         <AnimatePresence initial={false} mode="wait">
                             {!walletOpen ? (
@@ -211,16 +212,9 @@ export default function Header() {
                         >
                             {/* Inner content can keep your margins/gaps */}
                             <div className="mt-2 grid grid-cols-2 gap-4 text-sm">
-                                <div className="font-mono">
-                                    <div className="opacity-70">current balance</div>
-                                    <div className="text-2xl">
-                                        {ready ? `$${typeof balance === 'number' ? balance.toFixed(2) : balance}` : "—"}
-                                    </div>
-                                </div>
-                                <div className="flex items-end justify-end gap-2">
-                                    <Link href="/about" className="text-xs underline opacity-70 hover:opacity-100">
-                                        how it works
-                                    </Link>
+                                {/* <QuestSection /> */}
+                                <div>
+                                    with your money, I would buy...
                                 </div>
                             </div>
                         </motion.div>
