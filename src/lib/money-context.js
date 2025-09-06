@@ -2,24 +2,16 @@
 import React, { createContext, useContext, useEffect, useMemo, useReducer, useState, useRef } from 'react';
 import { createPayoutGenerator } from "@/lib/payout.js";
 import { defaultMixtureConfig } from "@/lib/payout-default.js";
+import { quest_totals } from "@/app/data/projects.js"
 
 const STORAGE_KEY = 'moneyState_v1';
 const MoneyContext = createContext(null);
 const MAX_BAL = 9999.99;
 const INIT_BAL = 10.00;
 
-const KINDS = ['redtext', 'project', 'link'];
-const isKind = (k) => KINDS.includes(k);
+// total values for the different quests...
+const QUEST_TOTALS = quest_totals;
 
-/* returns an empty quest object, {
-  redtext: { total: 0, done: 0 },
-  project: { total: 0, done: 0 },
-  link:    { total: 0, done: 0 },
-}
-*/
-
-const emptyQuests = () =>
-  KINDS.reduce((acc, k) => { acc[k] = { total: 0, done: 0 }; return acc; }, {});
 
 let __payoutGen = null;
 
@@ -46,10 +38,8 @@ function reducer(state, action) {
       const init = INIT_BAL;
       return {
         balance: init,
-        awarded: {}, // maps id -> true
+        awarded: {}, // maps id -> kind. Therefore if the key ID exists, then it has be awarded before
         initBalance: init,
-        registry: {}, // maps id -> kind
-        quests: emptyQuests(), // { redtext:{total,done}, project:{total,done}, link:{...} }
       };
     }
     case 'LOAD': {
@@ -72,14 +62,15 @@ function reducer(state, action) {
       };
     }
     case 'AWARD': {
-      const { id, amount } = action;
-      if (state.awarded[id]) return state;
+      const { id, amount, kind } = action;
+      if (state.awarded[id] != null) return state; //return when the key/value pair exists
       const amt = normalize2(toAmount(amount));
       if (!Number.isFinite(amt) || amt <= 0) return state;
 
       return {
+        ...state,
         balance: addWithCap(state.balance, amt),   // <-- clamp here
-        awarded: { ...state.awarded, [id]: true },
+        awarded: { ...state.awarded, [id]: kind },
       };
     }
     case 'AWARDINF': {
@@ -214,7 +205,7 @@ export function MoneyProvider({ children }) {
      * @returns {boolean} true if paid (first time), false otherwise
      */
     awardOnce: (id, kind, projValue) => {
-      if (state.awarded[id]) return false;
+      if (state.awarded[id] != null) return false;
 
       const allowed = new Set(['redtext', 'project', 'link', 'egg']);
       if (!allowed.has(kind)) {
@@ -234,8 +225,22 @@ export function MoneyProvider({ children }) {
         setOverflowTick(t => t + 1);
       }
 
-      dispatch({ type: 'AWARD', id, amount });
+      dispatch({ type: 'AWARD', id, amount, kind });
       return true;
+    },
+
+    getQuestStats: () => {
+      const kinds = Object.values(state.awarded || {});
+      const counts = kinds.reduce((acc, kind) => {
+        acc[kind] = (acc[kind] || 0) + 1;
+        return acc;
+      }, {});
+
+      return {
+        redtext: { total: QUEST_TOTALS.redtext, done: counts.redtext || 0 },
+        project: { total: QUEST_TOTALS.project, done: counts.project || 0 },
+        link: { total: QUEST_TOTALS.link, done: counts.link || 0 },
+      };
     },
 
     spend: (amount) => {

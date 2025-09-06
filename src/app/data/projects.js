@@ -1,19 +1,10 @@
 import Link from 'next/link';
 import RedText from "@/components/RewardRedText"
 
-
-const generateRandomTicketNo = () => {
-    const randomNum = Math.floor(Math.random() * 99) + 1; // 1-99
-    return randomNum < 10 ? `0${randomNum}` : randomNum.toString();
-};
-
-const generateRandomTicketAmount = () => {
-  const min = 15000;
-  const max = 18000;
-  // pick a multiple of 10 within [min, max]
-  const steps = Math.floor((max - min) / 10); // 300 steps of 10
-  const value = min + Math.floor(Math.random() * (steps + 1)) * 10;
-  return value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+export const quest_totals = {
+    redtext: 33,
+    project: 4,
+    link: 9,
 };
 
 /*  EMPTY TEMPLATE FOR NEW PROJECT!

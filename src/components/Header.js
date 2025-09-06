@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMoney } from "@/lib/money-context";
+import QuestSection from "@/components/QuestSection";
 
 import AnimatedBalance from "@/components/AnimatedBalance";
 import RewardLink from "@/components/RewardLink"
@@ -212,7 +213,7 @@ export default function Header() {
                         >
                             {/* Inner content can keep your margins/gaps */}
                             <div className="mt-2 grid grid-cols-2 gap-4 text-sm">
-                                {/* <QuestSection /> */}
+                                <QuestSection />
                                 <div>
                                     with your money, I would buy...
                                 </div>
