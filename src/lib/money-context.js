@@ -1,5 +1,5 @@
 'use client';
-import React, { createContext, useContext, useEffect, useMemo, useReducer, useState, useRef } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useReducer, useState, useRef, useCallback } from 'react';
 import { createPayoutGenerator } from "@/lib/payout.js";
 import { defaultMixtureConfig } from "@/lib/payout-default.js";
 import { quest_totals } from "@/app/data/projects.js"
@@ -193,6 +193,30 @@ export function MoneyProvider({ children }) {
     } catch { }
   }, [state, ready]);
 
+// ---- derived quest stats (outside api useMemo) ----
+const questCounts = useMemo(() => {
+  const counts = { redtext: 0, project: 0, link: 0 };
+  for (const kind of Object.values(state.awarded || {})) {
+    if (counts[kind] != null) counts[kind]++;
+  }
+  return counts;
+}, [state.awarded]);
+
+const questStats = useMemo(() => ({
+  redtext: { total: QUEST_TOTALS.redtext, done: questCounts.redtext },
+  project: { total: QUEST_TOTALS.project, done: questCounts.project },
+  link:    { total: QUEST_TOTALS.link,    done: questCounts.link },
+}), [questCounts]);
+
+// keep the same API: function that returns the memoized object
+const getQuestStats = useCallback(() => questStats, [questStats]);
+
+const allQuestsComplete = useMemo(() => (
+  questStats.redtext.done >= questStats.redtext.total &&
+  questStats.project.done >= questStats.project.total &&
+  questStats.link.done    >= questStats.link.total
+), [questStats]);
+
 
   const api = useMemo(() => ({
     ...state,
@@ -229,19 +253,6 @@ export function MoneyProvider({ children }) {
       return true;
     },
 
-    getQuestStats: () => {
-      const kinds = Object.values(state.awarded || {});
-      const counts = kinds.reduce((acc, kind) => {
-        acc[kind] = (acc[kind] || 0) + 1;
-        return acc;
-      }, {});
-
-      return {
-        redtext: { total: QUEST_TOTALS.redtext, done: counts.redtext || 0 },
-        project: { total: QUEST_TOTALS.project, done: counts.project || 0 },
-        link: { total: QUEST_TOTALS.link, done: counts.link || 0 },
-      };
-    },
 
     spend: (amount) => {
       const amt = normalize2(toAmount(amount));
@@ -303,6 +314,9 @@ export function MoneyProvider({ children }) {
     inputBalance: (amt) => {
       dispatch({ type: 'INPUT', amount: amt })
     },
+    getQuestStats,
+    
+    isAllQuestsComplete: () => allQuestsComplete,
 
     underflowTick,
     overflowTick,

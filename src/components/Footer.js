@@ -17,7 +17,7 @@ export default function Footer() {
             rewardId="footer:linkedin"
           >
             <Image
-              src="/linkedin_icon.svg"
+              src="/icons/linkedin_icon.svg"
               alt="LinkedIn Icon"
               width={24}
               height={24}
@@ -31,7 +31,7 @@ export default function Footer() {
             rewardId="footer:github"
           >
             <Image
-              src="/github_icon.svg"
+              src="/icons/github_icon.svg"
               alt="GitHub Icon"
               width={25}
               height={25}

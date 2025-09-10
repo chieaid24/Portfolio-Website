@@ -32,7 +32,7 @@ export default function AboutPage() {
                 {" "}student at the <RedText rewardId="red:about:uwaterloo">University of Waterloo</RedText>!
               </p>
               <p>
-                I take pride in my ability to design and develop <span className="font-bold">high quality solutions</span> for <span className="font-bold">software, mechanical, and electrical</span> systems.
+                I take pride in my ability to design and develop high quality solutions for <span className="font-bold">software, mechanical, and electrical</span> systems.
               </p>
               <p>
                 I'm passionate about taking my skills to the next level and <span className="font-bold">making an impact</span> on the greater community.

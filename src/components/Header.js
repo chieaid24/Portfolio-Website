@@ -8,6 +8,9 @@ import { useMoney } from "@/lib/money-context";
 import QuestSection from "@/components/QuestSection";
 import AnimatedBalance from "@/components/AnimatedBalance";
 import RewardLink from "@/components/RewardLink";
+import DarkModeToggle from "@/components/DarkModeToggle"
+import CloseButton from "@/icons/CloseButton"
+
 import DevMoneyReset from "@/components/DevMoneyReset";
 import OverflowButton from "@/components/OverflowButton";
 import DevBalanceInput from "@/components/DevBalanceInput";
@@ -91,7 +94,7 @@ export default function Header() {
     return (
         <header
             className={`fixed inset-x-0 top-0 z-50 transition-transform ease-in-out duration-300 pointer-events-none ${showHeader ? "translate-y-0" : "-translate-y-full"
-                } py-5 font-dm-sans `}
+                } py-5 font-dm-sans`}
         >
             <motion.div
                 className="pointer-events-auto w-1/2 mx-auto rounded-xl shadow-[0px_5.47px_13.68px_0px_rgba(0,0,0,0.15)] overflow-hidden transition-colors duration-150 bg-background-dark/95"
@@ -106,7 +109,7 @@ export default function Header() {
                             aria-expanded={walletOpen}
                             className={`group self-start font-semibold text-xs sm:text-lg text-dark-grey-text cursor-pointer`}
                         >
-                            <div className="px-1.5 py-1 my-1.5 rounded-md inline-flex flex-col items-start transition-colors duration-250 group-hover:bg-black/7">
+                            <div className="px-1.5 py-1 my-1.5 rounded-md inline-flex flex-col items-start group-hover:bg-black/7">
                                 <div className="leading-none gradient-text-header pb-0.5">
                                     your earnings:
                                 </div>
@@ -122,7 +125,7 @@ export default function Header() {
                                         transition={{ duration: 1, ease: "easeInOut" }}
                                     >
                                         {ready ? (
-                                            <AnimatedBalance value={balance} className="relative inline-block top-[4px]" />
+                                                <AnimatedBalance value={balance} className="relative inline-block top-[4px] transition-colors duration-250" />
                                         ) : (
                                             "—"
                                         )}
@@ -211,19 +214,25 @@ export default function Header() {
                                     >
                                         with your money, I would buy...
                                     </motion.div>
-                                    <motion.button
-                                        key="close"
-                                        type="button"
-                                        onClick={() => setWalletOpen(false)}
-                                        aria-label="Close"
-                                        initial={{ opacity: 0, rotate: -90, scale: 0.9 }}
-                                        animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                                        exit={{ opacity: 0, rotate: 90, scale: 0.9 }}
-                                        transition={{ duration: 0.18 }}
-                                        className="justify-self-end self-center leading-none px-[2.5px] py-[2.5px] rounded-md hover:bg-black/7 transition-colors duration-250 cursor-pointer"
-                                    >
-                                        <Image src="/icons/nav_close_button.svg" width={20} height={20} alt="Close" />
-                                    </motion.button>
+                                    <span className="flex items-center space-x-1">
+
+                                        <DarkModeToggle />
+
+
+                                        <motion.button
+                                            key="close"
+                                            type="button"
+                                            onClick={() => setWalletOpen(false)}
+                                            aria-label="Close"
+                                            initial={{ opacity: 0, rotate: -90, scale: 0.9 }}
+                                            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                                            exit={{ opacity: 0, rotate: 90, scale: 0.9 }}
+                                            transition={{ duration: 0.18 }}
+                                            className="px-[2.5px] py-[2.5px] rounded-md hover:bg-black/7 transition-colors duration-250 cursor-pointer"
+                                        >
+                                            <CloseButton className="h-6 w-6 text-dark-grey-text" />
+                                        </motion.button>
+                                    </span>
                                 </div>
                             )}
                         </AnimatePresence>

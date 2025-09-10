@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    webpack(config, options) {
+  webpack(config, options) {
     // Find the existing rule handling SVGs and exclude SVG from it
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.('.svg')
@@ -11,7 +11,21 @@ const nextConfig = {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
-      use: ['@svgr/webpack'],
+      resourceQuery: { not: [/url/] }, // `?url` keeps raw file import
+      use: [{
+        loader: '@svgr/webpack',
+        options: {
+          icon: true,
+          svgo: true,
+          svgoConfig: {
+            plugins: [
+              { name: 'removeDimensions', active: true },
+              { name: 'removeViewBox', active: false },
+            ],
+          },
+          replaceAttrValues: { '#000': 'currentColor', '#111': 'currentColor', '#fff': 'currentColor' },
+        },
+      }],
     });
 
     return config;

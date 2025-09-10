@@ -89,6 +89,14 @@ export const commodities = [
         price: '99.95',
         note: 'i just hate walking!',
     },
+    {
+        id: 'naked-mass-gainer',
+        what: 'mass gainer tubs',
+        price: '69.99',
+        note: 'i just hate walking!',
+    },
+
+
 
 ];
 

@@ -4,16 +4,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Oooh+Baby&display=swap');
 @import "tailwindcss";
 
-
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
   --background-light: #FFF3E5;
   --background-dark: #FFEDD8;
+
+  --dark-background-light: #3D3E44;
+
   --custom-red: #FF7D7D;
   --custom-light-red: #FFAEAE;
   --custom-orange: #FFC88A;
+
   --light-grey-text: #919191;
   --card-light-grey: #9C9C9C;
   --dark-grey-text: #383838;
@@ -23,36 +25,48 @@
 
   --sage-green: #9EE9B4;
 
+  color-scheme: light;
+
 }
 
+.dark:root {
+  color-scheme: dark;
+}
+
+
 @theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --color-custom-red: var(--custom-red);
   --color-custom-light-red: var(--custom-light-red);
   --color-custom-orange: var(--custom-orange);
   --color-light-grey-text: var(--light-grey-text);
-  --color-card-light-grey: var(--card-light-grey);
   --color-dark-grey-text: var(--dark-grey-text);
   --color-dark-grey-footer: var(--dark-grey-footer);
   --color-header-light: var(--header-light);
   --color-sage-green: var(--sage-green);
   --color-progress-background: var(--progress-background);
+  --color-stroke: #414249;
 
   --color-background-light: var(--background-light);
   --color-background-dark: var(--background-dark);
+
   --font-dm-sans: 'DM Sans', sans-serif;
   --font-italiana: 'Italiana', serif;
   --font-unna: 'Unna', serif;
   --font-oh-baby: 'Oooh Baby', cursive;
 
-  --animate-new-pulse: pulse 1.5s cubic-bezier(0.42, 0, 0.58, 1) infinite
+  --animate-new-pulse: pulse 1.5s cubic-bezier(0.42, 0, 0.58, 1) infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* set dark mode colors*/
+@layer theme {
+  :root, :host {
+    @variant dark {
+      --color-background-light: #3D3E44;
+      --color-background-dark: #323339;
+      --color-custom-orange: #FFDBB1;
+      --color-dark-grey-text: #EFEFEF;
+
+    }
   }
 }
 

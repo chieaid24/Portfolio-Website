@@ -74,7 +74,7 @@ export default function ProjectPage({ params }) {
                                     <h1 className="font-black text-7xl">
                                         {project.title}
                                     </h1>
-                                    <h3 className="italic text-3xl text-card-light-grey">
+                                    <h3 className="italic text-3xl text-light-grey-text opacity-80 mt-1">
                                         '{project.subtitle}'
                                     </h3>
                                 </div>

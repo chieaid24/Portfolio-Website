@@ -5,6 +5,7 @@ import RewardProjectLink from "@/components/RewardProjectLink";
 import Image from "next/image";
 import { getOrCreateTicket } from "@/lib/ticket-store";
 import Decimal from 'decimal.js';
+import Barcode from "@/icons/Barcode";
 
 export default function ProjectCard({ title, generated_with, ticket_no, fallback_value, skills_used, image, slug }) {
     const [ticket, setTicket] = useState({
@@ -49,26 +50,27 @@ export default function ProjectCard({ title, generated_with, ticket_no, fallback
                     <div className="absolute -translate-x-[4.4px] translate-y-[125%] group-hover:translate-y-[121%] w-full flex flex-col items-center transition-transform duration-300 group-hover:duration-300 group-hover:scale-102">
                         <div className="relative">
                             {/* <CardLabel /> */}
-                            <Image src="/illu_card_1.svg"
+                            <Image src="/icons/illu_card_1.svg"
                                 width={459}
                                 height={132}
                                 alt="Project ticket"
                             />
-                            <div className="absolute inset-0 flex flex-col justify-center items-center z-10 text-black w-full ml-[4px]">
-                                <div className="font-bold text-[0.7rem] mb-[-5px] mt-[-5px] text-black opacity-50">
+                            <div className="absolute inset-0 flex flex-col justify-center items-center z-10 text-black dark:text-white w-full ml-[4px]">
+                                <div className="font-bold text-[0.7rem] mb-[-5px] mt-[-5px] opacity-50">
                                     CASHOUT VOUCHER
                                 </div>
                                 <div className="text-dark-grey-text font-black text-[39px] my-[-9px] tracking-tight">
                                     {title}
                                 </div>
                                 <div className="overflow-hidden mt-[-5px] w-[240px] h-[30px] opacity-12">
-                                    <Image
-                                        src="/barcode_hireme.svg"
+                                    {/* <Image
+                                        src="/icons/barcode_hireme.svg"
                                         alt="Barcode"
                                         width={800}
                                         height={10}
                                         className=""
-                                        style={{ width: '100%', height: 'auto' }} />
+                                        style={{ width: '100%', height: 'auto' }} /> */}
+                                        <Barcode className="w-200 h-5 scale-75"/>
                                 </div>
                                 <div className="flex justify-between font-bold w-[260px] opacity-50">
                                     <div className="text-[10px]">GENERATED WITH: {generated_with}</div>
@@ -87,3 +89,5 @@ export default function ProjectCard({ title, generated_with, ticket_no, fallback
 
     );
 }
+                                        // width={800}
+                                        // height={10} style={{ width: '100%', height: 'auto' }} />

@@ -1,4 +1,5 @@
 import { DM_Sans } from "next/font/google";
+import Script from 'next/script'
 import "./globals.css";
 import ScrollProgressBarClient from "@/components/ScrollProgressBarClient";
 import Header from "@/components/Header";                 // <-- your header
@@ -18,6 +19,19 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={dmSans.variable}>
+      <head>
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`
+            try {
+              var saved = localStorage.getItem('theme');     // 'dark' | 'light' | null
+              var isDark = saved === 'dark';                 // default light if null
+              var root = document.documentElement;
+              root.classList.toggle('dark', isDark);
+              root.style.colorScheme = isDark ? 'dark' : 'light';
+            } catch (_) {}
+          `}
+        </Script>
+      </head>
       <body className={`${dmSans.variable} antialiased min-h-screen`}>
           <Providers>
             <ScrollProgressBarClient />
