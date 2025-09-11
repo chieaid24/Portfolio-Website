@@ -44,15 +44,15 @@ export default function CommodityDisplay({ commodity, balanceInDollars }) {
                     </span>
                 )}
             </div>
-            <p className="text-dark-grey-text font-semibold items-center text-xs ">
+            <p className="text-dark-grey-text font-semibold items-center text-sm ">
                 {title}
-                <Image
+                {/* <Image
                     src="/icons/info_icon_v1-01.svg"
                     width={12}
                     height={12}
                     alt="Info"
                     className="ml-1 mb-0.5 inline"
-                />
+                /> */}
             </p>
         </div>
     );

@@ -1,5 +1,8 @@
 import Image from "next/image";
-import RewardLink from "@/components/RewardLink"; // <- use your wrapper
+import RewardLink from "@/components/RewardLink";
+import FooterGithub from "@/icons/FooterGithub";
+import FooterLinkedin from "@/icons/FooterLinkedin"
+
 
 export default function Footer() {
   return (
@@ -10,19 +13,20 @@ export default function Footer() {
             © 2025 AIDAN CHIEN. All rights reserved.<br />Designed and developed by AIDAN CHIEN.
           </p>
         </div>
-        <div className="flex gap-12 justify-center items-center">
+        <div className="flex gap-12 justify-center items-center text-[#4c4a48] dark:text-dark-grey-footer">
           <RewardLink
             href="https://www.linkedin.com/in/aidanchien/"
             target="_blank"
             rewardId="footer:linkedin"
           >
-            <Image
+            {/* <Image
               src="/icons/linkedin_icon.svg"
               alt="LinkedIn Icon"
               width={24}
               height={24}
-              className="h-[2.6em] w-auto hover:translate-y-[-2px] transition-all duration-200"
-            />
+              className="h-[2.6em] w-auto hover:translate-y-[-2px] transition-transform duration-200"
+            /> */}
+            <FooterLinkedin className="hover:translate-y-[-2px] transition-transform duration-200"/>
           </RewardLink>
 
           <RewardLink
@@ -30,13 +34,7 @@ export default function Footer() {
             target="_blank"
             rewardId="footer:github"
           >
-            <Image
-              src="/icons/github_icon.svg"
-              alt="GitHub Icon"
-              width={25}
-              height={25}
-              className="h-[2.8em] w-auto mt-[-5%] hover:translate-y-[-2px] transition-all duration-200"
-            />
+            <FooterGithub className="hover:translate-y-[-2px] transition-transform duration-200"/>
           </RewardLink>
         </div>
       </div>

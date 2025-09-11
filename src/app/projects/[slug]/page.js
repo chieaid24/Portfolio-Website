@@ -8,6 +8,8 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import Footer from '@/components/Footer';
 import BackToProjects from '@/components/BackToProjects';
 import ModelSection from '@/components/ModelSection';
+import ProjectGithub from "@/icons/ProjectGithub"
+
 
 // Generate static params for all projects (optional, for static generation)
 export async function generateStaticParams() {
@@ -61,36 +63,28 @@ export default function ProjectPage({ params }) {
     if (!project) {
         notFound();
     }
-
+    // pt-18 pb-15, mb-20
     return (
         <>
             <div className="pt-20 bg-background-light font-dm-sans text-dark-grey-text min-h-screen">
                 <MaxWidthWrapper>
                     <div className="pt-18 pb-15">
-                        {/* Project header */}
                         <div className="mb-20">
-                            <div className="flex justify-between items-center overflow-visible">
-                                <div>
-                                    <h1 className="font-black text-7xl">
-                                        {project.title}
-                                    </h1>
-                                    <h3 className="italic text-3xl text-light-grey-text opacity-80 mt-1">
-                                        '{project.subtitle}'
-                                    </h3>
-                                </div>
-                                <RewardLink 
-                                href={project.github_link} 
-                                target="_blank" 
-                                className="mt-[-40px]"
-                                rewardId={`${project.slug}:github`}>
-                                    <Image
-                                        src="/icons/Github_red.svg"
-                                        width={100}
-                                        height={100}
-                                        className="hover:opacity-80 hover:-translate-y-1 transition duration-200"
-                                        alt="Github logo" />
+                            <div className="flex relative items-center">
+                                <h1 className="font-black text-7xl">
+                                    {project.title}
+                                </h1>
+                                <RewardLink
+                                    href={project.github_link}
+                                    target="_blank"
+                                    className="absolute right-0 top-1/2 -translate-y-1/2 w-auto"
+                                    rewardId={`${project.slug}:github`}>
+                                    <ProjectGithub className="w-[100px] h-[100px] hover:opacity-80 hover:-translate-y-1 transition duration-200" />
                                 </RewardLink>
                             </div>
+                            <h3 className="italic text-3xl text-light-grey-text opacity-80 mt-1">
+                                &apos;{project.subtitle}&apos;
+                            </h3>
                         </div>
                         {/**Summary text */}
                         <p className="text-2xl font-regular mb-15">

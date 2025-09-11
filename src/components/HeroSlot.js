@@ -1,11 +1,11 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { motion, useAnimate } from 'framer-motion';
 import RotatingHeroText from './RotatingHeroText.js';
-import Image from 'next/image';
 import { useSlotJiggle } from '@/lib/slot-jiggle-context';
 import { useMoney } from "@/lib/money-context"
+import HeroCorner from "@/icons/HeroCorner.js"
 
 export default function HeroSlot() {
   const textRef = useRef(null);
@@ -22,7 +22,7 @@ export default function HeroSlot() {
   const milliDuration = duration * 1000;
 
   // Jiggle animation function
-  const jiggleAnimation = async () => {
+  const jiggleAnimation = useCallback(async () => {
     if (hasBeenClicked) return; // Don't jiggle if already clicked
 
     const JiggleXPromise = animate(
@@ -49,10 +49,10 @@ export default function HeroSlot() {
       }
     );
     await Promise.all([JiggleXPromise, PulsePromise]);
-  };
+  }, [hasBeenClicked, animate, scope]);
 
   // Jiggle animation function
-  const underflowJiggle = async () => {
+  const underflowJiggle = useCallback(async () => {
 
     const JiggleXPromise = animate(
       leverGroupRef.current,
@@ -78,11 +78,11 @@ export default function HeroSlot() {
       }
     );
     await Promise.all([JiggleXPromise, PulsePromise]);
-  };
+  }, [animate, scope, leverGroupRef]);
 
 
   // Start jiggle cycle
-  const startJiggleCycle = () => {
+  const startJiggleCycle = useCallback(() => {
     if (hasBeenClicked) return;
 
     const scheduleNextJiggle = () => {
@@ -98,7 +98,7 @@ export default function HeroSlot() {
     };
 
     scheduleNextJiggle();
-  };
+  }, [hasBeenClicked, jiggleAnimation]);
 
   // Start jiggle cycle once the context is ready (so we respect localStorage)
   useEffect(() => {
@@ -213,8 +213,10 @@ export default function HeroSlot() {
   return (
     <div>
       <div className="flex justify-between mb-[-80px]"> {/**top corners div */}
-        <Image src="/hero/corner_tl.svg" alt="Top Left Corner" width={60} height={60} />
-        <Image src="/hero/corner_tr.svg" alt="Top Right Corner" width={60} height={60} />
+        {/* <Image src="/hero/corner_tl.svg" alt="Top Left Corner" width={60} height={60} /> */}
+        <HeroCorner className="w-[64px] h-[64px] rotate-180" />
+        {/* <Image src="/hero/corner_tr.svg" alt="Top Right Corner" width={60} height={60} /> */}
+        <HeroCorner className="w-[64px] h-[64px] -rotate-90" />
       </div>
       <div className="grid grid-cols-[2fr_1fr] h-80 gap-6 mt-[-50px]">
         <div className="relative overflow-visible min-w-0">
@@ -222,8 +224,8 @@ export default function HeroSlot() {
             {/* Rotating Text */}
             <RotatingHeroText
               ref={textRef}
-              texts={['AIDAN', 'ENG', 'DES', 'INVE', 'CLIM', 'FILM', 'STU', 'GYM', 'CODE', 'CAD', 'REELS', 'GAME', 'UI/UX', 'WEB', 'AI', 'NYT', 'SLEEP',]}
-              texts2={['CHIEN', 'INEER', 'IGNER', 'NTOR', 'BER', 'MAKER', 'DENT', 'GOER', 'ADDICT', 'HEAD', 'SNOB', 'NERD', 'FAN', 'DEV', 'FIEND', 'GAMER', 'LOVER',]}
+              texts={['AIDAN', 'ENG', 'DES', 'INVE', 'CLIM', 'FILM', 'STU', 'GYM', 'CODE', 'CAD', 'REELS', 'GAME', 'UI/UX', 'WEB', 'AI', 'NYT', 'SLEEP', 'CHESS', 'DEV']}
+              texts2={['CHIEN', 'INEER', 'IGNER', 'NTOR', 'BER', 'MAKER', 'DENT', 'GOER', 'ADDICT', 'HEAD', 'SNOB', 'NERD', 'FAN', 'DEV', 'FIEND', 'GAMER', 'LOVER', 'NUT', 'ELOPER']} // STAN, BUFF, BOY, BUG, ACE, 
               mainClassName="overflow-visible px-2 sm:px-2 md:px-3 text-9xl bg-background-light text-dark-grey-text font-italiana py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
               staggerFrom="last"
               initial={{ y: '-100%' }}
@@ -304,8 +306,8 @@ export default function HeroSlot() {
         </div>
       </div>
       <div className="flex justify-between mt-[-10px]"> {/**top corners div */}
-        <Image src="/hero/corner_bl.svg" alt="Bottom Left Corner" width={60} height={60} />
-        <Image src="/hero/corner_br.svg" alt="Bottom Right Corner" width={60} height={60} />
+        <HeroCorner className="w-[64px] h-[64px] rotate-90" />
+        <HeroCorner className="w-[64px] h-[64px]" />
       </div>
     </div >
   );

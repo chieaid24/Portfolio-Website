@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import ProjectCard from "@/components/ProjectCard";
-import { projects } from "@/app/data/projects"; // Updated import
+import { projects } from "@/app/data/projects";
 import Footer from "@/components/Footer";
 import HeroSlot from "@/components/HeroSlot";
 import RedText from '@/components/RewardRedText';
@@ -51,7 +51,6 @@ export default function Home() {
   return (
     <>
       <div className="pt-25 bg-background-dark font-dm-sans text-dark-grey-text"> {/**hero div */}
-        
         <div>
           <div id="hero" className="relative min-h-screen w-full">
             <MaxWidthWrapper>
@@ -60,10 +59,10 @@ export default function Home() {
                   <HeroSlot />
                 </div>
                 <h1 className="text-left font-semibold text-4xl">
-                  Hi, I'm Aidan, a systems engineer passionate about efficient <RedText rewardId="red:home:design" weight={"semibold"}>design</RedText> and <RedText rewardId="red:home:development" weight={"semibold"}>development</RedText>.
+                  Hi, I&apos;m Aidan, a systems engineer passionate about efficient <RedText rewardId="red:home:design" weight={"semibold"}>design</RedText> and <RedText rewardId="red:home:development" weight={"semibold"}>development</RedText>.
                 </h1>
                 <h3 className="font-normal text-2xl">
-                  I'm someone who gets genuinely excited about learning new things—whether it's a coding trick, a design tool, or just figuring out how something works. I love chasing ideas that push me to grow and create in new ways. If you're curious what that looks like in action, check out my projects below—I promise they're more fun than your average to-do list!
+                  I&apos;m someone who gets genuinely excited about learning new things—whether it&apos;s a coding trick, a design tool, or just figuring out how something works. I love chasing ideas that push me to grow and create in new ways. If you&apos;re curious what that looks like in action, check out my projects below—I promise they&apos;re more fun than your average to-do list!
                 </h3>
               </div>
             </MaxWidthWrapper>
@@ -98,7 +97,7 @@ export default function Home() {
                   Want to <span className="group-hover:animate-new-pulse group-hover:gradient-text-red-animated gradient-text-custom font-semibold animated-underline pr-0.5">cash out?</span>
                 </h1>
                 <h1 className="">
-                  Let's connect!
+                  Let&apos;s connect!
                 </h1>
               </RewardLink>
             </div>

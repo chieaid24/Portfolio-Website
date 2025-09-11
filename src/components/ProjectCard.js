@@ -5,7 +5,8 @@ import RewardProjectLink from "@/components/RewardProjectLink";
 import Image from "next/image";
 import { getOrCreateTicket } from "@/lib/ticket-store";
 import Decimal from 'decimal.js';
-import Barcode from "@/icons/Barcode";
+import ProjectTicket from "@/icons/ProjectTicket";
+
 
 export default function ProjectCard({ title, generated_with, ticket_no, fallback_value, skills_used, image, slug }) {
     const [ticket, setTicket] = useState({
@@ -15,7 +16,8 @@ export default function ProjectCard({ title, generated_with, ticket_no, fallback
     useEffect(() => {
         // seed with the prop once (if present), otherwise generate & persist
         const t = getOrCreateTicket(slug, {
-            number: ticket_no,        });
+            number: ticket_no,
+        });
         setTicket(t);
     }, [slug, ticket_no]);
 
@@ -50,11 +52,9 @@ export default function ProjectCard({ title, generated_with, ticket_no, fallback
                     <div className="absolute -translate-x-[4.4px] translate-y-[125%] group-hover:translate-y-[121%] w-full flex flex-col items-center transition-transform duration-300 group-hover:duration-300 group-hover:scale-102">
                         <div className="relative">
                             {/* <CardLabel /> */}
-                            <Image src="/icons/illu_card_1.svg"
-                                width={459}
-                                height={132}
-                                alt="Project ticket"
-                            />
+                            <div className="text-[#fffbf6] dark:text-[#565860]">
+                                <ProjectTicket className="w-[459px] h-[132px]" />
+                            </div>
                             <div className="absolute inset-0 flex flex-col justify-center items-center z-10 text-black dark:text-white w-full ml-[4px]">
                                 <div className="font-bold text-[0.7rem] mb-[-5px] mt-[-5px] opacity-50">
                                     CASHOUT VOUCHER
@@ -62,21 +62,20 @@ export default function ProjectCard({ title, generated_with, ticket_no, fallback
                                 <div className="text-dark-grey-text font-black text-[39px] my-[-9px] tracking-tight">
                                     {title}
                                 </div>
-                                <div className="overflow-hidden mt-[-5px] w-[240px] h-[30px] opacity-12">
-                                    {/* <Image
+                                <div className="overflow-hidden mt-[-6px] w-[240px] h-[30px] opacity-12 dark:opacity-25">
+                                    <img
                                         src="/icons/barcode_hireme.svg"
-                                        alt="Barcode"
-                                        width={800}
-                                        height={10}
-                                        className=""
-                                        style={{ width: '100%', height: 'auto' }} /> */}
-                                        <Barcode className="w-200 h-5 scale-75"/>
+                                        alt="Hire me barcode"
+                                        className="block w-full h-auto dark:invert"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
                                 </div>
-                                <div className="flex justify-between font-bold w-[260px] opacity-50">
+                                <div className="flex justify-between font-bold w-[260px] opacity-50 mt-1">
                                     <div className="text-[10px]">GENERATED WITH: {generated_with}</div>
                                     <div className="text-[10px]">TICKET # {ticket.number || '—'}</div>
                                 </div>
-                                <div className="font-bold mt-[-2px] text-[14px] opacity-65">
+                                <div className="font-bold mt-[-3px] text-[14px] opacity-65">
                                     ${ticket.value || ' ——'}
                                 </div>
                             </div>
@@ -89,5 +88,5 @@ export default function ProjectCard({ title, generated_with, ticket_no, fallback
 
     );
 }
-                                        // width={800}
-                                        // height={10} style={{ width: '100%', height: 'auto' }} />
+// width={800}
+// height={10} style={{ width: '100%', height: 'auto' }} />

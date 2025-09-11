@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Center } from '@react-three/drei';
 import Image from "next/image";
+import ArrowIcon from "@/icons/ArrowIcon"
 
 function Model({ modelPath }) {
   const { scene } = useGLTF(modelPath);
@@ -27,11 +28,8 @@ export default function ModelViewer({ modelPath = '/models/keyassembly03.glb' })
   return (
     <div className="w-full h-full relative"> {/* Full width/height container */}
       {/* Arrow - positioned absolutely */}
-      <div className={`absolute bottom-6 z-10 translate-x-[-15px] transition-opacity ease-in-out ${modelHovered ? 'opacity-100 duration-300' : 'opacity-0 duration-300'}`}>
-        <Image src="/about_image_arrow.svg"
-          alt=""
-          width={12}
-          height={12} />
+      <div className={`absolute bottom-5 z-10 translate-x-[-18px] transition-opacity ease-in-out ${modelHovered ? 'opacity-100 duration-300' : 'opacity-0 duration-300'}`}>
+          <ArrowIcon className="scale-80 opacity-90"/>
       </div>
 
       {/* Model viewer - full width/height */}

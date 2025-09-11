@@ -217,6 +217,7 @@ const allQuestsComplete = useMemo(() => (
   questStats.link.done    >= questStats.link.total
 ), [questStats]);
 
+const getAllQuestsComplete = useCallback(() => allQuestsComplete, [allQuestsComplete]);
 
   const api = useMemo(() => ({
     ...state,
@@ -316,8 +317,7 @@ const allQuestsComplete = useMemo(() => (
     },
     getQuestStats,
     
-    isAllQuestsComplete: () => allQuestsComplete,
-
+    getAllQuestsComplete,
     underflowTick,
     overflowTick,
     leverPullTick,

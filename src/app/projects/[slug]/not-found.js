@@ -11,7 +11,7 @@ export default function NotFound() {
                     <h1 className="text-6xl font-bold mb-4">404</h1>
                     <h2 className="text-2xl mb-8">Project Not Found</h2>
                     <p className="text-lg mb-8">
-                        The project you're looking for doesn't exist or may have been moved.
+                        The project you&apos;re looking for doesn&apos;t exist or may have been moved.
                     </p>
                     <Link 
                         href="/"
