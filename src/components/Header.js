@@ -244,7 +244,7 @@ export default function Header() {
                         <motion.div
                             key="wallet"
                             initial={{ height: 0, opacity: 0, paddingTop: 0, paddingBottom: 0 }}
-                            animate={{ height: "auto", opacity: 1, paddingTop: 0, paddingBottom: 10 }}
+                            animate={{ height: "auto", opacity: 1, paddingTop: 0, paddingBottom: 18 }}
                             exit={{ height: 0, opacity: 0, paddingTop: 0, paddingBottom: 0 }}
                             transition={{ duration: 0.28, ease: "easeInOut" }}
                             style={{ overflow: "hidden" }}
@@ -255,7 +255,7 @@ export default function Header() {
                                     <QuestSection />
 
                                     <div className="grid grid-cols-[7fr_1fr] mt-4">
-                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-7 items-center mb-5 ml-5">
+                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-7 items-start ml-5">
                                             {picks.length === 0 ? (
                                                 <p className="text-xs text-gray-400">No commodities available.</p>
                                             ) : (

@@ -96,14 +96,14 @@ export const commodities = [
         note: 'i just hate walking!',
     },
     {
-        id: 'chipotle-bowls',
+        id: 'chipotle-bowl',
         what: 'chipotle bowls',
         price: '13.61',
         note: 'i just hate walking!',
     },
     {
-        id: 'wingstop-sandwiches',
-        what: 'wingstop sandwiches',
+        id: 'wingstop-sandwich-combo',
+        what: 'wingstop combos',
         price: '10.80',
         note: 'i just hate walking!',
     },

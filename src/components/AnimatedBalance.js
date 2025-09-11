@@ -82,7 +82,7 @@ export default function AnimatedBalance({
 
     // do NOT update prev here (balance didn't change)
     return () => clearTimers();
-  }, [overflowTick]);
+  }, [overflowTick, holdMs, rotateMs, snapDelayMs]);
 
   //when the underflow increases, it calls this function, which creates the custom animation, saying that it has underflowed
   useEffect(() => {
@@ -106,7 +106,7 @@ export default function AnimatedBalance({
 
     // do NOT update prev here (balance didn't change)
     return () => clearTimers();
-  }, [underflowTick]);
+  }, [underflowTick, holdMs, rotateMs, snapDelayMs]);
 
 
   // change the timer of the pull, and also make it so there is no black snapping, ie change the trio

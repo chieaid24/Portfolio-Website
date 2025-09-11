@@ -2,7 +2,7 @@ import Link from 'next/link';
 import RedText from "@/components/RewardRedText"
 
 export const quest_totals = {
-    redtext: 33,
+    redtext: 36,
     project: 4,
     link: 9,
 };
@@ -108,7 +108,7 @@ export const projects = [
         page_image_one: '/personal_website/card_image.jpg',
         github_link: 'https://github.com/chieaid24/Personal-Website',
         subtitle: "a portfolio that performs",
-        summary: <>A plain resume displaying my projects is boring and, frankly, too easy to make. Find out how I built the <RedText rewardId="red:website:very-website">very website</RedText> you're on <RedText rewardId="red:website:scratch">from scratch!</RedText> </>,
+        summary: <>A plain resume displaying my projects is boring and, frankly, too easy to make. Find out how I built the <RedText rewardId="red:website:very-website">very website</RedText> you&apos;re on <RedText rewardId="red:website:scratch">from scratch!</RedText> </>,
         tool_paragraphs: [
             <>The main framework I used was <RedText rewardId="red:website:next">Next.js</RedText> with <RedText rewardId="red:website:react">React</RedText>, styled using <RedText rewardId="red:website:tailwind">Tailwind CSS</RedText> and <RedText rewardId="red:website:framer">Framer Motion</RedText>. I also used <RedText rewardId="red:website:node">Node.js</RedText> to connect with REST APIs for real-time updates, <RedText rewardId="red:website:figma">Figma</RedText> to prototype the interface, and <RedText rewardId="red:website:illustrator">Illustrator</RedText> to create my logo and other assets.</>,
         ],

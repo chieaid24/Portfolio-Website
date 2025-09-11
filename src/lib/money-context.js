@@ -193,31 +193,31 @@ export function MoneyProvider({ children }) {
     } catch { }
   }, [state, ready]);
 
-// ---- derived quest stats (outside api useMemo) ----
-const questCounts = useMemo(() => {
-  const counts = { redtext: 0, project: 0, link: 0 };
-  for (const kind of Object.values(state.awarded || {})) {
-    if (counts[kind] != null) counts[kind]++;
-  }
-  return counts;
-}, [state.awarded]);
+  // ---- derived quest stats (outside api useMemo) ----
+  const questCounts = useMemo(() => {
+    const counts = { redtext: 0, project: 0, link: 0 };
+    for (const kind of Object.values(state.awarded || {})) {
+      if (counts[kind] != null) counts[kind]++;
+    }
+    return counts;
+  }, [state.awarded]);
 
-const questStats = useMemo(() => ({
-  redtext: { total: QUEST_TOTALS.redtext, done: questCounts.redtext },
-  project: { total: QUEST_TOTALS.project, done: questCounts.project },
-  link:    { total: QUEST_TOTALS.link,    done: questCounts.link },
-}), [questCounts]);
+  const questStats = useMemo(() => ({
+    redtext: { total: QUEST_TOTALS.redtext, done: questCounts.redtext },
+    project: { total: QUEST_TOTALS.project, done: questCounts.project },
+    link: { total: QUEST_TOTALS.link, done: questCounts.link },
+  }), [questCounts]);
 
-// keep the same API: function that returns the memoized object
-const getQuestStats = useCallback(() => questStats, [questStats]);
+  // keep the same API: function that returns the memoized object
+  const getQuestStats = useCallback(() => questStats, [questStats]);
 
-const allQuestsComplete = useMemo(() => (
-  questStats.redtext.done >= questStats.redtext.total &&
-  questStats.project.done >= questStats.project.total &&
-  questStats.link.done    >= questStats.link.total
-), [questStats]);
+  const allQuestsComplete = useMemo(() => (
+    questStats.redtext.done >= questStats.redtext.total &&
+    questStats.project.done >= questStats.project.total &&
+    questStats.link.done >= questStats.link.total
+  ), [questStats]);
 
-const getAllQuestsComplete = useCallback(() => allQuestsComplete, [allQuestsComplete]);
+  const getAllQuestsComplete = useCallback(() => allQuestsComplete, [allQuestsComplete]);
 
   const api = useMemo(() => ({
     ...state,
@@ -284,7 +284,6 @@ const getAllQuestsComplete = useCallback(() => allQuestsComplete, [allQuestsComp
       if (normalize2(state.balance) < cost) {
         dispatch({ type: 'UNDERFLOW' });
         setUnderflowTick(t => t + 1);
-        console.log(underflowTick);
         return false;
       }
       setLeverPullTick(t => t + 1);
@@ -316,14 +315,14 @@ const getAllQuestsComplete = useCallback(() => allQuestsComplete, [allQuestsComp
       dispatch({ type: 'INPUT', amount: amt })
     },
     getQuestStats,
-    
+
     getAllQuestsComplete,
     underflowTick,
     overflowTick,
     leverPullTick,
     ready
 
-  }), [state, ready, overflowTick, underflowTick, leverPullTick]);
+  }), [state, ready, overflowTick, underflowTick, leverPullTick, getAllQuestsComplete, getQuestStats]);
 
   return <MoneyContext.Provider value={api}>{children}</MoneyContext.Provider>;
 }

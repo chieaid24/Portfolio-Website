@@ -107,7 +107,7 @@ export default function HeroSlot() {
     return () => {
       if (jiggleTimeoutRef.current) clearTimeout(jiggleTimeoutRef.current);
     };
-  }, [jiggleReady, hasBeenClicked]); // re-check if user clicks in another tab
+  }, [jiggleReady, hasBeenClicked, startJiggleCycle]); // re-check if user clicks in another tab
 
 
   function animateShadow({ ref, from, to, duration = 300 }) {
