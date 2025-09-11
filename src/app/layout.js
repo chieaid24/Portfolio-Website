@@ -1,4 +1,4 @@
-import { DM_Sans } from "next/font/google";
+import { DM_Sans, Italiana } from "next/font/google";
 import Script from 'next/script'
 import "./globals.css";
 import ScrollProgressBarClient from "@/components/ScrollProgressBarClient";
@@ -9,6 +9,7 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
 });
+const italiana = Italiana({ subsets: ['latin'], weight: '400', variable: '--font-italiana' });
 
 export const metadata = {
   title: { default: "AIDAN CHIEN", template: "%s || AIDAN CHIEN" },
@@ -32,7 +33,7 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body className={`${dmSans.variable} antialiased min-h-screen`}>
+      <body className={`${dmSans.className} ${italiana.variable} antialiased min-h-screen`}>
           <Providers>
             <ScrollProgressBarClient />
             <Header />           {/* balance appears next to your logo */}

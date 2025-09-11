@@ -17,7 +17,7 @@ export default function AboutImage() {
                     <ArrowIcon className="scale-80 opacity-90"/>
             </div>
             <div className="flex flex-col gap-1"> {/* #vertical Image + label  */}
-                <Image src="/about_image_1.png"
+                <Image src="/about/about_image_1.png"
                     alt="A photo of Aidan Chien"
                     width={400}
                     height={400}
