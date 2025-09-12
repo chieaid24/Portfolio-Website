@@ -32,7 +32,7 @@ export default function RedText({
         type="button"
         onClick={handleClick}
         className={
-          `${claimed ? 'cursor-default opacity-60' : 'cursor-pointer'} ` +
+          `${claimed ? 'cursor-default opacity-60 dark:opacity-100' : 'cursor-pointer'} ` +
           `custom-bold ${weightOverride} inline-block ` + // inline-block helps scale nicely
           `${popping ? 'pop' : ''} ${className}`
         }

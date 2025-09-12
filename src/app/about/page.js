@@ -2,12 +2,33 @@ import Footer from "@/components/Footer";
 import AboutImage from "@/components/AboutImage";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import RedText from '@/components/RewardRedText';
-
+import SpotifyEmbed from '@/components/SpotifyEmbed'
+import ChessWidget from "@/components/ChessWidget";
+import ClashWidget from "@/components/ClashWidget";
+import WidgetCarousel from "@/components/WidgetCarousel";
 
 export const metadata = {
   title: 'ABOUT',
   description: 'Who is Aidan Chien?',
 };
+
+const widgets = [
+  {
+    id: "spotify",
+    title: "Spotify – My Playlist",
+    element: <SpotifyEmbed playlistId="1oQngKRVkU7oI8hmB4hf7i" theme={0} />,
+  },
+  {
+    id: "chess",
+    title: "Chess.com",
+    element: <ChessWidget />,
+  },
+  {
+    id: "clash",
+    title: "Clash Royale",
+    element: <ClashWidget />,
+  },
+];
 
 export default function AboutPage() {
   return (
@@ -43,29 +64,34 @@ export default function AboutPage() {
           </div>
 
           {/* Interest Section */}
-          <div className="w-2/3 mt-0 ml-3 pb-10">
-            <h2 className="font-bold text-4xl leading-12 mb-1">You can also find me:</h2>
-            <li className="marker:text-xl text-2xl font-normal"> Playing team sports
-              <ul className="flex gap-2 pl-8 text-light-grey-text text-xl">
-                <li>→</li>
-                <li>Basketball and volleyball are my main ones right now!</li>
-              </ul>
-            </li>
-            <li className="marker:text-xl text-2xl font-normal"> Rock climbing
-              <ul className="flex gap-2 pl-8 text-light-grey-text text-xl">
-                <li>→</li>
-                <li>Mostly bouldering but I&apos;ve done a few outdoor top rope climbs!</li>
-              </ul>
-            </li>
-            <li className="marker:text-xl text-2xl font-normal"> Filmmaking
-              <ul className="flex gap-2 pl-8 text-light-grey-text text-xl">
-                <li>→</li>
-                <li>My preferred mode of creative expression, and I&apos;m always looking for inspiration for my next project!</li>
-              </ul>
-            </li>
+          <div className="grid grid-cols-2 pt-4 pb-20">
+            <div className="ml-3 pr-8">
+              <h2 className="font-bold text-4xl leading-tight">You can also find me:</h2>
+              <li className="marker:text-xl text-2xl font-normal pt-5"> Playing team sports
+                <ul className="flex gap-2 pl-8 text-light-grey-text text-xl">
+                  <li>→</li>
+                  <li>Basketball and volleyball are my main ones right now!</li>
+                </ul>
+              </li>
+              <li className="marker:text-xl text-2xl font-normal"> Rock climbing
+                <ul className="flex gap-2 pl-8 text-light-grey-text text-xl">
+                  <li>→</li>
+                  <li>Mostly bouldering but I&apos;ve done a few outdoor top rope climbs!</li>
+                </ul>
+              </li>
+              <li className="marker:text-xl text-2xl font-normal"> Filmmaking
+                <ul className="flex gap-2 pl-8 text-light-grey-text text-xl">
+                  <li>→</li>
+                  <li>My preferred mode of creative expression, and I&apos;m always looking for inspiration for my next project!</li>
+                </ul>
+              </li>
+            </div>
+            <WidgetCarousel items={widgets} className="" />
           </div>
+
         </MaxWidthWrapper>
       </div>
+
       <Footer />
     </div>
   );

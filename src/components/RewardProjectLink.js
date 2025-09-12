@@ -14,7 +14,7 @@ export default function RewardProjectLink({ rewardId, kind = "project", ticketVa
                 onClick?.(e);
             }}
             data-reward-id={rewardId}
-            className={`transition-opacity duration-200 ${claimed ? 'opacity-90' : 'opacity-100'} ${className}`}
+            className={`transition-opacity duration-200 ${claimed ? 'opacity-90 dark:opacity-100' : 'opacity-100'} ${className}`}
         >
             {children}
         </Link>

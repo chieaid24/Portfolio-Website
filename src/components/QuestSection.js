@@ -27,8 +27,10 @@ function ProgressBar({
 
 
 export default function QuestSection() {
-    const { getQuestStats } = useMoney();
+    const { getQuestStats, getAllQuestsComplete } = useMoney();
     const stats = getQuestStats();
+    const allQuestsComp = getAllQuestsComplete();
+
     // stats.redtext.total, stats.redtext.done, etc.
 
     return (

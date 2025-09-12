@@ -41,14 +41,11 @@
   --color-sage-green: var(--sage-green);
   --color-progress-background: var(--progress-background);
   --color-stroke: #414249;
+  --color-white-text: #EFEFEF;
+  --color-chess-text-grey: #909090;
 
   --color-background-light: var(--background-light);
   --color-background-dark: var(--background-dark);
-
-  /* --font-dm-sans: 'DM Sans', sans-serif;
-  --font-italiana: 'Italiana', serif;
-  --font-unna: 'Unna', serif;
-  --font-oh-baby: 'Oooh Baby', cursive; */
 
   --animate-new-pulse: pulse 1.5s cubic-bezier(0.42, 0, 0.58, 1) infinite;
 }
@@ -68,7 +65,6 @@
       --color-background-dark: #323339;
       --color-custom-orange: #FFDBB1;
       --color-dark-grey-text: #EFEFEF;
-
     }
   }
 }
