@@ -6,6 +6,7 @@ import Image from "next/image";
 import { getOrCreateTicket } from "@/lib/ticket-store";
 import Decimal from 'decimal.js';
 import ProjectTicket from "@/icons/ProjectTicket";
+import SkillDisplay from "@/components/SkillDisplay"
 
 
 export default function ProjectCard({ title, generated_with, ticket_no, fallback_value, skills_used, image, slug }) {
@@ -33,23 +34,21 @@ export default function ProjectCard({ title, generated_with, ticket_no, fallback
 
     return (
         <div>
-            <RewardProjectLink href={`/projects/${slug}`} className="block font-dm-sans group" rewardId={`project:${slug}`} ticketValue={addedTicketValue}>
+            <RewardProjectLink href={`/projects/${slug}`} className="block font-dm-sans group/pc" rewardId={`project:${slug}`} ticketValue={addedTicketValue}>
                 <div className="flex relative justify-center">
                     <div className="relative w-[500px] aspect-[2] overflow-hidden rounded-lg shadow-[-4px_4px_4px_0px_rgba(0,0,0,0.25)] ">
                         <Image
                             src={image}
                             alt={title}
                             fill
-                            className="object-cover z-0 transition-transform duration-300 group-hover:scale-101" />
-                        <ul className="absolute w-full flex flex-wrap justify-end gap-3 pt-3 pr-3 text-[16px]"> {/**skills used div */}
-                            {skills_used.map((lang, i) => (
-                                <li key={i} className="bg-custom-red px-2 py-[1px] rounded-md text-white font-semibold tracking-wider opacity-90 hover:opacity-80 transition-opacity duration-200">
-                                    #{lang}
-                                </li>
+                            className="object-cover z-0 transition-transform duration-300 group-hover/pc:scale-101" />
+                        <ul className="absolute w-full pl-20 flex flex-wrap justify-end gap-2 pt-3 pr-3 text-[16px]"> {/**skills used div */}
+                            {skills_used.map((skill, i) => (
+                                <SkillDisplay fileName={skill} project={i} card={true} key={i}/>
                             ))}
                         </ul>
                     </div>
-                    <div className="absolute -translate-x-[4.4px] translate-y-[125%] group-hover:translate-y-[121%] w-full flex flex-col items-center transition-transform duration-300 group-hover:duration-300 group-hover:scale-102">
+                    <div className="absolute -translate-x-[4.4px] translate-y-[125%] group-hover/pc:translate-y-[121%] w-full flex flex-col items-center transition-transform duration-300 group-hover/pc:duration-300 group-hover/pc:scale-102">
                         <div className="relative">
                             {/* <CardLabel /> */}
                             <div className="text-[#fffbf6] dark:text-[#565860]">

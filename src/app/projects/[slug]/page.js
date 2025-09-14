@@ -1,11 +1,9 @@
 
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
 import RewardLink from '@/components/RewardLink';
 import { getProjectBySlug, projects } from '@/app/data/projects';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
-import Footer from '@/components/Footer';
 import BackToProjects from '@/components/BackToProjects';
 import ModelSection from '@/components/ModelSection';
 import ProjectGithub from "@/icons/ProjectGithub"
@@ -172,7 +170,6 @@ export default function ProjectPage({ params }) {
                     </div>
                 </MaxWidthWrapper >
             </div >
-            <Footer />
         </>
     );
 }

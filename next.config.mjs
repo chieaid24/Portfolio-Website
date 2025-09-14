@@ -30,6 +30,14 @@ const nextConfig = {
 
     return config;
   },
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.chesscomfiles.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'api-assets.clashroyale.com', pathname: '/**' },
+    ],
+    minimumCacheTTL: 60 * 60 * 24 * 7, // 1 week
+    formats: ['image/avif', 'image/webp'],
+  },
 };
 
 export default nextConfig;

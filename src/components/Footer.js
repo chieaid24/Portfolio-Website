@@ -1,4 +1,3 @@
-import Image from "next/image";
 import RewardLink from "@/components/RewardLink";
 import FooterGithub from "@/icons/FooterGithub";
 import FooterLinkedin from "@/icons/FooterLinkedin"
@@ -19,14 +18,7 @@ export default function Footer() {
             target="_blank"
             rewardId="footer:linkedin"
           >
-            {/* <Image
-              src="/icons/linkedin_icon.svg"
-              alt="LinkedIn Icon"
-              width={24}
-              height={24}
-              className="h-[2.6em] w-auto hover:translate-y-[-2px] transition-transform duration-200"
-            /> */}
-            <FooterLinkedin className="hover:translate-y-[-2px] transition-transform duration-200"/>
+            <FooterLinkedin className="hover:translate-y-[-2px] transition-transform duration-200 shrink-0 h-[45px] w-[45px]"/>
           </RewardLink>
 
           <RewardLink
@@ -34,7 +26,7 @@ export default function Footer() {
             target="_blank"
             rewardId="footer:github"
           >
-            <FooterGithub className="hover:translate-y-[-2px] transition-transform duration-200"/>
+            <FooterGithub className="hover:translate-y-[-2px] transition-transform duration-200 shrink-0 block leading-none align-middle overflow-visible h-12 w-12"/>
           </RewardLink>
         </div>
       </div>

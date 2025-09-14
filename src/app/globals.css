@@ -53,13 +53,72 @@
 
 /* globals.css */
 @layer utilities {
-  .font-italiana { font-family: var(--font-italiana), serif; }
-  .font-dm-sans  { font-family: var(--font-dm-sans), sans-serif; }
+  .font-italiana {
+    font-family: var(--font-italiana), serif;
+  }
+
+  .font-dm-sans {
+    font-family: var(--font-dm-sans), sans-serif;
+  }
+
+  .font-clash {
+    font-family: var(--font-clash), sans-serif;
+  }
+
+  .text-outline-2 {
+    color: #fff;
+    /* white text */
+    -webkit-text-stroke: 2px #000;
+  }
+
+  /* thinner/thicker variants if you want */
+  .text-outline-1 {
+    -webkit-text-stroke: 0.25px #000;
+  }
+
+  .text-outline-3 {
+    -webkit-text-stroke: 3px #000;
+  }
+
+  /* Single hard shadow (offset X/Y, no diffusion) */
+  .text-clash-border {
+    text-shadow: var(--ts-x, 0px) var(--ts-y, 2px) 0 var(--ts-color, #383838);
+    -webkit-text-stroke: 0.75px #383838;
+  }
+
+  /* Single hard shadow (offset X/Y, no diffusion) */
+  .text-clash-border-white {
+    text-shadow: var(--ts-x, 0px) var(--ts-y, 2px) 0 var(--ts-color, #000);
+    -webkit-text-stroke: 1px #000;
+  }
+
+  .text-clash-border-small {
+    text-shadow: var(--ts-x, 0px) var(--ts-y, 1px) 0 var(--ts-color, #000);
+    -webkit-text-stroke: 0.5px #000;
+  }
+
+
+
+  /* Quick presets (optional) */
+  .text-shadow-hard-sm {
+    text-shadow: 1px 1px 0 var(--ts-color, #000);
+  }
+
+  .text-shadow-hard-lg {
+    text-shadow: 4px 4px 0 var(--ts-color, #000);
+  }
+
+  /* Reset helper */
+  .text-shadow-none {
+    text-shadow: none;
+  }
 }
 
 /* set dark mode colors*/
 @layer theme {
-  :root, :host {
+
+  :root,
+  :host {
     @variant dark {
       --color-background-light: #3D3E44;
       --color-background-dark: #323339;
@@ -130,6 +189,24 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.gradient-text-gold {
+  background: linear-gradient(90deg,
+      #f9c02f 0%,
+      #f0e39d 50%,
+      /* blend ends by 45% */
+      #f9c02f 100%
+      /* solid light red after */
+    );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* helps Firefox */
+  -webkit-text-fill-color: transparent;
+  /* WebKit */
+}
+
+
+
 .animated-underline {
   position: relative;
   display: inline-block;
@@ -161,6 +238,23 @@ body {
 
 /* globals.css */
 @layer utilities {
+  .text-gradient-mirror {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(90deg,
+        #f9c02f 0%,
+        #f0e39d 50%,
+        #f9c02f 100%);
+    -webkit-text-fill-color: transparent;
+    /* Safari */
+    filter: drop-shadow(var(--ts-x, 0px) var(--ts-y, 2px) 0 var(--ts-color, #383838));
+  }
+
+  /* outline ABOVE the fill */
+  .text-outline {
+    -webkit-text-stroke: 1px #383838;
+  }
+
+
   @keyframes fade-in {
     from {
       opacity: 0

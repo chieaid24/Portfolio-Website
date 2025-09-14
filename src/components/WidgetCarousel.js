@@ -24,7 +24,7 @@ function ArrowButton({ dir = "left", disabled, onClick }) {
         <button
             type="button"
             onClick={handleClick}
-            className="text-neutral-200 px-1 py-1 text-sm cursor-pointer disabled:cursor-default disabled:text-neutral-500 disabled:pointer-events-none transition-colors duration-200"
+            className="text-neutral-200 px-1 py-1 text-sm cursor-pointer disabled:cursor-default disabled:text-neutral-500 disabled:pointer-events-none transition-colors duration-200 hover:bg-black/10 rounded-md"
             aria-label={dir === "left" ? "Previous widget" : "Next widget"}
             disabled={disabled}
         >
@@ -62,7 +62,7 @@ export default function WidgetCarousel({
                             {items.map((_, i) => (
                                 <CarouselDot
                                     key={i}
-                                    className={`w-2 h-2 transition ${index === i
+                                    className={`w-1.5 h-1.5 transition ${index === i
                                             ? "text-neutral-200 scale-135"   // selected = light
                                             : "text-neutral-500 "   // not selected = grey
                                         }`}

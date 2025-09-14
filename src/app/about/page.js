@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import AboutImage from "@/components/AboutImage";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import RedText from '@/components/RewardRedText';
@@ -88,11 +87,8 @@ export default function AboutPage() {
             </div>
             <WidgetCarousel items={widgets} className="" />
           </div>
-
         </MaxWidthWrapper>
       </div>
-
-      <Footer />
     </div>
   );
 }

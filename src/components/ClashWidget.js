@@ -1,11 +1,212 @@
+// components/ClashWidget.jsx
+'use client'
+import { useEffect, useMemo, useState } from 'react'
+import Image from 'next/image'
 
-export default function ChessWidget() {
-  // Replace with your real Chess.com component later
+const round1 = (n) => Math.round(n * 10) / 10;
+const pct1 = (num, den) => (den ? round1((num / den) * 100) : null);
+
+// Format: "Hog Rider" -> "hog-rider"
+function formatCardAssetName(name) {
+  return String(name).trim().toLowerCase().replace(/\s+/g, '-');
+}
+
+const getCardIcon = (card, index) => {
+  const name = card?.name ?? '';
+  const base = formatCardAssetName(name);
+  if (!base) return null;
+
+  const evoEligible =
+    index < 2 && Number(card?.evolutionLevel ?? 0) >= 1;
+
+  // If your evolved images live in a subfolder:
+  const evolvedPath = `/royale/cards/${base}-ev1.png`;
+  const normalPath = `/royale/cards/${base}.png`;
+
+  // If instead they’re in the same folder with a suffix,
+  // use this line instead of evolvedPath:
+  // const evolvedPath = `/royale/cards/${base}-evo.png`;
+
+  return evoEligible ? evolvedPath : normalPath;
+};
+
+export default function ClashWidget() {
+  const [data, setData] = useState(null)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    let cancelled = false
+      ; (async () => {
+        try {
+          setError(null)
+          const res = await fetch('/api/royale/player')
+          if (!res.ok) throw new Error(`API failed: ${res.status}`)
+          const json = await res.json()
+          if (!cancelled) setData(json)
+        } catch (e) {
+          if (!cancelled) setError(e.message || 'Failed to load')
+        }
+      })()
+    return () => { cancelled = true }
+  }, [])
+
+  const player = data?.player
+  const deck = player?.currentDeck ?? []
+  const results = data?.battleResults ?? [] // ['win' | 'loss' | 'draw', ...]
+  const clanBadgeSrc = player?.clanBadgeSrc ?? null
+
+  const careerWinPercent = useMemo(() => {
+    const wins = player?.wins ?? 0;
+    const total = player?.battleCount ?? 0;
+    return pct1(wins, total);        // null if total is 0/undefined
+  }, [player?.wins, player?.battleCount]);
+
+  const summary = useMemo(() => {
+    let w = 0, l = 0, d = 0
+    for (const r of results) {
+      if (r === 'win') w++
+      else if (r === 'loss') l++
+      else d++
+    }
+    const total = results.length || 1
+    return { w, l, d, winRate: pct1(w, total) }
+  }, [results])
+
   return (
-    <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 p-4 h-[352px] flex items-center justify-center">
-      <p className="text-sm text-neutral-600 dark:text-neutral-300">
-        Clash Royale widget goes here
-      </p>
+    <div className="rounded-xl bg-background-dark p-3 h-[352px] flex flex-col relative overflow-hidden border-1 border-dark-grey-text">
+      {/* Header */}
+      <div className="flex justify-between items-center mt-3 mx-2">
+        <a href="https://royaleapi.com/player/9UJLLC08R" target="_blank" rel="noopener noreferrer">
+          <div className="font-clash font-bold text-gradient-mirror text-outline gradient-text-gold text-[38px] leading-tight pb-[2px] pt-[1px] tracking-tighter hover:opacity-80 duration-150">
+            @{player?.name ?? '—'}
+          </div>
+        </a>
+        <div className="flex flex-col">
+          <div className="flex gap-1 items-center justify-end">
+            <div className="relative w-8 h-8">
+              <Image
+                src="/about/trophy_1.png"
+                alt="Trophy"
+                fill
+                className="object-contain"
+                sizes="48px"
+              />
+            </div>
+            <div className="text-clash-border text-[#fede2b] text-[25px] font-clash font-bold justify-end tracking-tight">{player?.trophies ?? '—'}</div>
+          </div>
+          <div className="text-[16px] flex items-center gap-1.5 font-medium justify-end">
+            {player?.clanBadgeSrc ? (
+              <Image
+                src={player.clanBadgeSrc}
+                alt={`${player?.clanName ?? 'Clan'} badge`}
+                width={23}
+                height={23}
+                className="mr-0.5"
+              />
+            ) :
+              <Image
+                src="/royale/badges/Bamboo_04.png"
+                alt={`Clan Badge`}
+                width={30}
+                height={30}
+              />}
+            {player?.clanName ? `${player.clanName}` : 'No clan'}
+            <div className="text-light-grey-text text-md font-medium">|</div>
+            {player?.role && <div>{player.role}</div>}
+          </div>
+        </div>
+      </div>
+      <hr className="my-2 border-t border-light-grey-text mx-7" />
+      <div className="grid grid-cols-2 gap-3 text-[15px] mx-5">
+        <div className="flex flex-col">
+          <div className="flex justify-between font-medium">
+            <h1>Career wins</h1>
+            <div className="font-bold">{player?.wins ?? '—'}</div>
+          </div>
+          <div className="flex justify-between">
+            <h1>Career win percentage</h1>
+            <div className="font-bold">{careerWinPercent != null ? `${careerWinPercent}%` : '—'}</div>
+          </div>
+        </div>
+        <div className="flex flex-col">
+          <div className="flex justify-between">
+            <h1>Recent wins</h1>
+            <div className="font-bold">{summary.w ?? '—'}</div>
+          </div>
+          <div className="flex justify-between">
+            <h1>Recent win percentage</h1>
+            <div className="font-bold">{summary.winRate != null ? `${summary.winRate}%` : '—'}</div>
+          </div>
+        </div>
+      </div>
+
+      <hr className="mt-2 border-t border-light-grey-text mx-7" />
+
+      <div className="my-1 self-center text-light-grey-text">
+        My current deck! ↓
+      </div>
+
+      {/* Current deck */}
+      <div className="flex w-full">
+        {/* <Image
+          src="/about/king_with_book.png"
+          width={300}
+          height={300}
+          alt="King with a book"
+          className="absolute right-1/2 top-1/4 -translate-x-16 -translate-y-0"
+        /> */}
+
+        <div className="grid grid-cols-4 grid-rows-2 gap-x-0 mx-auto bg-black/10 p-1 rounded-xl self-center">
+          {deck.slice(0, 8).map((card, i) => (
+            <div
+              key={card.id ?? i}
+              className="items-center justify-center"
+            >
+              {getCardIcon(card, i) ? (
+                <Image
+                  src={getCardIcon(card, i)}
+                  alt={card.name || 'Card'}
+                  width={60}
+                  height={60}
+                  className="hover:scale-110 duration-200"
+                />
+              ) : (
+                <Image
+                  src="/royale/cards/card-legendary-unknown.png"
+                  alt="Card"
+                  width={60}
+                  height={60}
+                  className=""
+                />
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* <Image
+          src="/about/crl_logo.png"
+          width={150}
+          height={150}
+          alt="Clash Royale Logo"
+          className="absolute left-3/4 top-3/4 translate-y-5"
+        /> */}
+        <Image
+          src="/about/test.png"
+          width={35}
+          height={35}
+          alt="Clash Royale Logo"
+          className="absolute right-4 bottom-2 hover:translate-y-[-2px] duration-200"
+        />
+      </div>
+
+
+      {/* States */}
+      {error && <div className="mt-3 text-xs text-red-300">{error}</div>}
+      {!data && !error && (
+        <div className="mt-3 text-xs text-neutral-200/70 animate-pulse">
+          Loading Clash Royale data…
+        </div>
+      )}
     </div>
-  );
+  )
 }

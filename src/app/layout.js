@@ -1,8 +1,10 @@
 import { DM_Sans, Italiana } from "next/font/google";
+import localFont from "next/font/local"
 import Script from 'next/script'
 import "./globals.css";
 import ScrollProgressBarClient from "@/components/ScrollProgressBarClient";
 import Header from "@/components/Header";                 // <-- your header
+import Footer from "@/components/Footer"
 import Providers from "./providers.js";
 
 const dmSans = DM_Sans({
@@ -10,6 +12,16 @@ const dmSans = DM_Sans({
   subsets: ["latin"],
 });
 const italiana = Italiana({ subsets: ['latin'], weight: '400', variable: '--font-italiana' });
+
+const clashFont = localFont({
+  src: [
+    { path: './fonts/Clash_Regular.otf', weight: '400', style: 'normal' },
+    { path: './fonts/Clash_Bold.otf', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-clash',   // exposes a CSS var
+  display: 'swap',             // good UX
+  fallback: ['system-ui', 'Segoe UI', 'Arial'],
+})
 
 export const metadata = {
   title: { default: "AIDAN CHIEN", template: "%s || AIDAN CHIEN" },
@@ -33,12 +45,13 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body className={`${dmSans.className} ${italiana.variable} antialiased min-h-screen`}>
-          <Providers>
-            <ScrollProgressBarClient />
-            <Header />           {/* balance appears next to your logo */}
-            <main>{children}</main>
-          </Providers>
+      <body className={`${dmSans.className} ${italiana.variable} ${clashFont.variable} antialiased min-h-screen`}>
+        <Providers>
+          <ScrollProgressBarClient />
+          <Header />           {/* balance appears next to your logo */}
+          <main>{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

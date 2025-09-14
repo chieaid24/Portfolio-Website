@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import RedText from "@/components/RewardRedText"
+import SkillDisplay from "@/components/SkillDisplay"
 
 export const quest_totals = {
-    redtext: 36,
+    redtext: 37,
     project: 4,
     link: 9,
 };
@@ -62,21 +63,21 @@ export const projects = [
         ticket_no: "26",
         fallback_value: "16,230.00",
         skills_used: ['Python', 'OOP'],
-        image: '/pmi_auto_generator/PMI Card2.png',
+        image: '/pmi_auto_generator/new_pmi_card - Copy.png',
         page_image_one: '/pmi_auto_generator/pmi_card.png',
         page_image_two: '/pmi_auto_generator/pmi_card.png',
         github_link: 'https://github.com/chieaid24/PMI-Auto-Generator-Desc',
         subtitle: "a machinist's best friend",
         summary: <>Manually transferring info from a <RedText rewardId="red:pmi:technical-drawing">technical drawing</RedText> to a 3D <RedText rewardId="red:pmi:CAD-model">CAD model</RedText> can be tedious and the worst part of a machinist&apos;s day. Keep scrolling to find out how I cut production time by <RedText rewardId="red:pmi:30-percent">30 percent</RedText>! </>,
         tool_paragraphs: [
-            <>I used <RedText rewardId="red:pmi:python">Python</RedText> for the logic and <RedText rewardId="red:pmi:ahk">AutoHotKey</RedText> for easy interfacing with applications. I also utilized MBDVidia&apos;s OCR for data extraction and file conversion.</>,
+            <>I used <SkillDisplay fileName="Python" project="pmi" /> for the logic and <SkillDisplay fileName="AutoHotKey" project="pmi" /> for easy interfacing with applications. I also utilized MBDVidia&apos;s OCR for data extraction and file conversion.</>,
         ],
         why_paragraphs: [
             <>
                 Working with CNC machinists at Autonomous Machining opened my eyes to the many unexpected challenges that come with producing machined parts, especially precision parts for aerospace and automotive systems. At first, I thought the buyer companies just sent a SOLIDWORKS model, the machinist hit a few buttons, and the machine would cut it out—simple, like a 3D printer. However, I quickly learned that this isn&apos;t the case, and there are very good reasons to why machinists get paid in this economy.
             </>,
             <>
-                As a machinist, it makes life a lot easier to have a 3D model that includes Product and Manufacturing Information (PMI), such as desired dimensions, tolerances, and specifications. This allows you to create machine paths and quality assurance procedures to the specs of the buyer. But due to old-fashioned &quot;this is the way it&apos;s always been done&quot; practices, many times the machine shop only receives a stripped-down (no PMI) 3D model and a 2D PDF containing the necessary specifications. Someone then must manually annotate the model, which is a tedious and time-consuming task, especially for a small team like the one I worked with at my internship. Seeing this, I realized it had to change, and that was the birth of my PMI Auto Generator.
+                As a machinist, it makes life a lot easier to have a 3D model that includes Product and Manufacturing Information (PMI), such as desired dimensions, tolerances, and specifications. This allows you to create machine paths and quality assurance procedures to the specs of the buyer. But due to old-fashioned &quot;this is the way it&apos;s always been done&quot; practices, many times the machine shop only receives a stripped-down (no PMI) <RedText rewardId="red:pmi:3dmodel">3D model</RedText> and a <RedText rewardId="red:pmi:2dpdf">2D PDF</RedText> containing the necessary specifications. Someone then must manually annotate the model, which is a tedious and time-consuming task, especially for a small team like the one I worked with at my internship. Seeing this, I realized it had to change, and that was the birth of my PMI Auto Generator.
             </>
         ],
         what_paragraphs: [
@@ -104,13 +105,13 @@ export const projects = [
         ticket_no: "73",
         fallback_value: "17,390.00",
         skills_used: ['React', 'Web Development', 'Full Stack Development'],
-        image: '/personal_website/card_image.jpg',
+        image: '/personal_website/card_image_new - Copy2.png',
         page_image_one: '/personal_website/card_image.jpg',
         github_link: 'https://github.com/chieaid24/Personal-Website',
         subtitle: "a portfolio that performs",
         summary: <>A plain resume displaying my projects is boring and, frankly, too easy to make. Find out how I built the <RedText rewardId="red:website:very-website">very website</RedText> you&apos;re on <RedText rewardId="red:website:scratch">from scratch!</RedText> </>,
         tool_paragraphs: [
-            <>The main framework I used was <RedText rewardId="red:website:next">Next.js</RedText> with <RedText rewardId="red:website:react">React</RedText>, styled using <RedText rewardId="red:website:tailwind">Tailwind CSS</RedText> and <RedText rewardId="red:website:framer">Framer Motion</RedText>. I also used <RedText rewardId="red:website:node">Node.js</RedText> to connect with REST APIs for real-time updates, <RedText rewardId="red:website:figma">Figma</RedText> to prototype the interface, and <RedText rewardId="red:website:illustrator">Illustrator</RedText> to create my logo and other assets.</>,
+            <>The main framework I used was <SkillDisplay fileName="Next" project="website" displayName="Next.js" /> with <SkillDisplay fileName="React" project="website" />, styled using <SkillDisplay fileName="Tailwind CSS" project="website" /> and <SkillDisplay fileName="Framer Motion" project="website" />. I also used <SkillDisplay fileName="Node" project="website" displayName="Node.js" /> to connect with REST APIs for real-time updates, <SkillDisplay fileName="Figma" project="website" /> to prototype the interface, and <SkillDisplay fileName="Illustrator" project="website" /> to create my logo and other assets.</>,
         ],
         why_paragraphs: [
             <>
@@ -138,8 +139,8 @@ export const projects = [
         generated_with: 'SOLIDWORKS',
         ticket_no: "41",
         fallback_value: "16,180.00",
-        skills_used: ['CAD', '3D Printing'],
-        image: '/3d_tools/3d_card.png',
+        skills_used: ['SOLIDWORKS', '3D Printing'],
+        image: '/3d_tools/card_new - Copy.png',
         page_image_one: '/models/keyassembly03.glb',
         page_image_two: '/models/remoteholder.glb',
         github_link: 'https://github.com/chieaid24/Design_Portfolio/tree/main/SOLIDWORKS/BUILD%20PICS',
@@ -147,7 +148,7 @@ export const projects = [
         summary: <>A messy and unorganized workspace is both <RedText rewardId="red:tools:unprofessional">unprofessional</RedText> and <RedText rewardId="red:tools:inefficient">inefficient</RedText>. Keep reading to find out how I solved problems while creating <RedText rewardId="red:tools:conversation-pieces">conversation pieces</RedText> for the office!</>,
         tool_paragraphs: [
             <>
-                I designed everything in <RedText rewardId="red:tools:solidworks">SOLIDWORKS</RedText> and printed with the Markforged software, on FDM carbon-fiber reinforced filaments. I also sanded and spray painted when necessary.
+                I designed everything in <SkillDisplay fileName="SOLIDWORKS" project="tools"/> and printed with the Markforged software, on FDM carbon-fiber reinforced filaments. I also sanded and spray painted when necessary.
             </>,
         ],
         why_paragraphs: [
@@ -176,14 +177,14 @@ export const projects = [
         generated_with: 'AUTOHOTKEY',
         ticket_no: "94",
         fallback_value: "17,270.00",
-        skills_used: ['Workflow Optimization', 'Machining'],
-        image: '/mbd_macro/mbd_card.png',
+        skills_used: ['AutoHotKey', 'Optimization'],
+        image: '/mbd_macro/mbd1 - Copy.png',
         page_image_one: '/mbd_macro/mbd_card.png',
         github_link: 'https://github.com/chieaid24/MBD-Macro',
         subtitle: "streamlining software to your workflow",
         summary: <>Being a machinist requires you to <RedText rewardId="red:mbd:spend-hours">spend hours</RedText> annotating and processing every part that comes through the shop. I built an app that increases your efficiency by <RedText rewardId="red:mbd:100%">up to 100%</RedText>—keep scrolling to learn more!</>,
         tool_paragraphs: [
-            <>The script is built in <RedText rewardId="red:mbd:ahk">AutoHotKey</RedText>, a <RedText rewardId="red:mbd:cpp">C++</RedText> based scripting language for easy interfacing with applications, and built for Capvidia&apos;s <RedText rewardId="red:mbd:mbdvidia">MBDVidia</RedText>.</>,
+            <>The script is built in <SkillDisplay fileName="AutoHotKey" project="mbd" />, a <SkillDisplay fileName="CPP" project="mbd" displayName="C++" /> based scripting language for easy interfacing with applications, and built for Capvidia&apos;s MBDVidia.</>,
         ],
         why_paragraphs: [
             <>

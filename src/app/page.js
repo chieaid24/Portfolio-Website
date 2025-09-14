@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/app/data/projects";
-import Footer from "@/components/Footer";
 import HeroSlot from "@/components/HeroSlot";
 import RedText from '@/components/RewardRedText';
 import RewardLink from '@/components/RewardLink';
@@ -70,7 +69,7 @@ export default function Home() {
         </div>
         <div id="projects" className="bg-background-light text-dark-grey-text"> {/**project section */}
           <MaxWidthWrapper>
-            <h1 className="font-bold text-7xl pt-15">
+            <h1 className="font-bold text-6xl pt-15">
               My Projects
             </h1>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 gap-y-20 mt-10 mb-32">
@@ -102,7 +101,6 @@ export default function Home() {
               </RewardLink>
             </div>
           </div>
-          <Footer />
         </div>
       </div>
     </>
