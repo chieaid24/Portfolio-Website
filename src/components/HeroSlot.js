@@ -179,17 +179,6 @@ export default function HeroSlot() {
       }
     );
 
-    const xAnimation = animate(
-      scope.current,
-      {
-        x: [0, 20, 0, 0, 20, 0],
-      },
-      {
-        duration: duration,
-        times: [0, 0.25, 0.5, 0.6, 0.85, 1],
-        ease: 'easeInOut',
-      }
-    );
 
     // Trigger textRef.next() halfway through the animation
     textRef.current?.next();
@@ -212,7 +201,7 @@ export default function HeroSlot() {
 
   return (
     <div>
-      <div className="flex justify-between mb-[-80px]"> {/**top corners div */}
+      <div className="flex justify-between mb-[-80px] text-corner-orange"> {/**top corners div */}
         {/* <Image src="/hero/corner_tl.svg" alt="Top Left Corner" width={60} height={60} /> */}
         <HeroCorner className="w-[64px] h-[64px] rotate-180" />
         {/* <Image src="/hero/corner_tr.svg" alt="Top Right Corner" width={60} height={60} /> */}
@@ -224,9 +213,9 @@ export default function HeroSlot() {
             {/* Rotating Text */}
             <RotatingHeroText
               ref={textRef}
-              texts={['AIDAN', 'ENG', 'DES', 'INVE', 'CLIM', 'FILM', 'STU', 'GYM', 'CODE', 'CAD', 'REELS', 'GAME', 'UI/UX', 'WEB', 'AI', 'NYT', 'SLEEP', 'CHESS', 'DEV']}
-              texts2={['CHIEN', 'INEER', 'IGNER', 'NTOR', 'BER', 'MAKER', 'DENT', 'GOER', 'ADDICT', 'HEAD', 'SNOB', 'NERD', 'FAN', 'DEV', 'FIEND', 'GAMER', 'LOVER', 'NUT', 'ELOPER']} // STAN, BUFF, BOY, BUG, ACE, 
-              mainClassName="overflow-visible px-2 sm:px-2 md:px-3 text-9xl bg-background-light text-dark-grey-text font-italiana py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+              texts={['AIDAN', 'ENG', 'DES', 'INVE', 'CLIM', 'FILM', 'STU', 'GYM', 'CODE', 'CAD', 'REELS', 'GAME', 'UI/UX', 'WEB', 'AI', 'NYT', 'SLEEP', 'CHESS', 'DEVE']}
+              texts2={['CHIEN', 'INEER', 'IGNER', 'NTOR', 'BER', 'MAKER', 'DENT', 'GOER', 'ADDICT', 'HEAD', 'SNOB', 'NERD', 'FAN', 'DEV', 'FIEND', 'GAMER', 'LOVER', 'NUT', 'LOPER']} // STAN, BUFF, BOY, BUG, ACE, 
+              mainClassName="overflow-visible px-2 sm:px-2 md:px-3 text-3xl md:text-9xl bg-background-light text-dark-grey-text font-italiana py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
               staggerFrom="last"
               initial={{ y: '-100%' }}
               animate={{ y: 0 }}
@@ -305,7 +294,7 @@ export default function HeroSlot() {
           </svg>
         </div>
       </div>
-      <div className="flex justify-between mt-[-10px]"> {/**top corners div */}
+      <div className="flex justify-between mt-[-10px] text-corner-orange"> {/**bottom corners div */}
         <HeroCorner className="w-[64px] h-[64px] rotate-90" />
         <HeroCorner className="w-[64px] h-[64px]" />
       </div>

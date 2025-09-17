@@ -71,7 +71,7 @@ export default function ChessWidget() {
       {/* Header */}
       <div className="flex items-center gap-3 mt-5 mx-2">
         <Image
-          src={profile?.avatar || '/about/chess_profile_backup'}
+          src={profile?.avatar || '/about/chess_profile_backup.jpg'}
           alt=""
           width={90}
           height={90}

@@ -53,7 +53,6 @@ export default function ClashWidget() {
   const player = data?.player
   const deck = player?.currentDeck ?? []
   const results = data?.battleResults ?? [] // ['win' | 'loss' | 'draw', ...]
-  const clanBadgeSrc = player?.clanBadgeSrc ?? null
 
   const careerWinPercent = useMemo(() => {
     const wins = player?.wins ?? 0;
@@ -73,11 +72,11 @@ export default function ClashWidget() {
   }, [results])
 
   return (
-    <div className="rounded-xl bg-background-dark p-3 h-[352px] flex flex-col relative overflow-hidden border-1 border-dark-grey-text">
+    <div className="rounded-xl bg-background-dark p-3 h-[352px] flex flex-col relative overflow-hidden border-1 border-light-grey-text">
       {/* Header */}
       <div className="flex justify-between items-center mt-3 mx-2">
         <a href="https://royaleapi.com/player/9UJLLC08R" target="_blank" rel="noopener noreferrer">
-          <div className="font-clash font-bold text-gradient-mirror text-outline gradient-text-gold text-[38px] leading-tight pb-[2px] pt-[1px] tracking-tighter hover:opacity-80 duration-150">
+          <div className="font-clash font-bold text-gradient-clash-name text-outline text-[38px] leading-tight pb-[2px] pt-[1px] tracking-tighter hover:opacity-80 duration-150">
             @{player?.name ?? '—'}
           </div>
         </a>
@@ -148,14 +147,6 @@ export default function ClashWidget() {
 
       {/* Current deck */}
       <div className="flex w-full">
-        {/* <Image
-          src="/about/king_with_book.png"
-          width={300}
-          height={300}
-          alt="King with a book"
-          className="absolute right-1/2 top-1/4 -translate-x-16 -translate-y-0"
-        /> */}
-
         <div className="grid grid-cols-4 grid-rows-2 gap-x-0 mx-auto bg-black/10 p-1 rounded-xl self-center">
           {deck.slice(0, 8).map((card, i) => (
             <div
@@ -190,13 +181,15 @@ export default function ClashWidget() {
           alt="Clash Royale Logo"
           className="absolute left-3/4 top-3/4 translate-y-5"
         /> */}
-        <Image
-          src="/about/test.png"
-          width={35}
-          height={35}
-          alt="Clash Royale Logo"
-          className="absolute right-4 bottom-2 hover:translate-y-[-2px] duration-200"
-        />
+        <a href="https://royaleapi.com/player/9UJLLC08R" target="_blank" rel="noopener noreferrer">
+          <Image
+            src="/about/test.png"
+            width={35}
+            height={35}
+            alt="Clash Royale Logo"
+            className="absolute right-4 bottom-2 hover:translate-y-[-2px] duration-200"
+          />
+        </a>
       </div>
 
 

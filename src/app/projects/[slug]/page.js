@@ -7,14 +7,14 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import BackToProjects from '@/components/BackToProjects';
 import ModelSection from '@/components/ModelSection';
 import ProjectGithub from "@/icons/ProjectGithub"
-
+import RenderPageDisplay from "@/components/RenderPageDisplay"
 
 // Generate static params for all projects (optional, for static generation)
-export async function generateStaticParams() {
-    return projects.map((project) => ({
-        slug: project.slug,
-    }));
-}
+// export async function generateStaticParams() {
+//     return projects.map((project) => ({
+//         slug: project.slug,
+//     }));
+// }
 
 // Generate metadata for each project page
 export async function generateMetadata({ params }) {
@@ -49,13 +49,8 @@ const renderParagraphs = (paragraphs) => {
     ));
 };
 
-// Helper function to check if file is a .glb model
-const isGLBFile = (filePath) => {
-    return filePath && filePath.toLowerCase().endsWith('.glb');
-};
 
-
-export default function ProjectPage({ params }) {
+export default function ProjectPage({ params}) {
     const project = getProjectBySlug(params.slug);
 
     if (!project) {
@@ -89,22 +84,9 @@ export default function ProjectPage({ params }) {
                             {project.summary}
                         </p>
 
-                        {/* Project image - conditionally render 3D model or regular image */}
-                        <div className="mb-15">
-                            {isGLBFile(project.page_image_one) ? (
-                                <ModelSection modelPath={project.page_image_one} />
-                            ) : (
-                                <div className="relative w-full h-100 aspect-[16/10] rounded-lg overflow-hidden shadow-lg">
-                                    <Image
-                                        src={project.page_image_one}
-                                        alt={project.title}
-                                        fill
-                                        className="object-cover scale-110"
-                                    />
-                                </div>
-                            )}
-                        </div>
-
+                        {project.page_displays[0] && (
+                            <RenderPageDisplay info={project.page_displays[0]} projectTitle={project.title} />
+                         )}
 
                         {/* Tools Used Section */}
                         <div className="mb-20">
@@ -127,23 +109,11 @@ export default function ProjectPage({ params }) {
                         </div>
 
                         {/**optional second image - conditionally render 3D model or regular image */}
-                        {project.page_image_two && (
-                            <div className="mb-15">
-                                {isGLBFile(project.page_image_two) ? (
-                                    <ModelSection modelPath={project.page_image_two} />
-                                ) : (
-                                    <div className="relative w-full h-100 aspect-[16/10] rounded-lg overflow-hidden shadow-lg">
-                                        <Image
-                                            src={project.page_image_two}
-                                            alt={project.title}
-                                            fill
-                                            className="object-cover scale-110"
-                                        />
-                                    </div>
-                                )}
-                            </div>
+                        
+                        {project.page_displays[1] && (
+                            <RenderPageDisplay info={project.page_displays[1]} projectTitle={project.title} />
                         )}
-
+                        
                         {/**What is it */}
                         <div className="mb-20">
                             <h1 className="font-bold text-5xl mb-15">

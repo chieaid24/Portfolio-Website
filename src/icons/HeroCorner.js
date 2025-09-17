@@ -7,7 +7,7 @@ export default function HeroCorner(props) {
             fill="none"
             {...props}
         >
-            <path fill="#FFC88A" d="M0 0h64v22c0 23.196-18.804 42-42 42H0V0Z" />
+            <path fill="currentColor" d="M0 0h64v22c0 23.196-18.804 42-42 42H0V0Z" />
         </svg>
     );
 }

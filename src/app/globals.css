@@ -10,7 +10,8 @@
 
   --custom-red: #FF7D7D;
   --custom-light-red: #FFAEAE;
-  --custom-orange: #FFC88A;
+  --corner-orange: #FFC88A;
+  --custom-orange: #ffa04a;
 
   --light-grey-text: #919191;
   --card-light-grey: #9C9C9C;
@@ -34,6 +35,7 @@
   --color-custom-red: var(--custom-red);
   --color-custom-light-red: var(--custom-light-red);
   --color-custom-orange: var(--custom-orange);
+  --color-corner-orange: var(--corner-orange);
   --color-light-grey-text: var(--light-grey-text);
   --color-dark-grey-text: var(--dark-grey-text);
   --color-dark-grey-footer: var(--dark-grey-footer);
@@ -82,8 +84,8 @@
 
   /* Single hard shadow (offset X/Y, no diffusion) */
   .text-clash-border {
-    text-shadow: var(--ts-x, 0px) var(--ts-y, 2px) 0 var(--ts-color, #383838);
-    -webkit-text-stroke: 0.75px #383838;
+    text-shadow: var(--ts-x, 0px) var(--ts-y, 2px) 0 var(--ts-color, #000);
+    -webkit-text-stroke: 0.75px #000;
   }
 
   /* Single hard shadow (offset X/Y, no diffusion) */
@@ -154,14 +156,14 @@ body {
 
 
 .gradient-text-custom {
-  background: linear-gradient(90deg, var(--custom-red), var(--custom-orange));
+  background: linear-gradient(90deg, var(--custom-red), var(--corner-orange));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gradient-red-orange {
-  background: linear-gradient(90deg, var(--custom-orange), var(--custom-red));
+  background: linear-gradient(90deg, var(--corner-orange), var(--custom-red));
 }
 
 .gradient-text-jackpot {
@@ -238,7 +240,7 @@ body {
 
 /* globals.css */
 @layer utilities {
-  .text-gradient-mirror {
+  .text-gradient-clash-name {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(90deg,
         #f9c02f 0%,
@@ -246,12 +248,12 @@ body {
         #f9c02f 100%);
     -webkit-text-fill-color: transparent;
     /* Safari */
-    filter: drop-shadow(var(--ts-x, 0px) var(--ts-y, 2px) 0 var(--ts-color, #383838));
+    filter: drop-shadow(var(--ts-x, 0px) var(--ts-y, 2px) 0 var(--ts-color, #000));
   }
 
   /* outline ABOVE the fill */
   .text-outline {
-    -webkit-text-stroke: 1px #383838;
+    -webkit-text-stroke: 1px #000;
   }
 
 

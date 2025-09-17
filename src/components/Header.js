@@ -23,6 +23,20 @@ const COMMODITIES = (commodityData.default ?? commodityData.commodities ?? []).f
     (c) => c && typeof c.price !== "undefined"
 );
 
+function useIsMdUp() {
+    const [isMdUp, setIsMdUp] = useState(false);
+
+    useEffect(() => {
+        const mql = window.matchMedia('(min-width: 768px)'); // Tailwind md
+        const onChange = (e) => setIsMdUp(e.matches);
+        setIsMdUp(mql.matches);           // set initial
+        mql.addEventListener('change', onChange);
+        return () => mql.removeEventListener('change', onChange);
+    }, []);
+
+    return isMdUp;
+}
+
 // sample items
 function sampleDistinct(arr, n) {
     const copy = [...arr];
@@ -84,30 +98,37 @@ export default function Header() {
         return () => window.clearTimeout(t);
     }, [balance, ready]);
 
-    const picks = useMemo(
-        () => (walletOpen ? sampleDistinct(COMMODITIES, 3) : []),
-        [walletOpen]
-    );
+    const isMdUp = useIsMdUp();
+
+    const picks = useMemo(() => {
+        if (!walletOpen) return [];
+        const count = isMdUp ? 3 : 2;          // md+ → 3, mobile → 1
+        return sampleDistinct(COMMODITIES, count);
+    }, [walletOpen, isMdUp]);
+
 
     const dollarBalance = (ready ? balance : 0) * BALANCE_MULTIPLIER;
 
     return (
         <header
-            className={`fixed inset-x-0 top-0 z-50 transition-transform ease-in-out duration-300 pointer-events-none ${showHeader ? "translate-y-0" : "-translate-y-full"
-                } py-5 font-dm-sans`}
+            className={`fixed inset-x-0 top-0 z-50 transition-transform ease-in-out duration-300 pointer-events-none ${showHeader ? "translate-y-0" : "-translate-y-full"} py-5 font-dm-sans`}
         >
             <motion.div
-                className="pointer-events-auto w-1/2 mx-auto rounded-xl shadow-[0px_5.47px_13.68px_0px_rgba(0,0,0,0.15)] overflow-hidden transition-colors duration-150 bg-background-dark/95"
+                className="pointer-events-auto w-5/6 mx-auto rounded-xl shadow-[0px_5.47px_13.68px_0px_rgba(0,0,0,0.15)] overflow-hidden transition-colors duration-150 bg-background-dark/95
+                md:w-3/4 
+                2xl:w-1/2 2xl:max-w-[70rem]"
             >
                 {/* Top row */}
-                <div className="pl-4.5 pr-6 grid grid-cols-[1fr_4fr] justify-between gap-2">
+                <div className="px-3 flex justify-between
+                                md:pl-4.5 md:pr-6 
+                                lg:grid lg:grid-cols-[1fr_4fr]">
                     <div className="justify-self-start">
                         {/* Money pill = toggle */}
                         <button
                             type="button"
                             onClick={() => setWalletOpen((v) => !v)}
                             aria-expanded={walletOpen}
-                            className={`group self-start font-semibold text-xs sm:text-lg text-dark-grey-text cursor-pointer`}
+                            className={`group self-start font-semibold text-xs md:text-[17px] lg:text-lg text-dark-grey-text cursor-pointer`}
                         >
                             <div className="px-1.5 py-1 my-1.5 rounded-md inline-flex flex-col items-start group-hover:bg-black/7">
                                 <div className="leading-none gradient-text-header pb-0.5">
@@ -121,11 +142,11 @@ export default function Header() {
                                     <span className="leading-none">$</span>
                                     <motion.span
                                         layout="position"
-                                        className="text-[24px] leading-none "
+                                        className="text-lg md:text-[24px] leading-none "
                                         transition={{ duration: 1, ease: "easeInOut" }}
                                     >
                                         {ready ? (
-                                                <AnimatedBalance value={balance} className="relative inline-block top-[4px] transition-colors duration-250" />
+                                            <AnimatedBalance value={balance} className="relative inline-block top-1 transition-colors duration-250" />
                                         ) : (
                                             "—"
                                         )}
@@ -151,7 +172,7 @@ export default function Header() {
                                             width={14}
                                             height={14}
                                             alt="Info"
-                                            className="ml-[5px] block"
+                                            className="md:ml-1 block w-2 md:w-3"
                                         />
                                     </motion.div>
                                 </motion.div>
@@ -159,7 +180,7 @@ export default function Header() {
                         </button>
                     </div>
 
-                    <div className="flex items-center gap-2 text-lg text-dark-grey-text">
+                    <div className="flex items-center text-sm md:text-lg text-dark-grey-text">
                         {/* <DevMoneyReset />  */}
                         {/* <OverflowButton />
                          <DevBalanceInput /> */}
@@ -176,17 +197,19 @@ export default function Header() {
                                 >
                                     <Link
                                         href="/"
-                                        className="relative hover:text-custom-red transition-colors px-5 py-1
+                                        className="relative hover:text-custom-red transition-colors pr-2.5 py-3
                                after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2
-                               after:w-[2.5px] after:h-6 after:bg-header-light/80 last:after:hidden"
+                               after:w-0.5 after:h-5  after:bg-header-light/80
+                               md:pr-5 md:py-1 md:after:w-[2.5px] md:after:h-6"
                                     >
                                         home
                                     </Link>
                                     <RewardLink
                                         href="/about"
-                                        className="relative hover:text-custom-red transition-colors px-5 py-1
+                                        className="relative hover:text-custom-red transition-colors px-2.5 py-3
                                after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2
-                               after:w-[2.5px] after:h-6 after:bg-header-light/80 last:after:hidden"
+                                after:w-0.5 after:h-5 after:bg-header-light/80
+                               md:px-5 md:py-1 md:after:w-[2.5px] md:after:h-6"
                                         rewardId="header:about"
                                         transparent={false}
                                     >
@@ -196,7 +219,8 @@ export default function Header() {
                                         href="/documents/Aidan_Chien_resume.pdf"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="hover:text-custom-red transition-colors pl-5 py-1"
+                                        className="hover:text-custom-red transition-colors pl-2.5  py-3
+                                        md:pl-5 md:py-1"
                                         rewardId="header:resume"
                                         transparent={false}
                                     >
@@ -204,20 +228,26 @@ export default function Header() {
                                     </RewardLink>
                                 </motion.nav>
                             ) : (
-                                <div className="grid grid-cols-[8fr_1fr] justify-between w-full h-full">
-                                    <motion.div
-                                        key="with-your-money"
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1, transition: { duration: 1, ease: "easeOut" } }}   // 1s in
-                                        exit={{ opacity: 0, transition: { duration: 0.2, ease: "easeIn" } }}      // 0.5s out
-                                        className="font-semibold text-[22px] tracking-wide self-end justify-self-center translate-y-2"
-                                    >
-                                        with your money, I would buy...
-                                    </motion.div>
-                                    <span className="flex items-center space-x-2">
+                                <div className="flex justify-between
+                                lg:grid lg:grid-cols-[8fr_1fr] lg:w-full lg:h-full">
 
-                                        <DarkModeToggle />
+                                        <motion.div
+                                            key="with-your-money"
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1, transition: { duration: 1, ease: "easeOut" } }}   // 1s in
+                                            exit={{ opacity: 0, transition: { duration: 0.2, ease: "easeIn" } }}      // 0.5s out
+                                            className="font-semibold tracking-wide self-end justify-self-center translate-y-2 hidden italic text-light-grey-text
+                                                         lg:block lg:text-[22px] lg:translate-y-0 lg:ml-5
+                                                         xl:text-[22px]
+                                                         2xl:text-[24px]"
+                                        >
+                                            with your money, I would buy...
+                                        </motion.div>
 
+                                    <span className="flex items-center justify-end
+                                     md:space-x-2">
+
+                                        <DarkModeToggle className="px-3 py-2 md:px-[2.5px] md:py-[2.5px]" />
                                         <motion.button
                                             key="close"
                                             type="button"
@@ -227,7 +257,7 @@ export default function Header() {
                                             animate={{ opacity: 1, rotate: 0, scale: 1 }}
                                             exit={{ opacity: 0, rotate: 90, scale: 0.9 }}
                                             transition={{ duration: 0.18 }}
-                                            className="px-[2.5px] py-[2.5px] rounded-md hover:bg-black/7 transition-colors duration-250 cursor-pointer"
+                                            className="px-3 py-2 md:px-[2.5px] md:py-[2.5px] rounded-md hover:bg-black/7 transition-colors duration-250 cursor-pointer"
                                         >
                                             <CloseButton className="h-6 w-6 text-dark-grey-text" />
                                         </motion.button>
@@ -248,14 +278,30 @@ export default function Header() {
                             exit={{ height: 0, opacity: 0, paddingTop: 0, paddingBottom: 0 }}
                             transition={{ duration: 0.28, ease: "easeInOut" }}
                             style={{ overflow: "hidden" }}
-                            className="pl-4.5 pr-6"
+                            className="px-3 
+                                        md:pl-4.5 md:pr-6"
                         >
                             <div className="animate-fade-in-7">
-                                <div className="grid grid-cols-1 sm:grid-cols-[1fr_4fr] gap-2 text-sm">
-                                    <QuestSection />
-
-                                    <div className="grid grid-cols-[7fr_1fr] mt-4">
-                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-7 items-start ml-5">
+                                <div className="grid grid-cols-1 gap-2 text-sm
+                                                lg:grid-cols-[1fr_4fr]">
+                                    <QuestSection className="order-2 pt-4 px-5
+                                                             md:pt-2 md:px-20
+                                                             lg:px-0 lg:order-1"/>
+                                    <motion.div
+                                        key="with-your-money"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1, transition: { duration: 1, ease: "easeOut" } }}   // 1s in
+                                        exit={{ opacity: 0, transition: { duration: 0.2, ease: "easeIn" } }}      // 0.5s out
+                                        className="text-light-grey-text italic font-semibold text-lg text-center tracking-wide self-end justify-self-center translate-y-2 block col-start -mb-2
+                                        md:text-[22px] md:mb-0 
+                                        lg:hidden"
+                                    >
+                                        with your money, I would buy:
+                                    </motion.div>
+                                    <div className="grid mt-4 
+                                                    lg:grid-cols-[7fr_1fr] lg:order-2">
+                                        <div className="grid grid-cols-2 gap-8 items-start lg:ml-5
+                                                        md:grid-cols-3 md:gap-7 ">
                                             {picks.length === 0 ? (
                                                 <p className="text-xs text-gray-400">No commodities available.</p>
                                             ) : (

@@ -52,7 +52,7 @@ export default function ProjectCard({ title, generated_with, ticket_no, fallback
                         <div className="relative">
                             {/* <CardLabel /> */}
                             <div className="text-[#fffbf6] dark:text-[#565860]">
-                                <ProjectTicket className="w-[459px] h-[132px]" />
+                                <ProjectTicket className="w-[350px] h-[101px] sm:w-[459px] sm:h-[132px]" />
                             </div>
                             <div className="absolute inset-0 flex flex-col justify-center items-center z-10 text-black dark:text-white w-full ml-[4px]">
                                 <div className="font-bold text-[0.7rem] mb-[-5px] mt-[-5px] opacity-50">

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { motion } from "framer-motion";
 import { useMoney } from "@/lib/money-context"
 
-export default function DarkModeToggle() {
+export default function DarkModeToggle({className = ""}) {
     const [mounted, setMounted] = useState(false);
     const [isDark, setIsDark] = useState(false);
 
@@ -48,7 +48,7 @@ export default function DarkModeToggle() {
                 animate={{ opacity: 1, rotate: 0, scale: 1 }}
                 exit={{ opacity: 0, rotate: 90, scale: 0.9 }}
                 transition={{ duration: 0.18 }}
-                className={`px-[2.5px] py-[2.5px] rounded-md ${canToggle ? "hover:bg-black/7 cursor-pointer" : "cursor-default"} transition-colors duration-250 `}
+                className={`rounded-md ${canToggle ? "hover:bg-black/7 cursor-pointer" : "cursor-default"} transition-colors duration-250 ${className}`}
             >
 
                 <Image
@@ -57,7 +57,7 @@ export default function DarkModeToggle() {
                     width={20}
                     height={20}
                     alt="darkmode_dark"
-                    className={canToggle ? "opacity-100" : "opacity-70"}
+                    className={canToggle ? "opacity-100" : "opacity-0 md:opacity-70"}
                 />
             </motion.button>
 

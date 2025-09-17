@@ -3,7 +3,7 @@ import RedText from "@/components/RewardRedText"
 import SkillDisplay from "@/components/SkillDisplay"
 
 export const quest_totals = {
-    redtext: 37,
+    redtext: 38,
     project: 4,
     link: 9,
 };
@@ -18,8 +18,7 @@ export const quest_totals = {
         fallback_value: "17,230.00", //fallback ticket value that should be in this format (between 15000 and 18000, with comma, rounded to 10s place)
         skills_used: ['Python', 'OOP'], // red labels that appear on Card
         image: '/pmi_auto_generator/PMI Card2.png', // Card background image
-        page_image_one: '/pmi_auto_generator/pmi_card.png', // image on the Page 1, this can also be a 3D model in the .glb format
-        page_image_two: '/pmi_auto_generator/pmi_card.png', // image on the Page 2
+        page_displays: [['/pmi_auto_generator/pmi_card.png', 'Example 3D model with attached PMI'], ['/pmi_auto_generator/pmi_card.png']], // list range(1-2) of lists range(1-2). Bigger list is each Display which contains its path and its subtitle. Subtitle not req. 
         github_link: 'https://github.com/chieaid24/PMI-Auto-Generator-Desc',
         subtitle: "a machinist's best friend", // tagline that appears below the title on the Page
         summary: <> </>, // summary on the landing section of the Page
@@ -64,8 +63,7 @@ export const projects = [
         fallback_value: "16,230.00",
         skills_used: ['Python', 'OOP'],
         image: '/pmi_auto_generator/new_pmi_card - Copy.png',
-        page_image_one: '/pmi_auto_generator/pmi_card.png',
-        page_image_two: '/pmi_auto_generator/pmi_card.png',
+        page_displays: [['/pmi_auto_generator/pmi_card.png', 'Example 3D model with attached PMI'], ['https://www.youtube.com/watch?v=GMJ6381breo', 'Check out the demo video!']],
         github_link: 'https://github.com/chieaid24/PMI-Auto-Generator-Desc',
         subtitle: "a machinist's best friend",
         summary: <>Manually transferring info from a <RedText rewardId="red:pmi:technical-drawing">technical drawing</RedText> to a 3D <RedText rewardId="red:pmi:CAD-model">CAD model</RedText> can be tedious and the worst part of a machinist&apos;s day. Keep scrolling to find out how I cut production time by <RedText rewardId="red:pmi:30-percent">30 percent</RedText>! </>,
@@ -106,7 +104,7 @@ export const projects = [
         fallback_value: "17,390.00",
         skills_used: ['React', 'Web Development', 'Full Stack Development'],
         image: '/personal_website/card_image_new - Copy2.png',
-        page_image_one: '/personal_website/card_image.jpg',
+        page_displays: [['/personal_website/card_image.jpg']],
         github_link: 'https://github.com/chieaid24/Personal-Website',
         subtitle: "a portfolio that performs",
         summary: <>A plain resume displaying my projects is boring and, frankly, too easy to make. Find out how I built the <RedText rewardId="red:website:very-website">very website</RedText> you&apos;re on <RedText rewardId="red:website:scratch">from scratch!</RedText> </>,
@@ -141,8 +139,7 @@ export const projects = [
         fallback_value: "16,180.00",
         skills_used: ['SOLIDWORKS', '3D Printing'],
         image: '/3d_tools/card_new - Copy.png',
-        page_image_one: '/models/keyassembly03.glb',
-        page_image_two: '/models/remoteholder.glb',
+        page_displays: [['/models/keyassembly03.glb'], ['/models/remoteholder.glb']],
         github_link: 'https://github.com/chieaid24/Design_Portfolio/tree/main/SOLIDWORKS/BUILD%20PICS',
         subtitle: "where form meets functional",
         summary: <>A messy and unorganized workspace is both <RedText rewardId="red:tools:unprofessional">unprofessional</RedText> and <RedText rewardId="red:tools:inefficient">inefficient</RedText>. Keep reading to find out how I solved problems while creating <RedText rewardId="red:tools:conversation-pieces">conversation pieces</RedText> for the office!</>,
@@ -179,7 +176,7 @@ export const projects = [
         fallback_value: "17,270.00",
         skills_used: ['AutoHotKey', 'Optimization'],
         image: '/mbd_macro/mbd1 - Copy.png',
-        page_image_one: '/mbd_macro/mbd_card.png',
+        page_displays: [['https://www.youtube.com/watch?v=7-iw15DLMDQ', 'Check out the demo video!']],
         github_link: 'https://github.com/chieaid24/MBD-Macro',
         subtitle: "streamlining software to your workflow",
         summary: <>Being a machinist requires you to <RedText rewardId="red:mbd:spend-hours">spend hours</RedText> annotating and processing every part that comes through the shop. I built an app that increases your efficiency by <RedText rewardId="red:mbd:100%">up to 100%</RedText>—keep scrolling to learn more!</>,

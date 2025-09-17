@@ -60,8 +60,8 @@ export default function Home() {
                 <h1 className="text-left font-semibold text-4xl">
                   Hi, I&apos;m Aidan, a systems engineer passionate about efficient <RedText rewardId="red:home:design" weight={"semibold"}>design</RedText> and <RedText rewardId="red:home:development" weight={"semibold"}>development</RedText>.
                 </h1>
-                <h3 className="font-normal text-2xl">
-                  I&apos;m someone who gets genuinely excited about learning new things—whether it&apos;s a coding trick, a design tool, or just figuring out how something works. I love chasing ideas that push me to grow and create in new ways. If you&apos;re curious what that looks like in action, check out my projects below—I promise they&apos;re more fun than your average to-do list!
+                <h3 className="font-regular text-2xl text-light-grey-text italic leading-normal">
+                  Welcome to my portfolio site! Try clicking on projects, links, and <RedText rewardId="red:home:words" weight={"semibold"}>red words</RedText> to uncover new details and increase your earnings throughout the site. Scroll down to check out some of my other work—and good luck exploring :)
                 </h3>
               </div>
             </MaxWidthWrapper>

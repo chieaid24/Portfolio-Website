@@ -1,7 +1,14 @@
-export default function MaxWidthWrapper({children}) {
-    return(
-        <div className="w-full md:w-[69%] lg:w-[69%] mx-auto px-1 sm:px-2 md:px-0 lg:px-0 bg-transparent">
-            {children}
-        </div>
-    )
+export default function MaxWidthWrapper({ children, className = "" }) {
+  return (
+    <div
+      className={
+        "mx-auto w-full md:w-[69%] " +
+        "max-w-screen-lg sm:max-w-screen-xl xl:max-w-[80rem] 2xl:max-w-[80rem] " + // cap width
+        "px-6 md:px-0 " + // gutters
+        className
+      }
+    >
+      {children}
+    </div>
+  );
 }

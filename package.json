@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "build:favicon": "node public/scripts/build-favicon.mjs",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
@@ -27,6 +28,7 @@
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
+    "png-to-ico": "^3.0.1",
     "tailwindcss": "^4"
   }
 }

@@ -10,10 +10,6 @@ export default function AboutImage() {
     return (
         <div className="flex"> {/* #horiz arrow + (Image + label) */}
             <div className={`flex items-end mb-4 mr-0.5 transition-opacity ease-in-out ${imageHovered ? 'opacity-100 duration-300' : 'opacity-0 duration-600'}`}>
-                {/* <Image src="/about_image_arrow.svg"
-                    alt=""
-                    width={12}
-                    height={12} /> */}
                     <ArrowIcon className="scale-80 opacity-90"/>
             </div>
             <div className="flex flex-col gap-1"> {/* #vertical Image + label  */}
