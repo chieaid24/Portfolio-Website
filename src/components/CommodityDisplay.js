@@ -25,20 +25,23 @@ export default function CommodityDisplay({ commodity, balanceInDollars }) {
     return { value: fmtUpTo3SF.format(fmt.format(n)), suffix: '' };
   })();
 
-  // Framer Motion controls (better start/stop behavior than whileHover for loops)
+  // Bobbing animation loop
   const controls = useAnimation();
   const reduceMotion = useReducedMotion();
 
   const startBob = () => {
     if (reduceMotion) return;
     controls.start({
-      y: [0, -3, 0, -3, 0],                      // keyframes for a gentle bob
+      y: [0, -3, 0, -3, 0],
       transition: { duration: 2, ease: 'easeInOut', repeat: Infinity }
     });
   };
 
   const stopBob = () => {
-    controls.start({ y: 0, transition: { type: 'spring', stiffness: 200, damping: 30 } });
+    controls.start({
+      y: 0,
+      transition: { type: 'spring', stiffness: 200, damping: 30 }
+    });
   };
 
   return (
@@ -46,6 +49,8 @@ export default function CommodityDisplay({ commodity, balanceInDollars }) {
       onHoverStart={startBob}
       onHoverEnd={stopBob}
       animate={controls}
+      whileHover={{ scale: 1.05 }} // independent scale-up thread
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       className="flex flex-col items-center font-semibold will-change-transform cursor-default"
     >
       <div className="text-5xl text-custom-red inline-block md:text-6xl">

@@ -37,7 +37,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={dmSans.variable}>
+    <html lang="en" className={`${dmSans.variable} text-[16px]`}>
       <head>
         <Script id="theme-init" strategy="beforeInteractive">
           {`

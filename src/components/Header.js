@@ -114,9 +114,9 @@ export default function Header() {
             className={`fixed inset-x-0 top-0 z-50 transition-transform ease-in-out duration-300 pointer-events-none ${showHeader ? "translate-y-0" : "-translate-y-full"} py-5 font-dm-sans`}
         >
             <motion.div
-                className="pointer-events-auto w-5/6 mx-auto rounded-xl shadow-[0px_5.47px_13.68px_0px_rgba(0,0,0,0.15)] overflow-hidden transition-colors duration-150 bg-background-dark/95
+                className="pointer-events-auto w-5/6 mx-auto rounded-xl shadow-[0px_5.47px_13.68px_0px_rgba(0,0,0,0.15)] overflow-hidden transition-colors duration-150 bg-background-dark/96
                 md:w-3/4 
-                2xl:w-1/2 2xl:max-w-[70rem]"
+                2xl:w-1/2 2xl:max-w-[60rem]"
             >
                 {/* Top row */}
                 <div className="px-3 flex justify-between
@@ -199,7 +199,7 @@ export default function Header() {
                                         href="/"
                                         className="relative hover:text-custom-red transition-colors pr-2.5 py-3
                                after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2
-                               after:w-0.5 after:h-5  after:bg-header-light/80
+                               after:w-[2px] after:h-5  after:bg-header-light/80
                                md:pr-5 md:py-1 md:after:w-[2.5px] md:after:h-6"
                                     >
                                         home
@@ -208,7 +208,7 @@ export default function Header() {
                                         href="/about"
                                         className="relative hover:text-custom-red transition-colors px-2.5 py-3
                                after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2
-                                after:w-0.5 after:h-5 after:bg-header-light/80
+                                after:w-[2px] after:h-5 after:bg-header-light/80
                                md:px-5 md:py-1 md:after:w-[2.5px] md:after:h-6"
                                         rewardId="header:about"
                                         transparent={false}

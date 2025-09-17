@@ -203,7 +203,7 @@ export default function HeroSlot() {
     <div>
       <div className="flex justify-between mb-[-80px] text-corner-orange"> {/**top corners div */}
         {/* <Image src="/hero/corner_tl.svg" alt="Top Left Corner" width={60} height={60} /> */}
-        <HeroCorner className="w-[64px] h-[64px] rotate-180" />
+        <HeroCorner className="w-16 h-16 rotate-180" />
         {/* <Image src="/hero/corner_tr.svg" alt="Top Right Corner" width={60} height={60} /> */}
         <HeroCorner className="w-[64px] h-[64px] -rotate-90" />
       </div>

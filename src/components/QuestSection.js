@@ -41,12 +41,13 @@ function ProgressBar({
   };
 
   return (
-    <div className="w-full lg:w-4/5">
+    <motion.div className="w-full lg:w-4/5 py-1"
+            onHoverStart={handleHoverStart}
+        onHoverEnd={handleHoverEnd}>
       {/* Hover target */}
-      <motion.div
-        className="mt-1 h-[8px] w-full rounded-full bg-progress-background overflow-hidden min-w-0 cursor-pointer"
-        onHoverStart={handleHoverStart}
-        onHoverEnd={handleHoverEnd}
+      <div
+        className="mt-1 h-[8px] w-full rounded-full bg-progress-background overflow-hidden min-w-0"
+
       >
         {/* Fill */}
         <div
@@ -74,8 +75,8 @@ function ProgressBar({
             "
           />
         </div>
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   );
 }
 
@@ -88,20 +89,20 @@ export default function QuestSection({ className = "" }) {
     // stats.redtext.total, stats.redtext.done, etc.
 
     return (
-        <div className={`pt-2 pb-2 leading-none space-y-3 text-[10px] md:text-header-light text-light-grey-text font-medium tracking-wide ${className} cursor-default
+        <div className={`pt-2 pb-2 leading-none space-y-2 text-[10px] md:text-header-light text-light-grey-text font-medium tracking-wide ${className} cursor-default
                         lg:ml-2 `}>
             <div>
-                <p>red words found: <span className="font-bold">{stats.redtext.done}/{stats.redtext.total}</span></p>
+                <p className="mb-[-4px]">red words found: <span className="font-bold">{stats.redtext.done}/{stats.redtext.total}</span></p>
                 <ProgressBar done={stats.redtext.done} total={stats.redtext.total} />
             </div>
 
             <div>
-                <p>projects discovered: <span className="font-bold">{stats.project.done}/{stats.project.total}</span></p>
+                <p className="mb-[-4px]">projects discovered: <span className="font-bold">{stats.project.done}/{stats.project.total}</span></p>
                 <ProgressBar done={stats.project.done} total={stats.project.total} />
             </div>
 
             <div>
-                <p>links followed: <span className="font-bold">{stats.link.done}/{stats.link.total}</span></p>
+                <p className="mb-[-4px]">links followed: <span className="font-bold">{stats.link.done}/{stats.link.total}</span></p>
                 <ProgressBar done={stats.link.done} total={stats.link.total} />
             </div>
         </div>

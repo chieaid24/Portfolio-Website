@@ -57,7 +57,7 @@ export default function DarkModeToggle({className = ""}) {
                     width={20}
                     height={20}
                     alt="darkmode_dark"
-                    className={canToggle ? "opacity-100" : "opacity-0 md:opacity-70"}
+                    className={canToggle ? "opacity-100" : "opacity-0 md:opacity-50"}
                 />
             </motion.button>
 
