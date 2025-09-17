@@ -7,11 +7,27 @@ import { useSlotJiggle } from '@/lib/slot-jiggle-context';
 import { useMoney } from "@/lib/money-context"
 import HeroCorner from "@/icons/HeroCorner.js"
 
+// tiny helper: true when ≥ lg (1024px)
+function useIsLgUp() {
+  const [isLgUp, setIsLgUp] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)'); // Tailwind lg
+    const onChange = (e) => setIsLgUp(e.matches);
+    setIsLgUp(mq.matches); // initial
+    mq.addEventListener?.('change', onChange) ?? mq.addListener(onChange);
+    return () => mq.removeEventListener?.('change', onChange) ?? mq.removeListener(onChange);
+  }, []);
+  return isLgUp;
+}
+
+
 export default function HeroSlot() {
   const textRef = useRef(null);
   const leverRef = useRef(null);
   const shadowRef = useRef(null);
   const leverGroupRef = useRef(null);
+  // const isLgUp = useIsLgUp();
+
 
   const [scope, animate] = useAnimate();
   const { awardLever } = useMoney();
@@ -179,6 +195,18 @@ export default function HeroSlot() {
       }
     );
 
+    const xAnimation = animate(
+      scope.current,
+      {
+        x: [0, 20, 0, 0, 20, 0],
+      },
+      {
+        duration: duration,
+        times: [0, 0.25, 0.5, 0.6, 0.85, 1],
+        ease: 'easeInOut',
+      }
+    );
+
 
     // Trigger textRef.next() halfway through the animation
     textRef.current?.next();
@@ -200,37 +228,43 @@ export default function HeroSlot() {
   };
 
   return (
-    <div>
-      <div className="flex justify-between mb-[-80px] text-corner-orange"> {/**top corners div */}
+    <div className="flex flex-col justify-center w-[22rem] lg:w-[61rem] aspect-[2.2/1] self-center bg-background-light shadow-[-4px_4px_4px_rgba(0,0,0,0.25)]">
+      <div className="flex justify-between text-corner-orange lg:mb-[-30px] lg:mx-[40px]"> {/**top corners div */}
         {/* <Image src="/hero/corner_tl.svg" alt="Top Left Corner" width={60} height={60} /> */}
-        <HeroCorner className="w-16 h-16 rotate-180" />
+        <HeroCorner className="w-10 h-10
+        lg:w-16 lg:h-16 rotate-180" />
         {/* <Image src="/hero/corner_tr.svg" alt="Top Right Corner" width={60} height={60} /> */}
-        <HeroCorner className="w-[64px] h-[64px] -rotate-90" />
+        <HeroCorner className="w-10 h-10 
+        lg:w-16 lg:h-16 -rotate-90" />
       </div>
-      <div className="grid grid-cols-[2fr_1fr] h-80 gap-6 mt-[-50px]">
-        <div className="relative overflow-visible min-w-0">
-          <div className="absolute top-15 left-35">
-            {/* Rotating Text */}
-            <RotatingHeroText
-              ref={textRef}
-              texts={['AIDAN', 'ENG', 'DES', 'INVE', 'CLIM', 'FILM', 'STU', 'GYM', 'CODE', 'CAD', 'REELS', 'GAME', 'UI/UX', 'WEB', 'AI', 'NYT', 'SLEEP', 'CHESS', 'DEVE']}
-              texts2={['CHIEN', 'INEER', 'IGNER', 'NTOR', 'BER', 'MAKER', 'DENT', 'GOER', 'ADDICT', 'HEAD', 'SNOB', 'NERD', 'FAN', 'DEV', 'FIEND', 'GAMER', 'LOVER', 'NUT', 'LOPER']} // STAN, BUFF, BOY, BUG, ACE, 
-              mainClassName="overflow-visible px-2 sm:px-2 md:px-3 text-3xl md:text-9xl bg-background-light text-dark-grey-text font-italiana py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
-              staggerFrom="last"
-              initial={{ y: '-100%' }}
-              animate={{ y: 0 }}
-              exit={{ y: '120%' }}
-              staggerDuration={0.025}
-              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-              transition={{ type: 'spring', damping: 30, stiffness: 400 }}
-              rotationInterval={2000}
-              auto={false}
-            />
-          </div>
+      <div className="grid grid-cols-2 lg:grid-cols-[5fr_3fr] lg:gap-10">
+        <div className="self-center lg:translate-x-[180px]">
+          {/* Rotating Text */}
+          <RotatingHeroText
+            ref={textRef}
+            texts={['AIDAN', 'ENG', 'DES', 'INVE', 'CLIM', 'FILM', 'STU', 'GYM', 'CODE', 'CAD', 'REELS', 'GAME', 'UI/UX', 'WEB', 'AI', 'NYT', 'SLEEP', 'CHESS', 'DEVE']}
+            texts2={['CHIEN', 'INEER', 'IGNER', 'NTOR', 'BER', 'MAKER', 'DENT', 'GOER', 'ADDICT', 'HEAD', 'SNOB', 'NERD', 'FAN', 'DEV', 'FIEND', 'GAMER', 'LOVER', 'NUT', 'LOPER']} // STAN, BUFF, BOY, BUG, ACE, 
+            mainClassName="overflow-visible px-2 sm:px-2 md:px-3 text-2xl md:text-9xl bg-background-light text-dark-grey-text font-italiana py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+            staggerFrom="last"
+            initial={{ y: '-100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '120%' }}
+            staggerDuration={0.025}
+            splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+            transition={{ type: 'spring', damping: 30, stiffness: 400 }}
+            rotationInterval={2000}
+            auto={false}
+          />
         </div>
         {/* SVG Lever Button */}
-        <div className="flex items-center h-[400px]" ref={leverGroupRef}>
-          <div className="m-5 h-full flex relative items-center"> {/**lever and block div */}
+        <div
+          ref={leverGroupRef}
+          className="
+            flex items-center h-[150px] lg:h-[300px]
+            origin-top-left will-change-transform
+            scale-[0.5] lg:scale-100"
+        >
+          <div className="m-5 h-full flex relative items-center "> {/**lever and block div */}
             <svg
               width="90"
               height="140"
@@ -294,9 +328,9 @@ export default function HeroSlot() {
           </svg>
         </div>
       </div>
-      <div className="flex justify-between mt-[-10px] text-corner-orange"> {/**bottom corners div */}
-        <HeroCorner className="w-[64px] h-[64px] rotate-90" />
-        <HeroCorner className="w-[64px] h-[64px]" />
+      <div className="flex justify-between text-corner-orange lg:mt-[-30px] lg:mx-[40px]"> {/**bottom corners div */}
+        <HeroCorner className="w-10 h-10 lg:w-16 lg:h-16 rotate-90" />
+        <HeroCorner className="w-10 h-10 lg:w-16 lg:h-16" />
       </div>
     </div >
   );

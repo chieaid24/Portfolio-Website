@@ -54,9 +54,9 @@ export default function Home() {
           <div id="hero" className="relative min-h-screen w-full">
             <MaxWidthWrapper>
               <div className="flex flex-col gap-10 pt-10">
-                <div className="flex items-center justify-center w-[95%] aspect-[2.2/1] self-center bg-background-light shadow-[-4px_4px_4px_rgba(0,0,0,0.25)]">
+                {/* <div className="justify-center flex"> */}
                   <HeroSlot />
-                </div>
+                {/* </div> */}
                 <h1 className="text-left font-semibold text-4xl">
                   Hi, I&apos;m Aidan, a systems engineer passionate about efficient <RedText rewardId="red:home:design" weight={"semibold"}>design</RedText> and <RedText rewardId="red:home:development" weight={"semibold"}>development</RedText>.
                 </h1>
