@@ -88,7 +88,7 @@ export default function ChessWidget() {
           >
             @{profile?.username ?? '—'}
           </a>
-          <div className="text-[13px] text-chess-text-grey">aidan's (mediocre) chess account!</div>
+          <div className="text-[13px] text-chess-text-grey">aidan&apos;s (mediocre) chess account!</div>
           <div className="flex flex-wrap gap-2.5 text-[12px] font-semibold mt-0.5">
             <div>{formatDate(profile?.joined)} <span className="text-chess-text-grey">joined</span></div>
             <div>{profile?.followers ?? 0} <span className="text-chess-text-grey">followers</span></div>

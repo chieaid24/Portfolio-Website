@@ -1,8 +1,11 @@
-import Image from 'next/image'
 import CountUp from '@/components/CountUp'
 import { motion, useAnimation, useReducedMotion } from 'framer-motion'
 
 export default function CommodityDisplay({ commodity, balanceInDollars }) {
+    // Bobbing animation loop
+  const controls = useAnimation();
+  const reduceMotion = useReducedMotion();
+
   if (!commodity) return null;
 
   const { id, what, name, price, note } = commodity;
@@ -25,9 +28,7 @@ export default function CommodityDisplay({ commodity, balanceInDollars }) {
     return { value: fmtUpTo3SF.format(fmt.format(n)), suffix: '' };
   })();
 
-  // Bobbing animation loop
-  const controls = useAnimation();
-  const reduceMotion = useReducedMotion();
+
 
   const startBob = () => {
     if (reduceMotion) return;
