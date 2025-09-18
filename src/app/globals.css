@@ -30,6 +30,27 @@
   color-scheme: dark;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  top: -100vh;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background-color: #FFF3E5; 
+  z-index: -1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  bottom: -100vh;   
+  left: 0;
+  right: 0;
+  height: 100vh;
+  background-color: #FFEDD8;
+  z-index: -1;
+}
 
 @theme {
   --color-custom-red: var(--custom-red);
