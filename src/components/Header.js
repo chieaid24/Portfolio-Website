@@ -172,7 +172,7 @@ export default function Header() {
                                             width={14}
                                             height={14}
                                             alt="Info"
-                                            className="md:ml-1 block w-2 md:w-3"
+                                            className="md:ml-1 block w-2 md:w-3 max-w-none"
                                         />
                                     </motion.div>
                                 </motion.div>

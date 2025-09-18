@@ -49,18 +49,41 @@ export default function Home() {
 
   return (
     <>
-      <div className="pt-25 bg-background-dark font-dm-sans text-dark-grey-text"> {/**hero div */}
+      <div className="pt-[15vh] bg-background-dark font-dm-sans text-dark-grey-text
+                    md:pt-[11vh]
+                    lg:pt-25 "> {/**hero div */}
         <div>
-          <div id="hero" className="relative min-h-screen w-full">
+          <div id="hero" className="relative w-full
+                                    ">
             <MaxWidthWrapper>
-              <div className="flex flex-col gap-10 pt-10">
+              <div className="flex flex-col gap-10 pt-10 pb-10
+                              ">
                 {/* <div className="justify-center flex"> */}
+                <div className="flex flex-col gap-10 min-h-[80vh] md:min-h-0">
                   <HeroSlot />
-                {/* </div> */}
-                <h1 className="text-left font-semibold text-4xl">
-                  Hi, I&apos;m Aidan, a systems engineer passionate about efficient <RedText rewardId="red:home:design" weight={"semibold"}>design</RedText> and <RedText rewardId="red:home:development" weight={"semibold"}>development</RedText>.
-                </h1>
-                <h3 className="font-regular text-2xl text-light-grey-text italic leading-normal">
+                  {/* </div> */}
+                  <h1 className="text-center font-semibold text-4xl
+                                sm:text-5xl
+                                md:text-4xl
+                                lg:text-left 
+                                2xl:text-4xl">
+                    Hi, I&apos;m
+                    <span className="md:hidden gradient-text-custom">
+                      {` `}Aidan
+                    </span>
+                    <span className="hidden md:inline">
+                      {` `}Aidan
+                    </span>
+                    ,
+                    <span className="block mt-5 font-medium text-[22px] leading-7.5 opacity-90
+                    md:mt-0 md:inline md:font-semibold md:text-4xl md:opacity-100 md:leading-[45px]">
+                      {` `}a systems engineer passionate about efficient <RedText rewardId="red:home:design" weight={"semibold"}>design</RedText> and <RedText rewardId="red:home:development" weight={"semibold"}>development</RedText>.
+                    </span>
+                  </h1>
+                </div>
+                <h3 className="font-regular text-light-grey-text italic leading-normal hidden text-center
+                              md:text-xl md:block 
+                              lg:text-left lg:text-2xl">
                   Welcome to my portfolio site! Try clicking on projects, links, and <RedText rewardId="red:home:words" weight={"semibold"}>red words</RedText> to uncover new details and increase your earnings throughout the site. Scroll down to check out some of my other work—and good luck exploring :)
                 </h3>
               </div>
@@ -69,10 +92,15 @@ export default function Home() {
         </div>
         <div id="projects" className="bg-background-light text-dark-grey-text"> {/**project section */}
           <MaxWidthWrapper>
-            <h1 className="font-bold text-6xl pt-15">
+            <h1 className="font-bold pt-8 text-4xl  
+                          sm:text-5xl sm:pl-10
+                          md:pt-15
+                          lg:text-6xl lg:pl-0"
+                          >
+
               My Projects
             </h1>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 gap-y-20 mt-10 mb-32">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-25 lg:gap-y-20 mt-10 mb-32">
               {projects.map((project) => (
                 <ProjectCard
                   key={project.slug}
@@ -88,7 +116,11 @@ export default function Home() {
               ))}
             </div>
           </MaxWidthWrapper>
-          <div className="flex flex-col items-center my-[-10px] pt-10 bg-background-dark text-dark-grey-text font-dm-sans text-8xl tracking-tighter font-semibold"> {/**want to cash out? section */}
+          <div className="flex flex-col items-center my-[-10px] pt-10 bg-background-dark text-dark-grey-text font-dm-sans  tracking-tighter font-semibold
+                          text-[44px] leading-12 
+                          sm:text-7xl sm:leading-[72px]
+                          md:text-[80px] md:leading-[80px]
+                          lg:leading-[96px] lg:text-8xl"> {/**want to cash out? section */}
             <div>
               <RewardLink href="mailto:aidan.chien@uwaterloo.ca" rewardId="home:cash-out"
                 className="group hover:scale-110 hover:translate-y-[-15px] transition-all !duration-300 items-center inline-flex flex-col ">

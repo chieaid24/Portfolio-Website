@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback, useState } from 'react';
 import { motion, useAnimate } from 'framer-motion';
 import RotatingHeroText from './RotatingHeroText.js';
 import { useSlotJiggle } from '@/lib/slot-jiggle-context';
@@ -26,7 +26,7 @@ export default function HeroSlot() {
   const leverRef = useRef(null);
   const shadowRef = useRef(null);
   const leverGroupRef = useRef(null);
-  // const isLgUp = useIsLgUp();
+  const isLgUp = useIsLgUp();
 
 
   const [scope, animate] = useAnimate();
@@ -182,7 +182,7 @@ export default function HeroSlot() {
     }
 
     // Start the animation, but don't await it yet
-    const yAnimation = animate(
+    const yAnimation = isLgUp ? animate(
       scope.current,
       {
         y: [0, 225, 225, 0],
@@ -193,7 +193,19 @@ export default function HeroSlot() {
         transformOrigin: 'center',
         times: [0, 0.5, 0.6, 1],
       }
+    ) : animate(
+      scope.current,
+      {
+        y: [0, 210, 210, 0],
+      },
+      {
+        duration: duration,
+        ease: 'easeInOut',
+        transformOrigin: 'center',
+        times: [0, 0.5, 0.6, 1],
+      }
     );
+
 
     const xAnimation = animate(
       scope.current,
@@ -228,23 +240,21 @@ export default function HeroSlot() {
   };
 
   return (
-    <div className="flex flex-col justify-center w-[22rem] lg:w-[61rem] aspect-[2.2/1] self-center bg-background-light shadow-[-4px_4px_4px_rgba(0,0,0,0.25)]">
-      <div className="flex justify-between text-corner-orange lg:mb-[-30px] lg:mx-[40px]"> {/**top corners div */}
-        {/* <Image src="/hero/corner_tl.svg" alt="Top Left Corner" width={60} height={60} /> */}
-        <HeroCorner className="w-10 h-10
+    <div className="flex flex-col justify-center w-[22rem] lg:w-[61rem] self-center bg-background-light shadow-[-4px_4px_4px_rgba(0,0,0,0.25)]">
+      <div className="flex justify-between text-corner-orange mb-[-10px] mt-[10px] mx-[10px] lg:mb-[-30px] lg:mx-[40px] lg:pt-7.5"> {/**top corners div */}
+        <HeroCorner className="w-8 h-8
         lg:w-16 lg:h-16 rotate-180" />
-        {/* <Image src="/hero/corner_tr.svg" alt="Top Right Corner" width={60} height={60} /> */}
-        <HeroCorner className="w-10 h-10 
+        <HeroCorner className="w-8 h-8 
         lg:w-16 lg:h-16 -rotate-90" />
       </div>
-      <div className="grid grid-cols-2 lg:grid-cols-[5fr_3fr] lg:gap-10">
-        <div className="self-center lg:translate-x-[180px]">
+      <div className="grid grid-cols-[minmax(0,4fr)_minmax(0,3fr)] lg:grid-cols-[5fr_3fr] lg:gap-10">
+        <div className="self-center translate-x-[50px] lg:translate-x-[180px]">
           {/* Rotating Text */}
           <RotatingHeroText
             ref={textRef}
             texts={['AIDAN', 'ENG', 'DES', 'INVE', 'CLIM', 'FILM', 'STU', 'GYM', 'CODE', 'CAD', 'REELS', 'GAME', 'UI/UX', 'WEB', 'AI', 'NYT', 'SLEEP', 'CHESS', 'DEVE']}
             texts2={['CHIEN', 'INEER', 'IGNER', 'NTOR', 'BER', 'MAKER', 'DENT', 'GOER', 'ADDICT', 'HEAD', 'SNOB', 'NERD', 'FAN', 'DEV', 'FIEND', 'GAMER', 'LOVER', 'NUT', 'LOPER']} // STAN, BUFF, BOY, BUG, ACE, 
-            mainClassName="overflow-visible px-2 sm:px-2 md:px-3 text-2xl md:text-9xl bg-background-light text-dark-grey-text font-italiana py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+            mainClassName="overflow-visible px-3 text-5xl lg:text-9xl bg-background-light text-dark-grey-text font-italiana py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
             staggerFrom="last"
             initial={{ y: '-100%' }}
             animate={{ y: 0 }}
@@ -259,49 +269,48 @@ export default function HeroSlot() {
         {/* SVG Lever Button */}
         <div
           ref={leverGroupRef}
-          className="
-            flex items-center h-[150px] lg:h-[300px]
-            origin-top-left will-change-transform
-            scale-[0.5] lg:scale-100"
+          className=" flex items-center h-[80px] lg:h-[300px]
+            origin-top-left will-change-transform translate-y-3 lg:translate-0
+            "
         >
-          <div className="m-5 h-full flex relative items-center "> {/**lever and block div */}
+          <div className="lg:m-5 h-full flex relative items-center "> {/**lever and block div */}
             <svg
-              width="90"
-              height="140"
+              width={isLgUp ? "90" : "90"}
+              height={isLgUp ? "140" : "140"}
               viewBox="0 0 90 140"
-              className="p-0"> {/**block svg */}
+              className="p-0 scale-[0.5] lg:scale-100"> {/**block svg */}
               <rect
                 x="0"
                 y="0"
-                width="90"
-                height="150"
+                width={isLgUp ? "90" : "90"}
+                height={isLgUp ? "140" : "140"}
                 fill="#878787"
               />
             </svg>
             <svg
-              width="100"
-              height="300"
+              width={isLgUp ? "80" : "80"}
+              height={isLgUp ? "300" : "300"}
               viewBox="0 0 100 270"
-              className="absolute translate-x-[45px]"
+              className="absolute lg:translate-x-[45px] lg:translate-y-0 translate-x-[25px] translate-y-[-3px] scale-[0.5] lg:scale-100"
             > {/*lever svg*/}
               <motion.rect
                 ref={leverRef}
                 x="0"
                 y="0"
-                width="20"
-                height="270"
+                width={isLgUp ? "25" : "25"}
+                height={isLgUp ? "270" : "270"}
                 fill="#D9D9D9"
                 initial={{ rotate: 30 }}
-                className="translate-x-[-10px]"
+                className="translate-x-[-5px] lg:translate-x-[-10px]"
               />
             </svg>
           </div>
 
           <svg
-            width="150"
-            height="500"
+            width={isLgUp ? "150" : "150"}
+            height={isLgUp ? "500" : "500"}
             viewBox="0 0 150 100"
-            className="z-10 translate-x-[-49px] translate-y-[-10px]"
+            className="z-10 translate-x-[-30px] translate-y-[-5px] lg:translate-x-[-49px] lg:translate-y-[-10px] scale-120 lg:scale-100"
           > {/**lever ball svg */}
             <defs>
               <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
@@ -310,9 +319,9 @@ export default function HeroSlot() {
             </defs>
             <motion.circle
               ref={scope}
-              cx="50"
-              cy="-55"
-              r="28"
+              cx={isLgUp ? "50" : '50'}
+              cy={isLgUp ? "-55" : '-55'}
+              r={isLgUp ? "28" : '28'}
               fill="#FF7D7D"
               filter="url(#dropShadow)"
               whileTap={{ scale: 0.9 }}
@@ -328,9 +337,9 @@ export default function HeroSlot() {
           </svg>
         </div>
       </div>
-      <div className="flex justify-between text-corner-orange lg:mt-[-30px] lg:mx-[40px]"> {/**bottom corners div */}
-        <HeroCorner className="w-10 h-10 lg:w-16 lg:h-16 rotate-90" />
-        <HeroCorner className="w-10 h-10 lg:w-16 lg:h-16" />
+      <div className="flex justify-between text-corner-orange mt-[-10px] mb-[10px] mx-[10px] lg:mt-[-30px] lg:mx-[40px] lg:pb-7.5"> {/**bottom corners div */}
+        <HeroCorner className="w-8 h-8 lg:w-16 lg:h-16 rotate-90" />
+        <HeroCorner className="w-8 h-8 lg:w-16 lg:h-16" />
       </div>
     </div >
   );

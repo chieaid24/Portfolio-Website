@@ -55,13 +55,13 @@ export default function ProjectCard({ title, generated_with, ticket_no, fallback
                                 <ProjectTicket className="w-[350px] h-[101px] sm:w-[459px] sm:h-[132px]" />
                             </div>
                             <div className="absolute inset-0 flex flex-col justify-center items-center z-10 text-black dark:text-white w-full ml-[4px]">
-                                <div className="font-bold text-[0.7rem] mb-[-5px] mt-[-5px] opacity-50">
+                                <div className="font-bold text-[0.55rem] sm:text-[0.7rem] mt-[-3px] sm:mb-[-5px] sm:mt-[-5px] opacity-50">
                                     CASHOUT VOUCHER
                                 </div>
-                                <div className="text-dark-grey-text font-black text-[39px] my-[-9px] tracking-tight">
+                                <div className="text-dark-grey-text font-black text-[30px] sm:text-[39px] my-[-10px] sm:my-[-9px] tracking-tight">
                                     {title}
                                 </div>
-                                <div className="overflow-hidden mt-[-6px] w-[240px] h-[30px] opacity-12 dark:opacity-25">
+                                <div className="overflow-hidden mt-[0px] sm:mt-[-6px] w-[180px] h-[21px] sm:w-[240px] sm:h-[30px] opacity-12 dark:opacity-25">
                                     <img
                                         src="/icons/barcode_hireme.svg"
                                         alt="Hire me barcode"
@@ -70,11 +70,11 @@ export default function ProjectCard({ title, generated_with, ticket_no, fallback
                                         decoding="async"
                                     />
                                 </div>
-                                <div className="flex justify-between font-bold w-[260px] opacity-50 mt-1">
-                                    <div className="text-[10px]">GENERATED WITH: {generated_with}</div>
-                                    <div className="text-[10px]">TICKET # {ticket.number || '—'}</div>
+                                <div className="flex justify-between font-bold w-[200px] sm:w-[260px] opacity-50 mt-[2px] sm:mt-1">
+                                    <div className="text-[8px] sm:text-[10px]">GENERATED WITH: {generated_with}</div>
+                                    <div className="text-[8px] sm:text-[10px]">TICKET # {ticket.number || '—'}</div>
                                 </div>
-                                <div className="font-bold mt-[-3px] text-[14px] opacity-65">
+                                <div className="font-bold mt-[-3px] text-[12px] sm:text-[14px] opacity-65">
                                     ${ticket.value || ' ——'}
                                 </div>
                             </div>
