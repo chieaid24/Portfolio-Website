@@ -72,7 +72,9 @@ export default function Header() {
     useEffect(() => {
         const onScroll = () => {
             if (holdOpen) return;
-            const y = window.scrollY;
+
+            const y = Math.max(0, window.scrollY);
+            
             setShowHeader(y <= lastYRef.current);
             lastYRef.current = y;
         };
@@ -236,7 +238,7 @@ export default function Header() {
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1, transition: { duration: 1, ease: "easeOut" } }}   // 1s in
                                             exit={{ opacity: 0, transition: { duration: 0.2, ease: "easeIn" } }}      // 0.5s out
-                                            className="font-semibold tracking-wide self-end justify-self-center translate-y-2 hidden italic text-light-grey-text
+                                            className="font-semibold tracking-wide self-end justify-self-center translate-y-2 hidden italic text-light-grey-text cursor-default
                                                          lg:block lg:text-[22px] lg:translate-y-0 lg:ml-5
                                                          xl:text-[22px]
                                                          2xl:text-[24px]"

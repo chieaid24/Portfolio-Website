@@ -51,7 +51,7 @@ export default function RootLayout({ children }) {
           `}
         </Script>
       </head>
-      <body className={`${dmSans.className} ${italiana.variable} ${clashFont.variable} antialiased min-h-screen`}>
+      <body className={`${dmSans.className} ${italiana.variable} ${clashFont.variable} antialiased min-h-screen overscroll-none`}>
         <Providers>
           <ScrollProgressBarClient />
           <Header />           {/* balance appears next to your logo */}
