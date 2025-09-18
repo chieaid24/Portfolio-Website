@@ -33,6 +33,6 @@ export default function Footer() {
           </RewardLink>
         </div>
       </div>
-    </footer>
+    </footer> 
   );
 }
