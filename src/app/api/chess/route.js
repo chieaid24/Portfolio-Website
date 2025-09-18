@@ -1,11 +1,11 @@
 // app/api/chess/route.js
 
 // Cache the whole route for 1 week (ISR) — first hit warms it, others are CDN hits.
-export const revalidate = 60 * 60 * 24 * 7;
+export const revalidate = 604800;
 export const dynamic = 'force-static';
 
 const MY_USERNAME = 'mangus_carlston';
-const WEEK = 60 * 60 * 24 * 7;
+const WEEK = 604800;
 
 // If revalidation fails, the previous cached value is kept.
 async function j(url) {

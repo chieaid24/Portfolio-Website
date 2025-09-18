@@ -1,10 +1,10 @@
 // app/api/royale/player/route.js
 import badges from '../_data/clanBadges.json'; // server-only import
 
-export const revalidate = 60 * 60 * 24 * 7;     // cache the route for 1 week
+export const revalidate = 604800;     // cache the route for 1 week
 export const dynamic = 'force-static';          // ensure it's cacheable
 
-const WEEK = 60 * 60 * 24 * 7;
+const WEEK = 604800;
 const BASE = 'https://proxy.royaleapi.dev/v1';
 
 const BADGE_MAP = Object.fromEntries(

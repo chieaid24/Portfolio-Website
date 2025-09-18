@@ -1,5 +1,5 @@
-export const revalidate = 60 * 60 * 24 * 7;
-const WEEK = 60 * 60 * 24 * 7;
+export const revalidate = 604800;
+const WEEK = 604800;
 const BASE = 'https://proxy.royaleapi.dev/v1';
 const TOKEN = process.env.CLASH_ROYALE_TOKEN;
 const TAG   = process.env.CLASH_ROYALE_TAG || '#9UJLLC08R';
