@@ -43,14 +43,14 @@ const renderParagraphs = (paragraphs) => {
     const paragraphArray = Array.isArray(paragraphs) ? paragraphs : [paragraphs];
 
     return paragraphArray.map((paragraph, index) => (
-        <p key={index} className="text-2xl font-regular mb-6">
+        <div key={index} className="text-xl md:text-2xl mb-6 leading-loose md:leading-normal">
             {paragraph}
-        </p>
+        </div>
     ));
 };
 
 
-export default function ProjectPage({ params}) {
+export default function ProjectPage({ params }) {
     const project = getProjectBySlug(params.slug);
 
     if (!project) {
@@ -61,10 +61,12 @@ export default function ProjectPage({ params}) {
         <>
             <div className="pt-20 bg-background-light font-dm-sans text-dark-grey-text min-h-screen">
                 <MaxWidthWrapper>
-                    <div className="pt-18 pb-15">
-                        <div className="mb-20">
+                    <div className="pt-12 pb-10 md:pb-15 
+                                    md:pt-18 ">
+                        <div className="mb-18 md:mb-20">
                             <div className="flex relative items-center">
-                                <h1 className="font-black text-7xl">
+                                <h1 className="font-black text-6xl 
+                                                md:text-7xl">
                                     {project.title}
                                 </h1>
                                 <RewardLink
@@ -72,25 +74,34 @@ export default function ProjectPage({ params}) {
                                     target="_blank"
                                     className="absolute right-0 top-1/2 -translate-y-1/2 w-auto"
                                     rewardId={`${project.slug}:github`}>
-                                    <ProjectGithub className="w-[100px] h-[100px] hover:opacity-80 hover:-translate-y-1 transition duration-200" />
+                                    <ProjectGithub className="w-[100px] h-[100px] hover:opacity-80 hover:-translate-y-1 transition duration-200 hidden md:block" />
                                 </RewardLink>
                             </div>
-                            <h3 className="italic text-3xl text-light-grey-text opacity-80 mt-1">
+                            <h3 className="italic text-light-grey-text opacity-80 mt-1 text-2xl
+                                            md:text-3xl">
                                 &apos;{project.subtitle}&apos;
                             </h3>
+                            <RewardLink
+                                href={project.github_link}
+                                target="_blank"
+                                className=""
+                                rewardId={`${project.slug}:github`}>
+                                <ProjectGithub className="w-[55px] h-[55x] hover:opacity-80 hover:-translate-y-1 transition duration-200 md:hidden mt-4" />
+                            </RewardLink>
                         </div>
                         {/**Summary text */}
-                        <p className="text-2xl font-regular mb-15">
-                            {project.summary}
-                        </p>
+                            <div className='text-2xl font-regular'>
+                                {renderParagraphs(project.summary)}
+                            </div>
 
                         {project.page_displays[0] && (
                             <RenderPageDisplay info={project.page_displays[0]} projectTitle={project.title} />
-                         )}
+                        )}
 
                         {/* Tools Used Section */}
                         <div className="mb-20">
-                            <h1 className="font-bold text-5xl mb-15">
+                            <h1 className="font-bold mb-15 text-4xl
+                                            md:text-5xl">
                                 What Tools?
                             </h1>
                             <div className='text-2xl font-regular'>
@@ -100,7 +111,7 @@ export default function ProjectPage({ params}) {
 
                         {/** Why This Project */}
                         <div className="mb-15">
-                            <h1 className="font-bold text-5xl mb-15">
+                            <h1 className="font-bold text-4xl md:text-5xl mb-15">
                                 Why This Project?
                             </h1>
                             <div className='text-2xl font-regular'>
@@ -109,14 +120,14 @@ export default function ProjectPage({ params}) {
                         </div>
 
                         {/**optional second image - conditionally render 3D model or regular image */}
-                        
+
                         {project.page_displays[1] && (
                             <RenderPageDisplay info={project.page_displays[1]} projectTitle={project.title} />
                         )}
-                        
+
                         {/**What is it */}
                         <div className="mb-20">
-                            <h1 className="font-bold text-5xl mb-15">
+                            <h1 className="font-bold text-4xl md:text-5xl mb-15">
                                 What is it?
                             </h1>
                             <div className='text-2xl font-regular'>
@@ -126,7 +137,7 @@ export default function ProjectPage({ params}) {
 
                         {/**what did I learn */}
                         <div>
-                            <h1 className="font-bold text-5xl mb-15">
+                            <h1 className="font-bold text-4xl md:text-5xl mb-15">
                                 What did I learn?
                             </h1>
                             <div className='text-2xl font-regular'>
@@ -134,7 +145,7 @@ export default function ProjectPage({ params}) {
                             </div>
                         </div>
                         {/* Back to Projects Button */}
-                        <div className="mt-20">
+                        <div className="mt-10 md:mt-20">
                             <BackToProjects />
                         </div>
                     </div>

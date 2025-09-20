@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import ModelSection from '@/components/ModelSection';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import YoutubePlayer from "@/components/YoutubePlayer"
 
 
@@ -44,11 +44,27 @@ const isYouTubeVideo = (input) => {
     }
 };
 
+function useIsMobile() {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const mql = window.matchMedia("(max-width: 767px)"); // Tailwind md breakpoint
+        const handler = (e) => setIsMobile(e.matches);
+        setIsMobile(mql.matches);
+        mql.addEventListener("change", handler);
+        return () => mql.removeEventListener("change", handler);
+    }, []);
+
+    return isMobile;
+}
+
 
 
 export default function RenderPageDisplay({ info, projectTitle }) {
     const [imageHovered, setImageHovered] = useState(false);
-
+    const isMobile = useIsMobile();
+    const showDescription = isMobile || imageHovered;
+    
     return (
         <div className="mb-15" >
             <div
@@ -60,13 +76,13 @@ export default function RenderPageDisplay({ info, projectTitle }) {
                 ) : isGLBFile(info[0]) ? (
                     <ModelSection modelPath={info[0]} />
                 ) : (
-                    <div className="relative w-full h-100 aspect-[16/10] rounded-lg overflow-hidden shadow-lg">
-                        <Image src={info[0]} alt={projectTitle} fill className="object-cover scale-110" />
+                    <div className="relative w-full md:h-100 aspect-[16/9] rounded-lg overflow-hidden shadow-lg">
+                        <Image src={info[0]} alt={projectTitle} fill className="object-cover scale-100" />
                     </div>
                 )}
             </div>
             {info[1] && (
-                <div className={`text-light-grey-text mt-1.5 transition-opacity duration-200 italic ${imageHovered ? 'opacity-100' : 'opacity-0 duration-200'}}`}>
+                <div className={`text-light-grey-text mt-1.5 transition-opacity duration-200 italic ${showDescription ? 'opacity-100' : 'opacity-0 duration-200'}}`}>
                     {info[1]}
                 </div>
             )}

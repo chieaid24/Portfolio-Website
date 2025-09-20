@@ -19,7 +19,7 @@ export default function RedText({
     if (claimed) return;
     const paid = awardOnce(rewardId, kind);
     if (paid) {
-      // retrigger animation even if clicked rapidly
+      // retrigger animation
       setPopping(false);
       requestAnimationFrame(() => setPopping(true));
       setTimeout(() => setPopping(false), 200); // match keyframe duration
@@ -28,20 +28,19 @@ export default function RedText({
 
   return (
     <>
-      <button
-        type="button"
+      <span
         onClick={handleClick}
-        className={
-          `${claimed ? 'cursor-default opacity-60 dark:opacity-100' : 'cursor-pointer'} ` +
-          `custom-bold ${weightOverride} inline-block ` + // inline-block helps scale nicely
-          `${popping ? 'pop' : ''} ${className}`
-        }
-        disabled={claimed}
+        className={`
+          ${claimed ? 'cursor-default opacity-60 dark:opacity-100' : 'cursor-pointer'}
+          custom-bold ${weightOverride} ${popping ? 'pop' : ''} ${className}
+          inline-block
+        `}
+        role="button"
         aria-pressed={claimed}
         data-reward-click
       >
         {children}
-      </button>
+      </span>
 
       <style jsx>{`
         .pop {

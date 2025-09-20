@@ -30,26 +30,35 @@
   color-scheme: dark;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: -100vh;
-  left: 0;
-  right: 0;
-  height: 100vh;
-  background-color: #FFF3E5; 
-  z-index: -1;
-}
+@layer base {
 
-body::after {
-  content: "";
-  position: fixed;
-  bottom: -100vh;   
-  left: 0;
-  right: 0;
-  height: 100vh;
-  background-color: #FFEDD8;
-  z-index: -1;
+  body {
+    @apply opacity-0;
+    /* start invisible */
+    animation: fadeIn 0.7s ease-in forwards;
+  }
+
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    z-index: -1;
+  }
+
+  body::before {
+    top: -100vh;
+    background-color: theme('colors.red.600');
+    /* top */
+  }
+
+  body::after {
+    bottom: -100vh;
+    background-color: theme('colors.blue.600');
+    /* bottom */
+  }
 }
 
 @theme {
@@ -71,11 +80,21 @@ body::after {
   --color-background-dark: var(--background-dark);
 
   --animate-new-pulse: pulse 1.5s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+
+  --breakpoint-3xl: 120rem;
+  --breakpoint-4xl: 135rem;
+  --breakpoint-5xl: 160rem;
+
 }
 
 
 /* globals.css */
 @layer utilities {
+  .fade-in-page {
+    @apply opacity-0;
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
   .font-italiana {
     font-family: var(--font-italiana), serif;
   }
@@ -103,11 +122,7 @@ body::after {
     -webkit-text-stroke: 3px #000;
   }
 
-  /* Single hard shadow (offset X/Y, no diffusion) */
-  .text-clash-border {
-    text-shadow: var(--ts-x, 0px) var(--ts-y, 2px) 0 var(--ts-color, #000);
-    -webkit-text-stroke: 0.75px #000;
-  }
+
 
   /* Single hard shadow (offset X/Y, no diffusion) */
   .text-clash-border-white {
@@ -134,6 +149,19 @@ body::after {
   /* Reset helper */
   .text-shadow-none {
     text-shadow: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .desktop\:select-none {
+      user-select: none;
+    }
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    .mobile\:select-none {
+      user-select: none;
+      -webkit-user-select: none;
+    }
   }
 }
 
@@ -274,8 +302,36 @@ body {
 
   /* outline ABOVE the fill */
   .text-outline {
-    -webkit-text-stroke: 1px #000;
+    -webkit-text-stroke: 0.8px #000;
   }
+
+  /* Single hard shadow (offset X/Y, no diffusion) */
+  .text-clash-border {
+    text-shadow: var(--ts-x, 0px) var(--ts-y, 2px) 0 var(--ts-color, #000);
+    -webkit-text-stroke: 0.75px #000;
+  }
+
+
+  @media (max-width: 639px) {
+    .text-gradient-clash-name {
+      background-image: linear-gradient(90deg,
+          #f9c02f 0%,
+          #f0e39d 50%,
+          #f9c02f 100%);
+      filter: drop-shadow(var(--ts-x, 0px) var(--ts-y, 1px) 0 var(--ts-color, #000));
+    }
+
+    .text-outline {
+      -webkit-text-stroke: 0.8px #000;
+    }
+
+    .text-clash-border {
+      text-shadow: var(--ts-x, 0px) var(--ts-y, 1px) 0 var(--ts-color, #000);
+      -webkit-text-stroke: 0.8px #000;
+    }
+
+  }
+
 
 
   @keyframes fade-in {
@@ -285,6 +341,16 @@ body {
 
     to {
       opacity: 1
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
     }
   }
 

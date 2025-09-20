@@ -5,6 +5,7 @@ import SpotifyEmbed from '@/components/SpotifyEmbed'
 import ChessWidget from "@/components/ChessWidget";
 import ClashWidget from "@/components/ClashWidget";
 import WidgetCarousel from "@/components/WidgetCarousel";
+import ResponsiveFrame from "@/components/ResponsiveFrame"
 
 export const metadata = {
   title: 'ABOUT',
@@ -14,7 +15,7 @@ export const metadata = {
 const widgets = [
   {
     id: "spotify",
-    title: "Spotify – My Playlist",
+    title: "Spotify Playlist",
     element: <SpotifyEmbed playlistId="1oQngKRVkU7oI8hmB4hf7i" theme={0} />,
   },
   {
@@ -34,20 +35,20 @@ export default function AboutPage() {
     <div className="font-medium font-dm-sans">
       <div className="pt-20 bg-background-light text-dark-grey-text ">
         <MaxWidthWrapper>
-          <div className="flex justify-start mt-6 sm:mt-8 lg:mt-12">  {/* Outer div that is a flex box so text acts as a single line of text when window shrinks + is centered as well */}
-            <h1 className="text-8xl text-center text-dark-grey-text"> {/* Makes it so when text is shrunk, its paragraph alignment is center */}
-              <span className="font-bold font-dm-sans">Who is </span>
+          <div className="flex justify-start mt-10 sm:mt-8 lg:mt-12">  {/* Outer div that is a flex box so text acts as a single line of text when window shrinks + is centered as well */}
+            <h1 className="text-5xl sm:text-6xl md:text-8xl sm:text-center text-dark-grey-text"> {/* Makes it so when text is shrunk, its paragraph alignment is center */}
+              <span className="font-bold font-dm-sans">Who is <span className="inline md:hidden">this </span></span>
+              <br className="block sm:hidden" />
               <span className="font-italiana">AIDAN CHIEN </span>
               <span className="font-bold font-dm-sans">?</span>
             </h1>
           </div>
 
           {/* image and blurb div */}
-          <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-8 items-start mt-10 break-normal">
-            <AboutImage />
-
-            <div className="flex justify-self-start text-left flex-col text-3xl text-dark-grey-text space-y-6">
-              <p className="mt-0">
+          <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-8 md:gap-8 items-start mt-10 break-normal">
+            <AboutImage className="" />
+            <div className="flex justify-self-start text-left flex-col leading-tight text-[17px] md:text-[21px] lg:text-[28px] text-dark-grey-text h-full gap-y-6 font-medium">
+              <p className="">
                 I&apos;m a <RedText rewardId="red:about:syde">Systems Design Engineering</RedText>
                 {" "}student at the University of Waterloo!
               </p>
@@ -63,29 +64,31 @@ export default function AboutPage() {
           </div>
 
           {/* Interest Section */}
-          <div className="grid grid-cols-2 pt-4 pb-20">
-            <div className="ml-3 pr-8">
-              <h2 className="font-bold text-4xl leading-tight">You can also find me:</h2>
-              <li className="marker:text-xl text-2xl font-normal pt-5"> Playing team sports
-                <ul className="flex gap-2 pl-8 text-light-grey-text text-xl">
+          <div className="grid grid-cols-1 place-items-center pt-4 pb-10  
+                          md:pb-20 lg:flex ">
+            <div className="ml-3 mr-8 order-2 mt-6
+                            lg:order-1 md:flex-1 lg:mt-0">
+              <h2 className="font-bold text-2xl sm:text-4xl leading-tight">You can also find me:</h2>
+              <li className="list-none lg:list-disc lg:marker:text-xl text-[19px] md:text-[21px] lg:text-[28px] font-medium pt-5"> Playing team sports
+                <ul className="flex gap-2 pl-8 text-light-grey-text text-[17px] md:text-xl font-normal">
                   <li>→</li>
                   <li>Basketball and volleyball are my main ones right now!</li>
                 </ul>
               </li>
-              <li className="marker:text-xl text-2xl font-normal"> Rock climbing
-                <ul className="flex gap-2 pl-8 text-light-grey-text text-xl">
+              <li className="list-none lg:list-disc lg:marker:text-xl text-[19px] md:text-[21px] lg:text-[28px] font-medium"> Rock climbing
+                <ul className="flex gap-2 pl-8 text-light-grey-text text-[17px] md:text-xl font-normal">
                   <li>→</li>
                   <li>Mostly bouldering but I&apos;ve done a few outdoor top rope climbs!</li>
                 </ul>
               </li>
-              <li className="marker:text-xl text-2xl font-normal"> Filmmaking
-                <ul className="flex gap-2 pl-8 text-light-grey-text text-xl">
+              <li className="list-none lg:list-disc lg:marker:text-xl text-[19px] md:text-[21px] lg:text-[28px] font-medium"> Filmmaking
+                <ul className="flex gap-2 pl-8 text-light-grey-text text-[17px] md:text-xl font-normal">
                   <li>→</li>
                   <li>My preferred mode of creative expression, and I&apos;m always looking for inspiration for my next project!</li>
                 </ul>
               </li>
             </div>
-            <WidgetCarousel items={widgets} className="" />
+            <WidgetCarousel items={widgets} className="order-1 lg:order-2 lg:flex-none w-full max-w-[540px]"/>
           </div>
         </MaxWidthWrapper>
       </div>

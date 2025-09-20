@@ -72,28 +72,27 @@ export default function ClashWidget() {
   }, [results])
 
   return (
-    <div className="rounded-xl bg-background-dark p-3 h-[352px] flex flex-col relative overflow-hidden border-1 border-light-grey-text">
+    <div className="rounded-xl bg-background-dark p-3 h-[352px] md:h-[352px] flex flex-col relative overflow-hidden border-1 border-light-grey-text">
       {/* Header */}
       <div className="flex justify-between items-center mt-3 mx-2">
         <a href="https://royaleapi.com/player/9UJLLC08R" target="_blank" rel="noopener noreferrer">
-          <div className="font-clash font-bold text-gradient-clash-name text-outline text-[38px] leading-tight pb-[2px] pt-[1px] tracking-tighter hover:opacity-80 duration-150">
+          <div className="font-clash font-bold text-gradient-clash-name text-outline text-[33px] sm:text-[38px] leading-tight pb-[2px] pt-[1px] tracking-tighter hover:opacity-80 duration-150">
             @{player?.name ?? '—'}
           </div>
         </a>
         <div className="flex flex-col">
           <div className="flex gap-1 items-center justify-end">
-            <div className="relative w-8 h-8">
+            <div className="relative w-6 h-6 sm:w-8 sm:h-8">
               <Image
                 src="/about/trophy_1.png"
                 alt="Trophy"
                 fill
                 className="object-contain"
-                sizes="48px"
-              />
+                sizes="(min-width: 640px) 32px, 24px" />
             </div>
-            <div className="text-clash-border text-[#fede2b] text-[25px] font-clash font-bold justify-end tracking-tight">{player?.trophies ?? '—'}</div>
+            <div className="text-clash-border text-[#fede2b] text-[20px] sm:text-[25px] font-clash font-bold justify-end tracking-tight">{player?.trophies ?? '—'}</div>
           </div>
-          <div className="text-[16px] flex items-center gap-1.5 font-medium justify-end">
+          <div className="text-[14px] sm:text-[16px] flex items-center gap-1 sm:gap-1.5 font-medium justify-end">
             {player?.clanBadgeSrc ? (
               <Image
                 src={player.clanBadgeSrc}
@@ -115,33 +114,33 @@ export default function ClashWidget() {
           </div>
         </div>
       </div>
-      <hr className="my-2 border-t border-light-grey-text mx-7" />
-      <div className="grid grid-cols-2 gap-3 text-[15px] mx-5">
-        <div className="flex flex-col">
-          <div className="flex justify-between font-medium">
+      <hr className="my-1 sm:my-2 border-t border-light-grey-text mx-7" />
+      <div className="grid grid-cols-2 gap-3 text-[10px] sm:text-[15px] mx-2 sm:mx-5 font-semibold sm:font-medium">
+        <div className="flex flex-col ">
+          <div className="flex justify-between ">
             <h1>Career wins</h1>
-            <div className="font-bold">{player?.wins ?? '—'}</div>
+            <div className="font-black sm:font-bold">{player?.wins ?? '—'}</div>
           </div>
           <div className="flex justify-between">
             <h1>Career win percentage</h1>
-            <div className="font-bold">{careerWinPercent != null ? `${careerWinPercent}%` : '—'}</div>
+            <div className="font-black sm:font-bold">{careerWinPercent != null ? `${careerWinPercent}%` : '—'}</div>
           </div>
         </div>
         <div className="flex flex-col">
           <div className="flex justify-between">
             <h1>Recent wins</h1>
-            <div className="font-bold">{summary.w ?? '—'}</div>
+            <div className="font-black sm:font-bold">{summary.w ?? '—'}</div>
           </div>
           <div className="flex justify-between">
             <h1>Recent win percentage</h1>
-            <div className="font-bold">{summary.winRate != null ? `${summary.winRate}%` : '—'}</div>
+            <div className="font-black sm:font-bold">{summary.winRate != null ? `${summary.winRate}%` : '—'}</div>
           </div>
         </div>
       </div>
 
-      <hr className="mt-2 border-t border-light-grey-text mx-7" />
+      <hr className="mt-1 sm:mt-2 border-t border-light-grey-text mx-7" />
 
-      <div className="my-1 self-center text-light-grey-text">
+      <div className="my-1 self-center text-light-grey-text text-sm sm:text-md">
         My current deck! ↓
       </div>
 
@@ -174,21 +173,15 @@ export default function ClashWidget() {
           ))}
         </div>
 
-        {/* <Image
-          src="/about/crl_logo.png"
-          width={150}
-          height={150}
-          alt="Clash Royale Logo"
-          className="absolute left-3/4 top-3/4 translate-y-5"
-        /> */}
         <a href="https://royaleapi.com/player/9UJLLC08R" target="_blank" rel="noopener noreferrer">
-          <Image
-            src="/about/test.png"
-            width={35}
-            height={35}
-            alt="Clash Royale Logo"
-            className="absolute right-4 bottom-2 hover:translate-y-[-2px] duration-200"
-          />
+          <div className="w-[24px] h-[30px] sm:w-[35px] sm:h-[43px] absolute right-2 sm:right-4 bottom-2">
+            <Image
+              src="/about/test.png"
+              fill
+              alt="Clash Royale Logo"
+              className="hover:translate-y-[-2px] duration-200"
+            />
+          </div>
         </a>
       </div>
 

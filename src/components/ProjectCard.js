@@ -34,7 +34,7 @@ export default function ProjectCard({ title, generated_with, ticket_no, fallback
 
     return (
         <div>
-            <RewardProjectLink href={`/projects/${slug}`} className="block font-dm-sans group/pc" rewardId={`project:${slug}`} ticketValue={addedTicketValue}>
+            <RewardProjectLink href={`/projects/${slug}`} className="block font-dm-sans group/pc mobile:select-none" rewardId={`project:${slug}`} ticketValue={addedTicketValue}>
                 <div className="flex relative justify-center">
                     <div className="relative w-[500px] aspect-[2] overflow-hidden rounded-lg shadow-[-4px_4px_4px_0px_rgba(0,0,0,0.25)] ">
                         <Image

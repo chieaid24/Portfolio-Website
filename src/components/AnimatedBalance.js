@@ -220,7 +220,9 @@ export default function AnimatedBalance({
   return (
     // Animate the wrapper's WIDTH so siblings slide smoothly.
     <motion.span
-      className={`inline-block align-baseline tabular-nums ${className}`}
+      layout="size"
+      initial={false}
+      className={`inline-block align-baseline tabular-nums text-right w-[10ch] ${className}`}
       style={{ lineHeight: 1, overflow: "hidden" }}
       // Animate from previous measured width to new width
       animate={{ width }}

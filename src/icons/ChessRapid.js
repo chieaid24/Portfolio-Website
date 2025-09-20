@@ -1,8 +1,7 @@
 export default function ChessRapid(props) {
     return (
         <svg
-            width={31}
-            height={31}
+            viewBox="0 0 31 31"
             fill="none"
             {...props}
         >

@@ -24,7 +24,7 @@ function ArrowButton({ dir = "left", disabled, onClick }) {
         <button
             type="button"
             onClick={handleClick}
-            className="text-neutral-200 dark:text-background-light px-1 py-1 text-sm cursor-pointer disabled:cursor-default disabled:text-neutral-500 dark:disabled:text-neutral-400 disabled:pointer-events-none transition-colors duration-200 hover:bg-black/10 rounded-md"
+            className="text-neutral-200 dark:text-background-light px-4 py-1 md:px-1 md:py-1 text-sm cursor-pointer disabled:cursor-default disabled:text-neutral-500 dark:disabled:text-neutral-400 disabled:pointer-events-none transition-colors duration-200 hover:bg-black/10 rounded-md"
             aria-label={dir === "left" ? "Previous widget" : "Next widget"}
             disabled={disabled}
         >
@@ -49,10 +49,10 @@ export default function WidgetCarousel({
     const atEnd = index === items.length - 1;
 
     return (
-        <section className={`relative ${className}`} aria-roledescription="carousel" aria-label="Widget carousel">
+        <section className={`relative ${className} min-w-[335px] max-w-[540px] h-[384px] md:w-[540px] md:h-[384px]`} aria-roledescription="carousel" aria-label="Widget carousel">
             {/* Header (always visible) */}
-            <header className="bg-dark-grey-text sticky top-0 translate-y-[10px] z-10 flex items-center justify-center gap-2.5 p-1 overflow-hidden rounded-t-xl">
-                <div className="flex items-center gap-3">
+                <header className="bg-dark-grey-text absolute inset-x-0 top-0  z-20 flex items-center justify-center gap-2.5 p-1 overflow-hidden rounded-t-xl">                
+                    <div className="flex items-center gap-3">
                     {/* Left */}
                     <div className="flex items-center gap-8">
                         <ArrowButton dir="left" disabled={atStart} onClick={() => goTo(index - 1)} />
@@ -77,7 +77,7 @@ export default function WidgetCarousel({
             </header>
 
             {/* Slides: transform-based, no scrolling */}
-            <div className="overflow-hidden">
+            <div className="overflow-hidden rounded-xl translate-y-[21px]">
                 <div
                     className="flex w-full transition-transform duration-300 ease-out will-change-transform"
                     style={{ transform: `translateX(-${index * 100}%)` }}

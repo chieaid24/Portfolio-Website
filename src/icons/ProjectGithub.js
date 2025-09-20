@@ -2,9 +2,7 @@ export default function ProjectGithub(props) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width={99}
-            height={99}
-            fill="none"
+            viewBox="0 0 99 99"
             {...props}
         >
             <path

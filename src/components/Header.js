@@ -57,6 +57,8 @@ export default function Header() {
     const [walletOpen, setWalletOpen] = useState(false);
     const [holdOpen, setHoldOpen] = useState(false);
 
+    const lastBalanceRef = useRef(null);
+    const holdTimerRef = useRef(null);
 
     const firstBalanceRender = useRef(true);
     const lastYRef = useRef(0);
@@ -68,13 +70,27 @@ export default function Header() {
         open: { opacity: 0, y: -4 },
     };
 
+    const popHeaderBriefly = (ms = 2000) => {
+        setShowHeader(true);
+        setHoldOpen(true);
+        if (holdTimerRef.current) clearTimeout(holdTimerRef.current);
+        holdTimerRef.current = setTimeout(() => setHoldOpen(false), ms);
+    };
+
+    // clear timer on unmount
+    useEffect(() => {
+        return () => {
+            if (holdTimerRef.current) clearTimeout(holdTimerRef.current);
+        };
+    }, []);
+
     // Scroll show/hide, respecting the hold
     useEffect(() => {
         const onScroll = () => {
             if (holdOpen) return;
 
             const y = Math.max(0, window.scrollY);
-            
+
             setShowHeader(y <= lastYRef.current);
             lastYRef.current = y;
         };
@@ -86,18 +102,19 @@ export default function Header() {
     useEffect(() => {
         if (!ready) return;
 
-        if (firstBalanceRender.current) {
-            firstBalanceRender.current = false;
+        // normalize to 2 decimals to avoid float jitter
+        const current = Number.isFinite(balance) ? +Number(balance).toFixed(2) : null;
+
+        // first ready render: record but don't show
+        if (lastBalanceRef.current === null) {
+            lastBalanceRef.current = current;
             return;
         }
 
-        setShowHeader(true);
-        setHoldOpen(true);
-
-        const t = window.setTimeout(() => {
-            setHoldOpen(false);
-        }, 2000);
-        return () => window.clearTimeout(t);
+        if (current !== lastBalanceRef.current) {
+            popHeaderBriefly(2000);
+            lastBalanceRef.current = current;
+        }
     }, [balance, ready]);
 
     const isMdUp = useIsMdUp();
@@ -138,12 +155,12 @@ export default function Header() {
                                 </div>
                                 <motion.div
                                     layout
+                                    initial={false}
+                                    transition={{ layout: { duration: 0 } }}
                                     className="flex gap-1 items-baseline leading-none pt-0 -translate-y-0.5"
-                                    transition={{ duration: 1, ease: "easeInOut" }}
                                 >
                                     <span className="leading-none">$</span>
                                     <motion.span
-                                        layout="position"
                                         className="text-lg md:text-[24px] leading-none "
                                         transition={{ duration: 1, ease: "easeInOut" }}
                                     >
@@ -154,7 +171,6 @@ export default function Header() {
                                         )}
                                     </motion.span>
                                     <motion.span
-                                        layout="position"
                                         className="leading-none"
                                         transition={{ duration: 0.5, ease: "easeInOut" }}
                                     >
@@ -233,18 +249,18 @@ export default function Header() {
                                 <div className="flex justify-between
                                 lg:grid lg:grid-cols-[8fr_1fr] lg:w-full lg:h-full">
 
-                                        <motion.div
-                                            key="with-your-money"
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1, transition: { duration: 1, ease: "easeOut" } }}   // 1s in
-                                            exit={{ opacity: 0, transition: { duration: 0.2, ease: "easeIn" } }}      // 0.5s out
-                                            className="font-semibold tracking-wide self-end justify-self-center translate-y-2 hidden italic text-light-grey-text cursor-default
+                                    <motion.div
+                                        key="with-your-money"
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1, transition: { duration: 1, ease: "easeOut" } }}   // 1s in
+                                        exit={{ opacity: 0, transition: { duration: 0.2, ease: "easeIn" } }}      // 0.5s out
+                                        className="font-semibold tracking-wide self-end justify-self-center translate-y-2 hidden italic text-light-grey-text cursor-default
                                                          lg:block lg:text-[22px] lg:translate-y-0 lg:ml-5
                                                          xl:text-[22px]
                                                          2xl:text-[24px]"
-                                        >
-                                            with your money, I would buy...
-                                        </motion.div>
+                                    >
+                                        with your money, I would buy...
+                                    </motion.div>
 
                                     <span className="flex items-center justify-end
                                      md:space-x-2">
