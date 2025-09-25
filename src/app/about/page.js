@@ -32,7 +32,7 @@ const widgets = [
 
 export default function AboutPage() {
   return (
-    <div className="font-medium font-dm-sans">
+    <div className="font-medium font-dm-sans ">
       <div className="pt-20 bg-background-light text-dark-grey-text ">
         <MaxWidthWrapper>
           <div className="flex justify-start mt-10 sm:mt-8 lg:mt-12">  {/* Outer div that is a flex box so text acts as a single line of text when window shrinks + is centered as well */}
@@ -64,12 +64,16 @@ export default function AboutPage() {
           </div>
 
           {/* Interest Section */}
-          <div className="grid grid-cols-1 place-items-center pt-4 pb-10  
-                          md:pb-20 lg:flex ">
+          <div className="grid grid-cols-1 place-items-center 5xl:place-items-start pt-4 pb-10  
+                          md:pb-20 
+                          lg:flex
+                          5xl:grid 5xl:grid-cols-2">
             <div className="ml-3 mr-8 order-2 mt-6
-                            lg:order-1 md:flex-1 lg:mt-0">
+                            md:flex-1 
+                            lg:order-1 lg:mt-0
+                            ">
               <h2 className="font-bold text-2xl sm:text-4xl leading-tight">You can also find me:</h2>
-              <li className="list-none lg:list-disc lg:marker:text-xl text-[19px] md:text-[21px] lg:text-[28px] font-medium pt-5"> Playing team sports
+              <li className="list-none lg:list-disc lg:marker:text-xl text-[19px] md:text-[21px] lg:text-[28px] font-medium pt-4"> Playing team sports
                 <ul className="flex gap-2 pl-8 text-light-grey-text text-[17px] md:text-xl font-normal">
                   <li>→</li>
                   <li>Basketball and volleyball are my main ones right now!</li>

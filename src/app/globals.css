@@ -81,9 +81,9 @@
 
   --animate-new-pulse: pulse 1.5s cubic-bezier(0.42, 0, 0.58, 1) infinite;
 
-  --breakpoint-3xl: 120rem;
-  --breakpoint-4xl: 135rem;
-  --breakpoint-5xl: 160rem;
+  --breakpoint-3xl: 120rem;     /* 1920 */
+  --breakpoint-4xl: 135rem;    /* 2160 */
+  --breakpoint-5xl: 160rem;    /* 2560 */
 
 }
 
@@ -284,7 +284,6 @@ body {
 
 .custom-bold {
   font-weight: bold;
-  color: var(--color-custom-red);
 }
 
 /* globals.css */

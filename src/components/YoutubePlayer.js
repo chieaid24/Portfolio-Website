@@ -10,7 +10,7 @@ export default function YouTubePlayer({ urlOrId, title }) {
     if (!id) return null; // or render a fallback
 
     return (
-        <div className="relative w-full aspect-video overflow-hidden rounded-lg bg-black">
+        <div className="relative w-full aspect-video overflow-hidden rounded-xl bg-black">
             {!play ? (
                 <button
                     onClick={() => setPlay(true)}

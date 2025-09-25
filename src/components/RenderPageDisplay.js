@@ -76,8 +76,8 @@ export default function RenderPageDisplay({ info, projectTitle }) {
                 ) : isGLBFile(info[0]) ? (
                     <ModelSection modelPath={info[0]} />
                 ) : (
-                    <div className="relative w-full md:h-100 aspect-[16/9] rounded-lg overflow-hidden shadow-lg">
-                        <Image src={info[0]} alt={projectTitle} fill className="object-cover scale-100" />
+                    <div className="relative w-full aspect-[16/8] rounded-lg overflow-hidden shadow-lg">
+                        <Image src={info[0]} alt={projectTitle} fill className="object-cover object-center scale-100" />
                     </div>
                 )}
             </div>

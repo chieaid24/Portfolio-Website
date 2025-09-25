@@ -31,8 +31,8 @@ export default function RedText({
       <span
         onClick={handleClick}
         className={`
-          ${claimed ? 'cursor-default opacity-60 dark:opacity-100' : 'cursor-pointer'}
-          custom-bold ${weightOverride} ${popping ? 'pop' : ''} ${className}
+          ${claimed ? 'cursor-default text-custom-red/60 dark:opacity-100' : 'cursor-pointer'}
+          custom-bold text-custom-red ${weightOverride} ${popping ? 'pop' : ''} ${className}
           inline-block
         `}
         role="button"

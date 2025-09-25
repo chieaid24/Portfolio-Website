@@ -110,7 +110,7 @@ export default function HeroSlot() {
             }
           });
         }
-      }, 1500);
+      }, 700);
     };
 
     scheduleNextJiggle();
@@ -240,27 +240,30 @@ export default function HeroSlot() {
   };
 
   return (
-    <div className="flex flex-col justify-center w-[22rem] lg:w-[61rem] self-center bg-background-light shadow-[-4px_4px_4px_rgba(0,0,0,0.25)]">
-      <div className="flex justify-between text-corner-orange mb-[-10px] mt-[10px] mx-[10px] lg:mb-[-30px] lg:mx-[40px] lg:pt-7.5"> {/**top corners div */}
+    <div className="flex flex-col justify-center w-[22rem] lg:w-[61rem] 5xl:w-[76rem] self-center bg-background-light shadow-[-4px_4px_4px_rgba(0,0,0,0.25)]">
+      <div className="flex justify-between text-corner-orange mb-[-10px] mt-[10px] mx-[10px] lg:mb-[-30px] lg:mx-[40px] lg:pt-7.5
+                                                                                              5xl:mb-[-37px] 5xl:mx-[50px] 5xl:pt-9"> {/**top corners div */}
         <HeroCorner className="w-8 h-8
-        lg:w-16 lg:h-16 rotate-180" />
+        lg:w-16 lg:h-16 
+        5xl:w-20 5xl:h-20 rotate-180" />
         <HeroCorner className="w-8 h-8 
-        lg:w-16 lg:h-16 -rotate-90" />
+        lg:w-16 lg:h-16 
+        5xl:w-20 5xl:h-20 -rotate-90" />
       </div>
-      <div className="grid grid-cols-[minmax(0,4fr)_minmax(0,3fr)] lg:grid-cols-[5fr_3fr] lg:gap-10">
-        <div className="self-center translate-x-[50px] lg:translate-x-[180px]">
+      <div className="grid grid-cols-[minmax(0,4fr)_minmax(0,3fr)] lg:grid-cols-[5fr_3fr] lg:gap-10 5xl:gap-30"> 
+        <div className="self-center translate-x-[50px] lg:translate-x-[180px] 5xl:translate-x-[220px] cursor-default"> 
           {/* Rotating Text */}
           <RotatingHeroText
             ref={textRef}
             texts={['AIDAN', 'ENG', 'DES', 'INVE', 'CLIM', 'FILM', 'STU', 'GYM', 'CODE', 'CAD', 'REELS', 'GAME', 'UI/UX', 'WEB', 'AI', 'NYT', 'SLEEP', 'CHESS', 'DEVE']}
             texts2={['CHIEN', 'INEER', 'IGNER', 'NTOR', 'BER', 'MAKER', 'DENT', 'GOER', 'ADDICT', 'HEAD', 'SNOB', 'NERD', 'FAN', 'DEV', 'FIEND', 'GAMER', 'LOVER', 'NUT', 'LOPER']} // STAN, BUFF, BOY, BUG, ACE, 
-            mainClassName="overflow-visible px-3 text-5xl lg:text-9xl bg-background-light text-dark-grey-text font-italiana py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+            mainClassName="overflow-visible px-3 text-5xl lg:text-9xl 5xl:text-[160px] bg-background-light text-dark-grey-text font-italiana py-0.5 sm:py-1 md:py-2 5xl:py-[10px] justify-center rounded-lg"
             staggerFrom="last"
             initial={{ y: '-100%' }}
             animate={{ y: 0 }}
             exit={{ y: '120%' }}
             staggerDuration={0.025}
-            splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+            splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1"
             transition={{ type: 'spring', damping: 30, stiffness: 400 }}
             rotationInterval={2000}
             auto={false}
@@ -269,36 +272,36 @@ export default function HeroSlot() {
         {/* SVG Lever Button */}
         <div
           ref={leverGroupRef}
-          className=" flex items-center h-[80px] lg:h-[300px]
+          className=" flex items-center h-[80px] lg:h-[300px] 5xl:h-[375px]
             origin-top-left will-change-transform translate-y-3 lg:translate-0
             "
         >
           <div className="lg:m-5 h-full flex relative items-center "> {/**lever and block div */}
             <svg
-              width={isLgUp ? "90" : "90"}
-              height={isLgUp ? "140" : "140"}
+              width={"90"}
+              height={"140"}
               viewBox="0 0 90 140"
-              className="p-0 scale-[0.5] lg:scale-100"> {/**block svg */}
+              className="p-0 scale-[0.5] lg:scale-100 5xl:scale-125"> {/**block svg */}
               <rect
                 x="0"
                 y="0"
-                width={isLgUp ? "90" : "90"}
-                height={isLgUp ? "140" : "140"}
+                width={"90"}
+                height={"140"}
                 fill="#878787"
               />
             </svg>
             <svg
-              width={isLgUp ? "80" : "80"}
-              height={isLgUp ? "300" : "300"}
+              width={"80"}
+              height={"300"}
               viewBox="0 0 100 270"
-              className="absolute lg:translate-x-[45px] lg:translate-y-0 translate-x-[25px] translate-y-[-3px] scale-[0.5] lg:scale-100"
+              className="absolute translate-x-[25px] translate-y-[-3px] scale-[0.5] lg:translate-x-[45px] lg:translate-y-0 lg:scale-100 5xl:translate-x-[56px] 5xl:scale-125"
             > {/*lever svg*/}
               <motion.rect
                 ref={leverRef}
                 x="0"
                 y="0"
-                width={isLgUp ? "25" : "25"}
-                height={isLgUp ? "270" : "270"}
+                width={"25"}
+                height={"270"}
                 fill="#D9D9D9"
                 initial={{ rotate: 30 }}
                 className="translate-x-[-5px] lg:translate-x-[-10px]"
@@ -307,10 +310,10 @@ export default function HeroSlot() {
           </div>
 
           <svg
-            width={isLgUp ? "150" : "150"}
-            height={isLgUp ? "500" : "500"}
+            width={"150"}
+            height={"500"}
             viewBox="0 0 150 100"
-            className="z-10 translate-x-[-30px] translate-y-[-5px] lg:translate-x-[-49px] lg:translate-y-[-10px] scale-120 lg:scale-100"
+            className="z-10 translate-x-[-30px] translate-y-[-5px] lg:translate-x-[-49px] lg:translate-y-[-10px] scale-120 lg:scale-100 5xl:scale-125 5xl:translate-x-[-27px] 5xl:translate-y-[-10px]"
           > {/**lever ball svg */}
             <defs>
               <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
@@ -337,9 +340,10 @@ export default function HeroSlot() {
           </svg>
         </div>
       </div>
-      <div className="flex justify-between text-corner-orange mt-[-10px] mb-[10px] mx-[10px] lg:mt-[-30px] lg:mx-[40px] lg:pb-7.5"> {/**bottom corners div */}
-        <HeroCorner className="w-8 h-8 lg:w-16 lg:h-16 rotate-90" />
-        <HeroCorner className="w-8 h-8 lg:w-16 lg:h-16" />
+      <div className="flex justify-between text-corner-orange mt-[-10px] mb-[10px] mx-[10px] lg:mt-[-30px] lg:mx-[40px] lg:pb-7.5
+                                                                                              5xl:mt-[-37px] 5xl:mx-[50px] 5xl:pb-9"> {/**bottom corners div */}
+        <HeroCorner className="w-8 h-8 lg:w-16 lg:h-16 5xl:w-20 5xl:h-20 rotate-90" />
+        <HeroCorner className="w-8 h-8 lg:w-16 lg:h-16 5xl:w-20 5xl:h-20" />
       </div>
     </div >
   );

@@ -54,14 +54,14 @@ export default function CommodityDisplay({ commodity, balanceInDollars }) {
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       className="flex flex-col items-center font-semibold will-change-transform cursor-default"
     >
-      <div className="text-5xl text-custom-red inline-block md:text-6xl">
+      <div className="text-5xl md:text-6xl 5xl:text-[69px] text-custom-red inline-block ">
         <CountUp to={prettyQty} from={0} direction="up" />
         {suffix && (
-          <span className="text-4xl md:text-5xl">{suffix}</span>
+          <span className="text-4xl md:text-5xl 5xl:text-[53px]">{suffix}</span>
         )}
       </div>
 
-      <p className="text-header-light font-medium items-center text-xs text-center leading-tight md:text-sm">
+      <p className="text-header-light font-medium items-center text-xs text-center leading-tight md:text-sm 5xl:text-[16px]">
         {title}
       </p>
     </motion.div>

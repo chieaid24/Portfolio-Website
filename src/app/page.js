@@ -12,6 +12,7 @@ import SectionRevealVeil from '@/components/SectionRevealVeil';
 import ScrollRevealWrapper from '@/components/ScrollRevealWrapper';
 
 
+
 export default function Home() {
   const [randomTickets, setRandomTickets] = useState({});
 
@@ -123,7 +124,8 @@ export default function Home() {
                             text-[44px] leading-12
                             sm:text-7xl sm:leading-[72px]
                             md:text-[80px] md:leading-[80px]
-                            lg:leading-[96px] lg:text-8xl"> {/**want to cash out? section */}
+                            lg:leading-[96px] lg:text-8xl
+                            5xl:text-[105px] 5xl:leading-[105px] "> {/**want to cash out? section */}
             <div>
               <RewardLink href="mailto:aidan.chien@uwaterloo.ca" rewardId="home:cash-out"
                 className="group md:hover:scale-110 md:hover:translate-y-[-15px] transition-all duration-300 items-center inline-flex flex-col mobile:select-none">

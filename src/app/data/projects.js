@@ -63,7 +63,7 @@ export const projects = [
         fallback_value: "16,230.00",
         skills_used: ['Python', 'OOP'],
         image: '/pmi_auto_generator/pmi_card.png',
-        page_displays: [['/pmi_auto_generator/pmi_img_1.png', 'Example 3D model with attached PMI'], ['https://www.youtube.com/watch?v=GMJ6381breo', 'Check out the demo video!']],
+        page_displays: [['/pmi_auto_generator/pmi_img_1_v6.png', 'Example 3D model with attached PMI'], ['https://www.youtube.com/watch?v=GMJ6381breo', 'Check out the demo video!']],
         github_link: 'https://github.com/chieaid24/PMI-Auto-Generator-Desc',
         subtitle: "a machinist's best friend",
         summary: <>Manually transferring info from a <RedText rewardId="red:pmi:technical-drawing">technical drawing</RedText> to a 3D <RedText rewardId="red:pmi:CAD-model">CAD model</RedText> can be tedious and the worst part of a machinist&apos;s day. Keep scrolling to find out how I cut production time by <RedText rewardId="red:pmi:30-percent">30 percent</RedText>! </>,
@@ -86,7 +86,7 @@ export const projects = [
                 The .qif file is the key that my program relies on, as its <RedText rewardId="red:pmi:xml">XML structure</RedText> allows me to parse and insert information without a GUI. This unlocks automation and greater speed capabilities, which I take advantage of through this project. Now, using Python with NumPy and openpyxl, it scrapes the Excel file and formats each entry to scan for diameter annotations. I&apos;ve picked diameter annotations because the shop mostly worked with turned (cylindrical) parts, so diameter annotations made up about one-third of all dimensions.
             </>,
             <>
-                The program then gets all of the dimensions from the model .qif file and cross-references each with the desired diameter dimensions. Lastly, it inserts those annotations onto the model. Then the user can simply open the .qif file and attach the rest of the annotations manually with the help of my <Link href="/projects/mbd-macro"><span className="hover:opacity-80 transition font-semibold">MBD Macro</span></Link>. This project single-handedly saves around 30% of the total annotation time, and the full process takes only about 60 seconds to complete.
+                The program then gets all of the dimensions from the model .qif file and cross-references each with the desired diameter dimensions. Lastly, it inserts those annotations onto the model. Then the user can simply open the .qif file and attach the rest of the annotations manually with the help of my <Link href="/projects/mbd-macro"><span className="hover:opacity-80 transition italic ">MBD Macro</span></Link>. This project single-handedly saves around 30% of the total annotation time, and the full process takes only about 60 seconds to complete.
             </>
         ],
 
@@ -109,25 +109,28 @@ export const projects = [
         subtitle: "a portfolio that performs",
         summary: <>A plain resume displaying my projects is boring and, frankly, too easy to make. Find out how I built the <RedText rewardId="red:website:very-website">very website</RedText> you&apos;re on <RedText rewardId="red:website:scratch">from scratch!</RedText> </>,
         tool_paragraphs: [
-            <>The main framework I used was <SkillDisplay fileName="Next" project="website" displayName="Next.js" /> with <SkillDisplay fileName="React" project="website" />, styled using <SkillDisplay fileName="Tailwind CSS" project="website" /> and <SkillDisplay fileName="Framer Motion" project="website" />. I also used <SkillDisplay fileName="Node" project="website" displayName="Node.js" /> to connect with REST APIs for real-time updates, <SkillDisplay fileName="Figma" project="website" /> to prototype the interface, and <SkillDisplay fileName="Illustrator" project="website" /> to create my logo and other assets.</>,
+            <>The main framework I used was <SkillDisplay fileName="Next" project="website" displayName="Next.js" /> with <SkillDisplay fileName="React" project="website" />, styled using <SkillDisplay fileName="Tailwind CSS" project="website" /> and <SkillDisplay fileName="Framer Motion" project="website" />. I also used <SkillDisplay fileName="Node" project="website" displayName="Node.js" /> to connect with REST APIs for real-time updates, <SkillDisplay fileName="Figma" project="website" /> to prototype the interface, <SkillDisplay fileName="Illustrator" project="website" /> to create my logo and other assets, and <SkillDisplay fileName="Amplify" project="website" displayName="AWS Amplify" /> for deployment.</>,
         ],
         why_paragraphs: [
             <>
-                I&apos;ve always wanted my own domain—something about owning a part of the internet seemed so cool. And creating a personal portfolio with some extra fluff seemed like the perfect idea. The slot machine concept just kind of came to me, and I rolled with it, creating an overarching theme for the site.
+                The main motivation for the site was to create an interactive and fun user experience, encouraging users to explore every aspect of the site and learn more about me in the process. The slot machine concept was something that I came up with a long time ago, and I rolled with it, creating an overarching theme for the site.
             </>,
         ],
         what_paragraphs: [
             <>
-                TBD!!
+                The main component of the site is your “balance,” which is persisted throughout the app and stored in the browser&apos;s local storage. The user can increase their balance by clicking on <RedText rewardId="red:website:red">red words</RedText>, project links, and external links, as well as gambling with the home-page slot machine. All the states for whether or not a link has been clicked are also stored in local storage, and the user&apos;s progress can be tracked in the expanded header. Completing all of the quests allows the user to access a dark-mode toggle that applies throughout the app.
             </>,
             <>
-
+                On the backend side, I read from the Chess.com REST API and Clash Royale REST API using my Node.js backend, and cache the values weekly to improve performance and reduce calls to the external APIs. These values are displayed with custom widgets on my About page. Additionally, I use an <RedText rewardId="red:website:lambda">AWS Lambda</RedText> cron job every month to update my “Top 5” Spotify playlist using the Spotify API, which is displayed via the Spotify web embed.
+            </>,
+            <>
+                The slot machine component was created using SVGs and Framer Motion, and is set to show an “inquiry animation” when it hasn&apos;t been pulled yet (state stored in the browser&apos;s local storage). The payout is calculated using a statistical mixture model made up of a triangularly distributed base and a power-law tail distribution. I designed it so that 10% of spins are jackpots (drawn from the tail). The remaining 90% come from the “base” of the model, which has an expected payout of $4.50 to balance things out. This gives the users an incentive to continue trying their chances while being an unrealistic machine, since the user can actually profit.
             </>,
         ],
 
         learning_paragraphs: [
             <>
-                TBD!!
+                I improved my UI/UX (accessibility, motion design, etc.) skills, as I think the main motivation for the creator of a project like this is for the user to effectively understand who I am as a professional, as well as a glimpse of my personality through creative design choices. Working through the large scale architecture and the tiny details forced me to build <RedText rewardId="red:website:bulletproof">bulletproof code</RedText> that balanced performance, an adaptive layout, and future scalability considerations. Lastly I learned a lot about myself when trying to create the “About” section, as it turns out I&apos;m not as interesting as I thought before.
             </>,
         ],
     },
@@ -145,7 +148,7 @@ export const projects = [
         summary: <>A messy and unorganized workspace is both <RedText rewardId="red:tools:unprofessional">unprofessional</RedText> and <RedText rewardId="red:tools:inefficient">inefficient</RedText>. Keep reading to find out how I solved problems while creating <RedText rewardId="red:tools:conversation-pieces">conversation pieces</RedText> for the office!</>,
         tool_paragraphs: [
             <>
-                I designed everything in <SkillDisplay fileName="SOLIDWORKS" project="tools"/> and printed with the Markforged software, on FDM carbon-fiber reinforced filaments. I also sanded and spray painted when necessary.
+                I designed everything in <SkillDisplay fileName="SOLIDWORKS" project="tools" /> and printed with the Markforged software, on FDM carbon-fiber reinforced filaments. I also sanded and spray painted when necessary.
             </>,
         ],
         why_paragraphs: [
@@ -201,7 +204,7 @@ export const projects = [
                     href="https://github.com/chieaid24/MBD-Macro"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:opacity-80 transition font-semibold"
+                    className="hover:opacity-80 transition italic"
                 >GitHub</Link>
                 , which goes through all the possible shortcuts and explanations.
             </>,

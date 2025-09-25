@@ -133,7 +133,7 @@ export default function Header() {
             className={`fixed inset-x-0 top-0 z-50 transition-transform ease-in-out duration-300 pointer-events-none ${showHeader ? "translate-y-0" : "-translate-y-full"} py-5 font-dm-sans`}
         >
             <motion.div
-                className="pointer-events-auto w-5/6 mx-auto rounded-xl shadow-[0px_5.47px_13.68px_0px_rgba(0,0,0,0.15)] overflow-hidden transition-colors duration-150 bg-background-dark/96
+                className="pointer-events-auto w-5/6 mx-auto rounded-xl shadow-[0px_5.47px_13.68px_0px_rgba(0,0,0,0.15)] overflow-hidden transition-colors duration-150 bg-background-light/96
                 md:w-3/4 
                 2xl:w-1/2 2xl:max-w-[60rem]"
             >
@@ -147,7 +147,7 @@ export default function Header() {
                             type="button"
                             onClick={() => setWalletOpen((v) => !v)}
                             aria-expanded={walletOpen}
-                            className={`group self-start font-semibold text-xs md:text-[17px] lg:text-lg text-dark-grey-text cursor-pointer`}
+                            className={`group self-start font-semibold text-xs md:text-[17px] lg:text-lg 5xl:text-[20px] text-dark-grey-text cursor-pointer`}
                         >
                             <div className="px-1.5 py-1 my-1.5 rounded-md inline-flex flex-col items-start group-hover:bg-black/7">
                                 <div className="leading-none gradient-text-header pb-0.5">
@@ -161,11 +161,11 @@ export default function Header() {
                                 >
                                     <span className="leading-none">$</span>
                                     <motion.span
-                                        className="text-lg md:text-[24px] leading-none "
+                                        className="text-lg md:text-[24px] 5xl:text-[27px] leading-none "
                                         transition={{ duration: 1, ease: "easeInOut" }}
                                     >
                                         {ready ? (
-                                            <AnimatedBalance value={balance} className="relative inline-block top-1 transition-colors duration-250" />
+                                            <AnimatedBalance value={balance} className="relative inline-block top-1  transition-colors duration-250" />
                                         ) : (
                                             "—"
                                         )}
@@ -190,7 +190,7 @@ export default function Header() {
                                             width={14}
                                             height={14}
                                             alt="Info"
-                                            className="md:ml-1 block w-2 md:w-3 max-w-none"
+                                            className="md:ml-1 block w-2 md:w-3 5xl:w-[13px] max-w-none"
                                         />
                                     </motion.div>
                                 </motion.div>
@@ -211,14 +211,15 @@ export default function Header() {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -4 }}
                                     transition={{ duration: 0.18 }}
-                                    className="flex items-center font-semibold justify-end w-full"
+                                    className="flex items-center font-semibold justify-end w-full 5xl:text-[19px]"
                                 >
                                     <Link
                                         href="/"
                                         className="relative hover:text-custom-red transition-colors pr-2.5 py-3
                                after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2
                                after:w-[2px] after:h-5  after:bg-header-light/80
-                               md:pr-5 md:py-1 md:after:w-[2.5px] md:after:h-6"
+                               md:pr-5 md:py-1 md:after:w-[2.5px] md:after:h-6
+                               5xl:after:w-[3px]"
                                     >
                                         home
                                     </Link>
@@ -227,7 +228,8 @@ export default function Header() {
                                         className="relative hover:text-custom-red transition-colors px-2.5 py-3
                                after:content-[''] after:absolute after:right-0 after:top-1/2 after:-translate-y-1/2
                                 after:w-[2px] after:h-5 after:bg-header-light/80
-                               md:px-5 md:py-1 md:after:w-[2.5px] md:after:h-6"
+                               md:px-5 md:py-1 md:after:w-[2.5px] md:after:h-6
+                               5xl:after:w-[3px]"
                                         rewardId="header:about"
                                         transparent={false}
                                     >
@@ -257,7 +259,8 @@ export default function Header() {
                                         className="font-semibold tracking-wide self-end justify-self-center translate-y-2 hidden italic text-light-grey-text cursor-default
                                                          lg:block lg:text-[22px] lg:translate-y-0 lg:ml-5
                                                          xl:text-[22px]
-                                                         2xl:text-[24px]"
+                                                         2xl:text-[24px]
+                                                         5xl:text-[25px]"
                                     >
                                         with your money, I would buy...
                                     </motion.div>
