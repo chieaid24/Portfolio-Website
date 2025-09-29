@@ -56,7 +56,7 @@ export default function DarkModeToggle({className = ""}) {
                     src={isDark ? "/icons/darkmode_light.svg" : "/icons/darkmode_dark.svg"}
                     width={20}
                     height={20}
-                    alt="darkmode_dark"
+                    alt="Dark mode toggle"
                     className={canToggle ? "opacity-100" : "opacity-0 md:opacity-50"}
                 />
             </motion.button>

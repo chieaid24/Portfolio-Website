@@ -10,11 +10,6 @@ import AnimatedBalance from "@/components/AnimatedBalance";
 import RewardLink from "@/components/RewardLink";
 import DarkModeToggle from "@/components/DarkModeToggle"
 import CloseButton from "@/icons/CloseButton"
-
-import DevMoneyReset from "@/components/DevMoneyReset";
-import OverflowButton from "@/components/OverflowButton";
-import DevBalanceInput from "@/components/DevBalanceInput";
-
 import * as commodityData from "@/app/data/commodities";
 import CommodityDisplay from "@/components/CommodityDisplay";
 
@@ -236,7 +231,7 @@ export default function Header() {
                                         about
                                     </RewardLink>
                                     <RewardLink
-                                        href="/documents/Aidan_Chien_resume.pdf"
+                                        href="https://drive.google.com/file/d/1YzK4a7QVQ6JAAOIF_WcgJk7MnkVXQfzC/view?usp=sharing"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="hover:text-custom-red transition-colors pl-2.5  py-3

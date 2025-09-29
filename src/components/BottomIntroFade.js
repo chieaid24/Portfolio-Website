@@ -49,7 +49,7 @@ export default function BottomIntroFade({ className = '' }) {
         // the actual fade-to-background
         'bg-gradient-to-b from-transparent to-[var(--color-background-light)]',
         // fade-out when dismissed
-        'transition-opacity duration-300',
+        'transition-opacity duration-1000',
         hidden ? 'opacity-0' : 'opacity-100',
         className,
       ].join(' ')}

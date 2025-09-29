@@ -5,11 +5,13 @@ import SpotifyEmbed from '@/components/SpotifyEmbed'
 import ChessWidget from "@/components/ChessWidget";
 import ClashWidget from "@/components/ClashWidget";
 import WidgetCarousel from "@/components/WidgetCarousel";
-import ResponsiveFrame from "@/components/ResponsiveFrame"
 
 export const metadata = {
-  title: 'ABOUT',
+  title: 'AIDAN CHIEN || About',
   description: 'Who is Aidan Chien?',
+  alternates: {
+    canonical: "https://aidanchien.com/about",
+  },
 };
 
 const widgets = [
@@ -32,7 +34,7 @@ const widgets = [
 
 export default function AboutPage() {
   return (
-    <div className="font-medium font-dm-sans ">
+    <main className="font-medium font-dm-sans ">
       <div className="pt-20 bg-background-light text-dark-grey-text ">
         <MaxWidthWrapper>
           <div className="flex justify-start mt-10 sm:mt-8 lg:mt-12">  {/* Outer div that is a flex box so text acts as a single line of text when window shrinks + is centered as well */}
@@ -44,8 +46,8 @@ export default function AboutPage() {
             </h1>
           </div>
 
-          {/* image and blurb div */}
-          <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-8 md:gap-8 items-start mt-10 break-normal">
+          {/* image and blurb section */}
+          <section className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-8 md:gap-8 items-start mt-10 break-normal">
             <AboutImage className="" />
             <div className="flex justify-self-start text-left flex-col leading-tight text-[17px] md:text-[21px] lg:text-[28px] text-dark-grey-text h-full gap-y-6 font-medium">
               <p className="">
@@ -61,17 +63,16 @@ export default function AboutPage() {
                 I&apos;m passionate about taking my skills to the next level and <RedText rewardId="red:about:impact">making an impact</RedText> on the greater community.
               </p>
             </div>
-          </div>
+          </section>
 
           {/* Interest Section */}
-          <div className="grid grid-cols-1 place-items-center 5xl:place-items-start pt-4 pb-10  
+          <section className="grid grid-cols-1 place-items-center 5xl:place-items-start pt-4 pb-10  
                           md:pb-20 
                           lg:flex
                           5xl:grid 5xl:grid-cols-2">
             <div className="ml-3 mr-8 order-2 mt-6
                             md:flex-1 
-                            lg:order-1 lg:mt-0
-                            ">
+                            lg:order-1 lg:mt-0">
               <h2 className="font-bold text-2xl sm:text-4xl leading-tight">You can also find me:</h2>
               <li className="list-none lg:list-disc lg:marker:text-xl text-[19px] md:text-[21px] lg:text-[28px] font-medium pt-4"> Playing team sports
                 <ul className="flex gap-2 pl-8 text-light-grey-text text-[17px] md:text-xl font-normal">
@@ -92,10 +93,10 @@ export default function AboutPage() {
                 </ul>
               </li>
             </div>
-            <WidgetCarousel items={widgets} className="order-1 lg:order-2 lg:flex-none w-full max-w-[540px]"/>
-          </div>
+            <WidgetCarousel items={widgets} className="order-1 lg:order-2 lg:flex-none w-full max-w-[540px]" />
+          </section>
         </MaxWidthWrapper>
       </div>
-    </div>
+    </main>
   );
 }

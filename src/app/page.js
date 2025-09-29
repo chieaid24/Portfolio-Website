@@ -8,9 +8,7 @@ import HeroSlot from "@/components/HeroSlot";
 import RedText from '@/components/RewardRedText';
 import RewardLink from '@/components/RewardLink';
 import BottomIntroFade from '@/components/BottomIntroFade';
-import SectionRevealVeil from '@/components/SectionRevealVeil';
-import ScrollRevealWrapper from '@/components/ScrollRevealWrapper';
-
+import { motion } from "framer-motion";
 
 
 export default function Home() {
@@ -52,14 +50,18 @@ export default function Home() {
 
   return (
     <>
-      <BottomIntroFade />
-      <div className="pt-[15vh] bg-background-dark font-dm-sans text-dark-grey-text
+      <>
+        <title>AIDAN CHIEN</title>
+        <meta name="description" content="Portfolio of Aidan Chien, systems engineer specializing in design and development." />
+        <BottomIntroFade />
+      </>
+      <main className="pt-[15vh] bg-background-dark font-dm-sans text-dark-grey-text
                     md:pt-[11vh]
-                    3xl:pt-[14vh]"> {/**hero div */}
-        <div id="hero" className="relative w-full lg:min-h-[92vh]">
+                    3xl:pt-[14vh]">
+        {/**hero div */}
+        <section id="hero" className="relative w-full lg:min-h-[92vh]">
           <MaxWidthWrapper>
-            <div className="flex flex-col gap-10 pt-10 pb-10
-                              ">
+            <div className="flex flex-col gap-10 pt-10 pb-10">
               {/* <div className="justify-center flex"> */}
               <div className="flex flex-col gap-10 min-h-[80vh] md:min-h-0">
                 <HeroSlot />
@@ -92,54 +94,74 @@ export default function Home() {
 
             </div>
           </MaxWidthWrapper>
-        </div>
+        </section>
 
 
-        <div id="projects" className="bg-background-light text-dark-grey-text"> {/**project section */}
+        <section id="projects" className="bg-background-light text-dark-grey-text"> {/**project section */}
           <MaxWidthWrapper>
-            <h1 className="font-bold pt-8 text-4xl
+            <motion.h2
+              key="my-projects"
+              initial={{ opacity: 0, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.5, delay: 0 }}
+              className="font-bold pt-8 text-4xl
                             sm:text-5xl sm:pl-10
                             md:pt-15
-                            lg:text-6xl lg:pl-0"
-            >
+                            lg:text-6xl lg:pl-0">
+
               My Projects
-            </h1>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-25 lg:gap-y-20 mt-10 mb-32">
+            </motion.h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-22 sm:gap-y-25 lg:gap-y-20 mt-10 mb-32">
               {projects.map((project) => (
-                <ProjectCard
+                <motion.div
                   key={project.slug}
-                  title={project.title}
-                  generated_with={project.generated_with}
-                  ticket_no={randomTickets[project.slug] ?? '--'}
-                  skills_used={project.skills_used}
-                  image={project.image}
-                  slug={project.slug}
-                  alt={project.title}
-                  fallback_value={[10, project.fallback_value]}
-                />
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
+                  transition={{ duration: 0.5, delay: 0 }}
+                >
+                  <ProjectCard
+                    key={project.slug}
+                    title={project.title}
+                    generated_with={project.generated_with}
+                    ticket_no={randomTickets[project.slug] ?? '--'}
+                    skills_used={project.skills_used}
+                    image={project.image}
+                    slug={project.slug}
+                    alt={project.title}
+                    fallback_value={[10, project.fallback_value]}
+                  />
+                </motion.div>
               ))}
             </div>
           </MaxWidthWrapper>
-          <div className="flex flex-col items-center my-[-10px] pt-10 bg-background-dark text-dark-grey-text font-dm-sans tracking-tighter font-semibold
+          <section className="flex flex-col items-center my-[-10px] pt-10 bg-background-dark text-dark-grey-text font-dm-sans tracking-tighter font-semibold
                             text-[44px] leading-12
                             sm:text-7xl sm:leading-[72px]
                             md:text-[80px] md:leading-[80px]
                             lg:leading-[96px] lg:text-8xl
                             5xl:text-[105px] 5xl:leading-[105px] "> {/**want to cash out? section */}
-            <div>
+            <motion.div
+              key="cash-out"
+              initial={{ opacity: 0, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.5, delay: 0 }}
+            >
               <RewardLink href="mailto:aidan.chien@uwaterloo.ca" rewardId="home:cash-out"
                 className="group md:hover:scale-110 md:hover:translate-y-[-15px] transition-all duration-300 items-center inline-flex flex-col mobile:select-none">
-                <h1>
+                <p>
                   Want to <span className="md:group-hover:animate-new-pulse md:group-hover:gradient-text-red-animated gradient-text-custom font-semibold animated-underline pr-0.5">cash out?</span>
-                </h1>
-                <h1 className="">
+                </p>
+                <p className="">
                   Let&apos;s connect!
-                </h1>
+                </p>
               </RewardLink>
-            </div>
-          </div>
-        </div>
-      </div>
+            </motion.div>
+          </section>
+        </section>
+      </main >
     </>
   );
 }

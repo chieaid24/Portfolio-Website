@@ -1,35 +1,32 @@
 
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import RewardLink from '@/components/RewardLink';
 import { getProjectBySlug, projects } from '@/app/data/projects';
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import BackToProjects from '@/components/BackToProjects';
-import ModelSection from '@/components/ModelSection';
 import ProjectGithub from "@/icons/ProjectGithub"
 import RenderPageDisplay from "@/components/RenderPageDisplay"
 
-// Generate static params for all projects (optional, for static generation)
-// export async function generateStaticParams() {
-//     return projects.map((project) => ({
-//         slug: project.slug,
-//     }));
-// }
-
 // Generate metadata for each project page
 export async function generateMetadata({ params }) {
-    const { slug } = await params;
+    const { slug } = params; // no need for await here since params is synchronous
     const project = getProjectBySlug(slug);
 
     if (!project) {
         return {
-            title: 'Project Not Found',
+            title: "Project Not Found",
+            alternates: {
+                canonical: "https://aidanchien.com", // fallback
+            },
         };
     }
 
     return {
-        title: `${project.title}`,
-        description: project.summary,
+        title: `AIDAN CHIEN || ${project.title}`,
+        description: project.summaryMetaData,
+        alternates: {
+            canonical: `https://aidanchien.com/${slug}`,
+        },
     };
 }
 
@@ -90,16 +87,16 @@ export default function ProjectPage({ params }) {
                             </RewardLink>
                         </div>
                         {/**Summary text */}
-                            <div className='text-2xl font-regular'>
-                                {renderParagraphs(project.summary)}
-                            </div>
+                        <div className='text-2xl font-regular'>
+                            {renderParagraphs(project.summary)}
+                        </div>
 
                         {project.page_displays[0] && (
                             <RenderPageDisplay info={project.page_displays[0]} projectTitle={project.title} />
                         )}
 
                         {/* Tools Used Section */}
-                        <div className="mb-20">
+                        <section className="mb-20">
                             <h1 className="font-bold mb-15 text-4xl
                                             md:text-5xl">
                                 What Tools?
@@ -107,17 +104,17 @@ export default function ProjectPage({ params }) {
                             <div className='text-2xl font-regular'>
                                 {renderParagraphs(project.tool_paragraphs)}
                             </div>
-                        </div>
+                        </section>
 
                         {/** Why This Project */}
-                        <div className="mb-15">
+                        <section className="mb-15">
                             <h1 className="font-bold text-4xl md:text-5xl mb-15">
                                 Why This Project?
                             </h1>
                             <div className='text-2xl font-regular'>
                                 {renderParagraphs(project.why_paragraphs)}
                             </div>
-                        </div>
+                        </section>
 
                         {/**optional second image - conditionally render 3D model or regular image */}
 
@@ -126,24 +123,24 @@ export default function ProjectPage({ params }) {
                         )}
 
                         {/**What is it */}
-                        <div className="mb-20">
+                        <section className="mb-20">
                             <h1 className="font-bold text-4xl md:text-5xl mb-15">
                                 What is it?
                             </h1>
                             <div className='text-2xl font-regular'>
                                 {renderParagraphs(project.what_paragraphs)}
                             </div>
-                        </div>
+                        </section>
 
                         {/**what did I learn */}
-                        <div>
+                        <section>
                             <h1 className="font-bold text-4xl md:text-5xl mb-15">
                                 What did I learn?
                             </h1>
                             <div className='text-2xl font-regular'>
                                 {renderParagraphs(project.learning_paragraphs)}
                             </div>
-                        </div>
+                        </section>
                         {/* Back to Projects Button */}
                         <div className="mt-10 md:mt-20">
                             <BackToProjects />

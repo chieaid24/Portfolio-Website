@@ -85,7 +85,7 @@ export default function ClashWidget() {
             <div className="relative w-6 h-6 sm:w-8 sm:h-8">
               <Image
                 src="/about/trophy_1.png"
-                alt="Trophy"
+                alt="Clash Royale trophy"
                 fill
                 className="object-contain"
                 sizes="(min-width: 640px) 32px, 24px" />

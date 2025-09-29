@@ -3,8 +3,15 @@ import RedText from "@/components/RewardRedText"
 import SkillDisplay from "@/components/SkillDisplay"
 
 export const quest_totals = {
-    redtext: 38,
+    // Home: 3 | About: 5 | PMI: 9 | Website: 13 | 3D Tools: 5 | MBDMacro: 7
+    // CURR TOTAL: 42
+    redtext: 42,
+    
+    // CURR TOTAL: 4
     project: 4,
+
+    // Header: 2 | Home: 1 | Footer: 2 | OnePerProject: 4
+    // CURR TOTAL: 9
     link: 9,
 };
 
@@ -21,6 +28,7 @@ export const quest_totals = {
         page_displays: [['/pmi_auto_generator/pmi_card.png', 'Example 3D model with attached PMI'], ['/pmi_auto_generator/pmi_card.png']], // list range(1-2) of lists range(1-2). Bigger list is each Display which contains its path and its subtitle. Subtitle not req. 
         github_link: 'https://github.com/chieaid24/PMI-Auto-Generator-Desc',
         subtitle: "a machinist's best friend", // tagline that appears below the title on the Page
+        summaryMetaData: "PMI Auto Generator speeds up machinist workflows by 30%, automating CAD annotation with Python + AHK." //60-150 character desc. for the SEO (just ask ChatGPT to summarize the project into a few words)
         summary: <> </>, // summary on the landing section of the Page
         tool_paragraphs: [
             <> 
@@ -63,9 +71,10 @@ export const projects = [
         fallback_value: "16,230.00",
         skills_used: ['Python', 'OOP'],
         image: '/pmi_auto_generator/pmi_card.png',
-        page_displays: [['/pmi_auto_generator/pmi_img_1_v6.png', 'Example 3D model with attached PMI'], ['https://www.youtube.com/watch?v=GMJ6381breo', 'Check out the demo video!']],
+        page_displays: [['/pmi_auto_generator/pmi_img_1_v6.png', 'Example 3D model with attached PMI'], ['https://www.youtube.com/watch?v=GMJ6381breo', 'Project demo video!']],
         github_link: 'https://github.com/chieaid24/PMI-Auto-Generator-Desc',
         subtitle: "a machinist's best friend",
+        summaryMetaData: "PMI Auto Generator speeds up machinist workflows by 30%, automating CAD annotation with Python + AHK.",
         summary: <>Manually transferring info from a <RedText rewardId="red:pmi:technical-drawing">technical drawing</RedText> to a 3D <RedText rewardId="red:pmi:CAD-model">CAD model</RedText> can be tedious and the worst part of a machinist&apos;s day. Keep scrolling to find out how I cut production time by <RedText rewardId="red:pmi:30-percent">30 percent</RedText>! </>,
         tool_paragraphs: [
             <>I used <SkillDisplay fileName="Python" project="pmi" /> for the logic and <SkillDisplay fileName="AutoHotKey" project="pmi" /> for easy interfacing with applications. I also utilized MBDVidia&apos;s OCR for data extraction and file conversion.</>,
@@ -104,9 +113,10 @@ export const projects = [
         fallback_value: "17,390.00",
         skills_used: ['React', 'Web Development', 'Full Stack Development'],
         image: '/personal_website/website_card.png',
-        page_displays: [['/personal_website/website_card.png']],
+        page_displays: [['/personal_website/website3-image-1_v5.png', "Phone, tablet, and desktop views of the website"]],
         github_link: 'https://github.com/chieaid24/Personal-Website',
         subtitle: "a portfolio that performs",
+        summaryMetaData: "An interactive Next.js portfolio with gamified balance, slot machine, APIs, and creative UI/UX design.",
         summary: <>A plain resume displaying my projects is boring and, frankly, too easy to make. Find out how I built the <RedText rewardId="red:website:very-website">very website</RedText> you&apos;re on <RedText rewardId="red:website:scratch">from scratch!</RedText> </>,
         tool_paragraphs: [
             <>The main framework I used was <SkillDisplay fileName="Next" project="website" displayName="Next.js" /> with <SkillDisplay fileName="React" project="website" />, styled using <SkillDisplay fileName="Tailwind CSS" project="website" /> and <SkillDisplay fileName="Framer Motion" project="website" />. I also used <SkillDisplay fileName="Node" project="website" displayName="Node.js" /> to connect with REST APIs for real-time updates, <SkillDisplay fileName="Figma" project="website" /> to prototype the interface, <SkillDisplay fileName="Illustrator" project="website" /> to create my logo and other assets, and <SkillDisplay fileName="Amplify" project="website" displayName="AWS Amplify" /> for deployment.</>,
@@ -145,6 +155,7 @@ export const projects = [
         page_displays: [['/printed_tools/keyassembly03.glb'], ['/printed_tools/remoteholder.glb']],
         github_link: 'https://github.com/chieaid24/Design_Portfolio/tree/main/SOLIDWORKS/BUILD%20PICS',
         subtitle: "where form meets functional",
+        summaryMetaData: "Custom 3D printed key and remote holders designed in SOLIDWORKS, combining function, ergonomics, and office branding.",
         summary: <>A messy and unorganized workspace is both <RedText rewardId="red:tools:unprofessional">unprofessional</RedText> and <RedText rewardId="red:tools:inefficient">inefficient</RedText>. Keep reading to find out how I solved problems while creating <RedText rewardId="red:tools:conversation-pieces">conversation pieces</RedText> for the office!</>,
         tool_paragraphs: [
             <>
@@ -179,9 +190,10 @@ export const projects = [
         fallback_value: "17,270.00",
         skills_used: ['AutoHotKey', 'Optimization'],
         image: '/mbd_macro/mbd_card.png',
-        page_displays: [['https://www.youtube.com/watch?v=7-iw15DLMDQ', 'Check out the demo video!']],
+        page_displays: [['https://www.youtube.com/watch?v=7-iw15DLMDQ', 'Project demo video!']],
         github_link: 'https://github.com/chieaid24/MBD-Macro',
         subtitle: "streamlining software to your workflow",
+        summaryMetaData: "An AutoHotKey macro app for MBDVidia that automates annotations, speeding machinist workflows with hotkeys and UI overlays.",
         summary: <>Being a machinist requires you to <RedText rewardId="red:mbd:spend-hours">spend hours</RedText> annotating and processing every part that comes through the shop. I built an app that increases your efficiency by <RedText rewardId="red:mbd:100%">up to 100%</RedText>—keep scrolling to learn more!</>,
         tool_paragraphs: [
             <>The script is built in <SkillDisplay fileName="AutoHotKey" project="mbd" />, a <SkillDisplay fileName="CPP" project="mbd" displayName="C++" /> based scripting language for easy interfacing with applications, and built for Capvidia&apos;s MBDVidia.</>,

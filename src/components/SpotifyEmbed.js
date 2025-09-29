@@ -1,6 +1,5 @@
 'use client'
 // components/SpotifyEmbed.jsx
-import { useEffect, useState } from 'react'
 
 export default function SpotifyEmbed({
   playlistId,        // e.g. "1oQngKRVkU7oI8hmB4hf7i"

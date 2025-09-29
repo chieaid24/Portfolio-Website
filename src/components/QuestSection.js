@@ -85,7 +85,7 @@ export default function QuestSection({ className = "" }) {
 
 
   return (
-    <div className={`pt-2 pb-2 5xl:pt-2 5xl:pb-1 leading-none space-y-2 text-[10px] 5xl:text-[12px]  text-light-grey-text md:text-header-light font-medium tracking-wide ${className} cursor-default
+    <div className={`pt-2 pb-2 5xl:pt-[12px] 5xl:pb-1 leading-none space-y-2 text-[10px] 5xl:text-[12px]  text-light-grey-text md:text-header-light font-medium tracking-wide ${className} cursor-default
                         lg:ml-2 `}>
       <div
         onMouseEnter={() => setHoveredRow('red')}

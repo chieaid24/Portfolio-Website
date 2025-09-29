@@ -83,7 +83,7 @@ export default function RenderPageDisplay({ info, projectTitle }) {
             </div>
             {info[1] && (
                 <div className={`text-light-grey-text mt-1.5 transition-opacity duration-200 italic ${showDescription ? 'opacity-100' : 'opacity-0 duration-200'}}`}>
-                    {info[1]}
+                    <span className="font-semibold">Pictured:</span> {info[1]}
                 </div>
             )}
         </div >
