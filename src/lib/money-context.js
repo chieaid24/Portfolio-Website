@@ -234,10 +234,6 @@ export function MoneyProvider({ children }) {
 
       const allowed = new Set(['redtext', 'project', 'link', 'egg']);
       if (!allowed.has(kind)) {
-        if (process.env.NODE_ENV !== 'production') {
-          // eslint-disable-next-line no-console
-          console.warn(`awardOnce: invalid kind "${kind}" for id "${id}"`);
-        }
         return false;
       }
 

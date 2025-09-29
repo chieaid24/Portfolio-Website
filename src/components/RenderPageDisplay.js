@@ -74,7 +74,10 @@ export default function RenderPageDisplay({ info, projectTitle }) {
                 {isYouTubeVideo(info[0]) ? (
                     <YoutubePlayer urlOrId={info[0]} title={projectTitle} />
                 ) : isGLBFile(info[0]) ? (
+
                     <ModelSection modelPath={info[0]} />
+
+                    
                 ) : (
                     <div className="relative w-full aspect-[16/8] rounded-lg overflow-hidden shadow-lg">
                         <Image src={info[0]} alt={projectTitle} fill className="object-cover object-center scale-100" />

@@ -52,7 +52,6 @@ export default function ClashWidget() {
 
   const player = data?.player
   const deck = player?.currentDeck ?? []
-  const results = data?.battleResults ?? [] // ['win' | 'loss' | 'draw', ...]
 
   const careerWinPercent = useMemo(() => {
     const wins = player?.wins ?? 0;
@@ -61,6 +60,7 @@ export default function ClashWidget() {
   }, [player?.wins, player?.battleCount]);
 
   const summary = useMemo(() => {
+    const results = data?.battleResults ?? []
     let w = 0, l = 0, d = 0
     for (const r of results) {
       if (r === 'win') w++
@@ -69,7 +69,8 @@ export default function ClashWidget() {
     }
     const total = results.length || 1
     return { w, l, d, winRate: pct1(w, total) }
-  }, [results])
+  }, [data?.battleResults])
+
 
   return (
     <div className="rounded-xl bg-background-dark p-3 h-[352px] md:h-[352px] flex flex-col relative overflow-hidden border-1 border-light-grey-text">
