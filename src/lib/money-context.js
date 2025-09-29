@@ -38,7 +38,7 @@ function reducer(state, action) {
       const init = INIT_BAL;
       return {
         balance: init,
-        awarded: {}, // maps id -> kind. Therefore if the key ID exists, then it has be awarded before
+        awarded: {}, // maps id -> kind. Therefore if the key ID exists, then it has be awarded before 
         initBalance: init,
       };
     }
