@@ -111,7 +111,7 @@ export default function ClashWidget() {
               />}
             {player?.clanName ? `${player.clanName}` : 'No clan'}
             <div className="text-light-grey-text text-md font-medium">|</div>
-            {player?.role && <div>{player.role}</div>}
+            {player?.role ? `${player.role}` : 'member'}
           </div>
         </div>
       </div>
@@ -120,11 +120,11 @@ export default function ClashWidget() {
         <div className="flex flex-col ">
           <div className="flex justify-between ">
             <h1>Career wins</h1>
-            <div className="font-black sm:font-bold">{player?.wins ?? '—'}</div>
+            <div className="font-black sm:font-bold">{player?.wins ?? '0'}</div>
           </div>
           <div className="flex justify-between">
             <h1>Career win percentage</h1>
-            <div className="font-black sm:font-bold">{careerWinPercent != null ? `${careerWinPercent}%` : '—'}</div>
+            <div className="font-black sm:font-bold">{careerWinPercent != null ? `${careerWinPercent}%` : '0%'}</div>
           </div>
         </div>
         <div className="flex flex-col">
@@ -188,7 +188,7 @@ export default function ClashWidget() {
 
 
       {/* States */}
-      {error && <div className="mt-3 text-xs text-red-300">{error}</div>}
+      {error && <div className="mt-3 text-sm text-red-300">{error}</div>}
       {!data && !error && (
         <div className="mt-3 text-xs text-neutral-200/70 animate-pulse">
           Loading Clash Royale data…
