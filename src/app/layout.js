@@ -10,6 +10,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Providers from "./providers.js";
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
 const dmSans = DM_Sans({ variable: "--font-dm-sans", subsets: ["latin"] });
 const italiana = Italiana({ subsets: ["latin"], weight: "400", variable: "--font-italiana" });
 const clashFont = localFont({
@@ -56,15 +58,15 @@ export default function RootLayout({ children }) {
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:url" content="https://aidanchien.com" />
+        <meta property="og:image" content="https://aidanchien.com/open_graph/opengraph_image.jpg" />
         <meta property="og:site_name" content="Aidan Chien Portfolio" />
-        <meta property="og:title" content="Aidan Chien's Portfolio" />
-        <meta
-          property="og:description"
-          content="Portfolio of Aidan Chien, displaying software development, mechanical design, and interactive projects."
+        <meta property="og:title" content="Developer & System Designer Showcase" />
+        <meta property="og:description" content="Portfolio of Aidan Chien, displaying software development, mechanical design, and interactive projects."
         />
 
         {/* Twitter */}
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://aidanchien.com/open_graph/opengraph_image.jpg" />
         <meta name="twitter:title" content="Aidan Chien's Portfolio" />
         <meta name="twitter:description" content="Portfolio of Aidan Chien, displaying software development, mechanical design, and interactive projects." />
         {/* Canonical */}
@@ -121,6 +123,7 @@ export default function RootLayout({ children }) {
           </main>
 
         </Providers>
+        <SpeedInsights />
       </body>
     </html>
   );
