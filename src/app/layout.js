@@ -58,17 +58,17 @@ export default function RootLayout({ children }) {
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:url" content="https://aidanchien.com" />
-        <meta property="og:image" content="https://aidanchien.com/open_graph/opengraph_image.jpg" />
+        <meta property="og:image" content="https://aidanchien.com/open_graph/opengraph_image.png" />
         <meta property="og:site_name" content="Aidan Chien Portfolio" />
-        <meta property="og:title" content="Developer & System Designer Showcase" />
-        <meta property="og:description" content="Portfolio of Aidan Chien, displaying software development, mechanical design, and interactive projects."
+        <meta property="og:title" content="AIDAN CHIEN || Developer & Designer" />
+        <meta property="og:description" content="My portfolio displaying software development, mechanical design, and interactive projects."
         />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://aidanchien.com/open_graph/opengraph_image.jpg" />
-        <meta name="twitter:title" content="Aidan Chien's Portfolio" />
-        <meta name="twitter:description" content="Portfolio of Aidan Chien, displaying software development, mechanical design, and interactive projects." />
+        <meta name="twitter:image" content="https://aidanchien.com/open_graph/opengraph_image.png" />
+        <meta name="twitter:title" content="AIDAN CHIEN || Developer & Designer" />
+        <meta name="twitter:description" content="My portfolio displaying software development, mechanical design, and interactive projects." />
         {/* Canonical */}
         <link rel="canonical" href="https://aidanchien.com" />
         {/** JSON-LD */}
