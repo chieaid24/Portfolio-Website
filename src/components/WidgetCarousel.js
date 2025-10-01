@@ -24,7 +24,7 @@ function ArrowButton({ dir = "left", disabled, onClick }) {
         <button
             type="button"
             onClick={handleClick}
-            className="text-neutral-200 dark:text-background-light px-4 py-1 md:px-1 md:py-1 text-sm cursor-pointer disabled:cursor-default disabled:text-neutral-500 dark:disabled:text-neutral-400 disabled:pointer-events-none transition-colors duration-200 hover:bg-black/10 rounded-md"
+            className="text-neutral-300 dark:text-background-light px-4 py-1 md:px-2 md:py-1 text-sm cursor-pointer disabled:cursor-default disabled:text-neutral-600 dark:disabled:text-neutral-400 disabled:pointer-events-none transition-colors duration-200 hover:bg-black/10 rounded-full"
             aria-label={dir === "left" ? "Previous widget" : "Next widget"}
             disabled={disabled}
         >
@@ -51,20 +51,20 @@ export default function WidgetCarousel({
     return (
         <section className={`relative ${className} min-w-[335px] max-w-[540px] h-[384px] md:w-[540px] md:h-[384px]`} aria-roledescription="carousel" aria-label="Widget carousel">
             {/* Header (always visible) */}
-                <header className="bg-dark-grey-text absolute inset-x-0 top-0  z-20 flex items-center justify-center gap-2.5 p-1 overflow-hidden rounded-t-xl">                
-                    <div className="flex items-center gap-3">
+            <header className="bg-dark-grey-text absolute inset-x-0 top-0  z-20 flex items-center justify-center gap-2.5 p-2 overflow-hidden rounded-t-xl">
+                <div className="flex items-center gap-4 outline-2 outline-neutral-600 dark:outline-neutral-400 rounded-xl">
                     {/* Left */}
-                    <div className="flex items-center gap-8">
+                    <div className="flex items-center gap-10">
                         <ArrowButton dir="left" disabled={atStart} onClick={() => goTo(index - 1)} />
 
                         {/* Dots (indicators only; non-interactive) */}
-                        <div className="flex gap-[7px] pointer-events-none select-none" aria-hidden="true">
+                        <div className="flex gap-[8px] pointer-events-none select-none" aria-hidden="true">
                             {items.map((_, i) => (
                                 <CarouselDot
                                     key={i}
                                     className={`w-1.5 h-1.5 transition ${index === i
-                                            ? "dark:text-background-light text-neutral-200 scale-135"   // selected = light
-                                            : "dark:text-neutral-400 text-neutral-500 "   // not selected = grey
+                                        ? "dark:text-background-light text-neutral-300 scale-135"   // selected = light
+                                        : "dark:text-neutral-400 text-neutral-600 "   // not selected = grey
                                         }`}
                                 />
                             ))}

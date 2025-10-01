@@ -5,6 +5,7 @@ import SpotifyEmbed from '@/components/SpotifyEmbed'
 import ChessWidget from "@/components/ChessWidget";
 import ClashWidget from "@/components/ClashWidget";
 import WidgetCarousel from "@/components/WidgetCarousel";
+import Link from "next/link";
 
 export const metadata = {
   title: 'AIDAN CHIEN || About',
@@ -86,7 +87,13 @@ export default function AboutPage() {
                   <li>Mostly bouldering but I&apos;ve done a few outdoor top rope climbs!</li>
                 </ul>
               </li>
-              <li className="list-none lg:list-disc lg:marker:text-xl text-[19px] md:text-[21px] lg:text-[28px] font-medium"> Filmmaking
+              <li className="list-none lg:list-disc lg:marker:text-xl text-[19px] md:text-[21px] lg:text-[28px] font-medium">
+                <Link
+                  href="https://www.youtube.com/@picturingaidanchien"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-90"
+                >Filmmaking</Link>
                 <ul className="flex gap-2 pl-8 text-light-grey-text text-[17px] md:text-xl font-normal">
                   <li>→</li>
                   <li>My preferred mode of creative expression, and I&apos;m always looking for inspiration for my next project!</li>

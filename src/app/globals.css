@@ -5,25 +5,20 @@
 :root {
   --background-light: #FFF3E5;
   --background-dark: #FFEDD8;
-
   --dark-background-light: #3D3E44;
-
   --custom-red: #FF7D7D;
   --custom-light-red: #FFAEAE;
   --corner-orange: #FFC88A;
   --custom-orange: #ffb164;
-
+  --custom-dark-orange: #FFB867;
   --light-grey-text: #919191;
   --card-light-grey: #9C9C9C;
   --dark-grey-text: #383838;
   --dark-grey-footer: #747474;
   --header-light: #B3B3B3;
   --progress-background: #D9D9D9;
-
   --sage-green: #9EE9B4;
-
   color-scheme: light;
-
 }
 
 .dark:root {
@@ -34,7 +29,6 @@
 
   body {
     @apply opacity-0;
-    /* start invisible */
     animation: fadeIn 0.7s ease-in forwards;
   }
 
@@ -69,6 +63,7 @@
   --color-custom-red: var(--custom-red);
   --color-custom-light-red: var(--custom-light-red);
   --color-custom-orange: var(--custom-orange);
+  --color-custom-dark-orange: var(--custom-dark-orange);
   --color-corner-orange: var(--corner-orange);
   --color-light-grey-text: var(--light-grey-text);
   --color-dark-grey-text: var(--dark-grey-text);
@@ -85,14 +80,15 @@
 
   --animate-new-pulse: pulse 1.5s cubic-bezier(0.42, 0, 0.58, 1) infinite;
 
-  --breakpoint-3xl: 120rem;     /* 1920 */
-  --breakpoint-4xl: 135rem;    /* 2160 */
-  --breakpoint-5xl: 160rem;    /* 2560 */
+  --breakpoint-3xl: 120rem;
+  /* 1920 */
+  --breakpoint-4xl: 135rem;
+  /* 2160 */
+  --breakpoint-5xl: 160rem;
+  /* 2560 */
 
 }
 
-
-/* globals.css */
 @layer utilities {
   .fade-in-page {
     @apply opacity-0;
@@ -113,11 +109,9 @@
 
   .text-outline-2 {
     color: #fff;
-    /* white text */
     -webkit-text-stroke: 2px #000;
   }
 
-  /* thinner/thicker variants if you want */
   .text-outline-1 {
     -webkit-text-stroke: 0.25px #000;
   }
@@ -177,7 +171,6 @@
     @variant dark {
       --color-background-light: #3D3E44;
       --color-background-dark: #323339;
-      --color-custom-orange: #FFDBB1;
       --color-dark-grey-text: #EFEFEF;
     }
   }
