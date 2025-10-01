@@ -66,7 +66,7 @@ export default function AboutPage() {
           </section>
 
           {/* Interest Section */}
-          <section className="grid grid-cols-1 place-items-center 5xl:place-items-start pt-4 pb-10  
+          <section className="grid grid-cols-1 place-items-center 5xl:place-items-start pt-10 pb-10  
                           md:pb-20 
                           lg:flex
                           5xl:grid 5xl:grid-cols-2">

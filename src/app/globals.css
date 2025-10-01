@@ -50,15 +50,19 @@
 
   body::before {
     top: -100vh;
-    background-color: theme('colors.red.600');
+    background-color: var(--background-light);
     /* top */
   }
 
   body::after {
     bottom: -100vh;
-    background-color: theme('colors.blue.600');
+    background-color: var(--background-light);
     /* bottom */
   }
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 @theme {

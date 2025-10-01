@@ -6,10 +6,11 @@ import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import BackToProjects from '@/components/BackToProjects';
 import ProjectGithub from "@/icons/ProjectGithub"
 import RenderPageDisplay from "@/components/RenderPageDisplay"
+import FooterGithub from "@/icons/FooterGithub"
 
 // Generate metadata for each project page
 export async function generateMetadata({ params }) {
-    const { slug } = params; // no need for await here since params is synchronous
+    const { slug } = await params; // no need for await here since params is synchronous
     const project = getProjectBySlug(slug);
 
     if (!project) {
@@ -47,13 +48,13 @@ const renderParagraphs = (paragraphs) => {
 };
 
 
-export default function ProjectPage({ params }) {
-    const project = getProjectBySlug(params.slug);
+export default async function ProjectPage({ params }) {
+    const { slug } = await params;
+    const project = getProjectBySlug(slug);
 
     if (!project) {
         notFound();
     }
-    // pt-18 pb-15, mb-20
     return (
         <>
             <div className="pt-20 bg-background-light font-dm-sans text-dark-grey-text min-h-screen">
@@ -71,7 +72,7 @@ export default function ProjectPage({ params }) {
                                     target="_blank"
                                     className="absolute right-0 top-1/2 -translate-y-1/2 w-auto"
                                     rewardId={`${project.slug}:github`}>
-                                    <ProjectGithub className="w-[100px] h-[100px] hover:opacity-80 hover:-translate-y-1 transition duration-200 hidden md:block" />
+                                    <ProjectGithub className="w-[100px] h-[100px] hover:opacity-80 hover:-translate-y-1 transition duration-200 hidden lg:block" />
                                 </RewardLink>
                             </div>
                             <h3 className="italic text-light-grey-text opacity-80 mt-1 text-2xl
@@ -83,7 +84,10 @@ export default function ProjectPage({ params }) {
                                 target="_blank"
                                 className=""
                                 rewardId={`${project.slug}:github`}>
-                                <ProjectGithub className="w-[55px] h-[55x] hover:opacity-80 hover:-translate-y-1 transition duration-200 md:hidden mt-4" />
+                                <div className={`inline-flex items-center gap-2 text-white rounded-md font-semibold bg-custom-red py-1.5 px-1.5 mt-4 lg:hidden ml-[1px]`}>
+                                    <FooterGithub className={`h-[24px] w-[24px]`} aria-hidden="true" />
+                                    <div>View GitHub</div>
+                                </div>
                             </RewardLink>
                         </div>
                         {/**Summary text */}
@@ -97,7 +101,7 @@ export default function ProjectPage({ params }) {
 
                         {/* Tools Used Section */}
                         <section className="mb-20">
-                            <h1 className="font-bold mb-15 text-4xl
+                            <h1 className="font-bold mb-10 text-4xl
                                             md:text-5xl">
                                 What Tools?
                             </h1>
@@ -108,7 +112,7 @@ export default function ProjectPage({ params }) {
 
                         {/** Why This Project */}
                         <section className="mb-15">
-                            <h1 className="font-bold text-4xl md:text-5xl mb-15">
+                            <h1 className="font-bold text-4xl md:text-5xl mb-10">
                                 Why This Project?
                             </h1>
                             <div className='text-2xl font-regular'>
@@ -124,7 +128,7 @@ export default function ProjectPage({ params }) {
 
                         {/**What is it */}
                         <section className="mb-20">
-                            <h1 className="font-bold text-4xl md:text-5xl mb-15">
+                            <h1 className="font-bold text-4xl md:text-5xl mb-10">
                                 What is it?
                             </h1>
                             <div className='text-2xl font-regular'>
@@ -134,7 +138,7 @@ export default function ProjectPage({ params }) {
 
                         {/**what did I learn */}
                         <section>
-                            <h1 className="font-bold text-4xl md:text-5xl mb-15">
+                            <h1 className="font-bold text-4xl md:text-5xl mb-10">
                                 What did I learn?
                             </h1>
                             <div className='text-2xl font-regular'>
