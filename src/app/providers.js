@@ -1,12 +1,16 @@
 'use client';
 import { MoneyProvider } from '@/lib/money-context';
 import { SlotJiggleProvider } from '@/lib/slot-jiggle-context';
+import { ThemeProvider } from "next-themes"
 
 
 export default function Providers({ children }) {
   return (
-    <MoneyProvider>
-      <SlotJiggleProvider>{children}</SlotJiggleProvider>
-    </MoneyProvider>
+    <ThemeProvider
+      attribute="class" defaultTheme="light" enableSystem>
+      <MoneyProvider>
+        <SlotJiggleProvider>{children}</SlotJiggleProvider>
+      </MoneyProvider>
+    </ThemeProvider>
     );
 }

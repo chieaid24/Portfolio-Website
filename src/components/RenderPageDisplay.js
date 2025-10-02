@@ -64,7 +64,7 @@ export default function RenderPageDisplay({ info, projectTitle }) {
     const [imageHovered, setImageHovered] = useState(false);
     const isMobile = useIsMobile();
     const showDescription = isMobile || imageHovered;
-    
+
     return (
         <div className="mb-15" >
             <div
@@ -77,7 +77,7 @@ export default function RenderPageDisplay({ info, projectTitle }) {
 
                     <ModelSection modelPath={info[0]} />
 
-                    
+
                 ) : (
                     <div className="relative w-full aspect-[16/8] rounded-lg overflow-hidden shadow-lg">
                         <Image src={info[0]} alt={projectTitle} fill className="object-cover object-center scale-100" />

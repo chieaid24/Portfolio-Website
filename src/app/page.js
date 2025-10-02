@@ -53,11 +53,12 @@ export default function Home() {
       <>
         <title>AIDAN CHIEN</title>
         <meta name="description" content="Portfolio of Aidan Chien, systems engineer specializing in design and development." />
-        <BottomIntroFade />
+
       </>
       <main className="pt-[15vh] bg-background-dark font-dm-sans text-dark-grey-text
                     md:pt-[11vh]
                     3xl:pt-[14vh]">
+        <BottomIntroFade />
         {/**hero div */}
         <section id="hero" className="relative w-full lg:min-h-[92vh]">
           <MaxWidthWrapper>
@@ -76,9 +77,9 @@ export default function Home() {
                     {` `}Aidan
                   </span>
                   <span className="hidden md:inline">
-                    {` `}Aidan
+                    {` `}Aidan,
                   </span>
-                  ,
+                  
                   <span className="block mt-5 font-medium text-[22px] leading-7.5 opacity-90
                                   md:mt-0 md:inline md:font-semibold md:text-4xl md:opacity-100 md:leading-[45px]">
                     {` `}a systems engineer passionate about efficient <RedText rewardId="red:home:design" weight={"semibold"}>design</RedText> and <RedText rewardId="red:home:development" weight={"semibold"}>development</RedText>.

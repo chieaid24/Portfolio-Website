@@ -38,9 +38,8 @@ function LoaderBar() {
   const { progress, active } = useProgress();
   return (
     <div
-      className={`absolute bottom-0 left-0 w-full h-1 bg-gray-100 transition-opacity duration-500 ${
-        active ? 'opacity-100' : 'opacity-0'
-      }`}
+      className={`absolute bottom-0 left-0 w-full h-1 bg-gray-100 transition-opacity duration-500 ${active ? 'opacity-100' : 'opacity-0'
+        }`}
     >
       <div
         className="h-full bg-gray-500 transition-all duration-200"
@@ -57,6 +56,7 @@ export default function ModelViewer({ modelPath = '/models/keyassembly03.glb' })
 
   const { active } = useProgress();
 
+
   // Preload the model
   React.useEffect(() => {
     useGLTF.preload(modelPath);
@@ -66,9 +66,8 @@ export default function ModelViewer({ modelPath = '/models/keyassembly03.glb' })
     <div className="w-full h-full relative">
       {/* Arrow - positioned absolutely */}
       <div
-        className={`absolute bottom-5 z-10 translate-x-[-18px] transition-opacity ease-in-out ${
-          showDescription ? 'opacity-100 duration-300' : 'opacity-0 duration-300'
-        }`}
+        className={`absolute bottom-5 z-10 translate-x-[-18px] transition-opacity ease-in-out ${showDescription ? 'opacity-100 duration-300' : 'opacity-0 duration-300'
+          }`}
       >
         <ArrowIcon className="scale-80 opacity-90" />
       </div>
@@ -102,9 +101,8 @@ export default function ModelViewer({ modelPath = '/models/keyassembly03.glb' })
       {/* Description */}
       <div>
         <p
-          className={`pt-1 text-xl font-medium text-light-grey-text font-dm-sans transition-opacity ease-in-out ${
-            showDescription ? 'opacity-100 duration-300' : 'opacity-0 duration-300'
-          }`}
+          className={`pt-1 text-xl font-medium text-light-grey-text font-dm-sans transition-opacity ease-in-out ${showDescription ? 'opacity-100 duration-300' : 'opacity-0 duration-300'
+            }`}
         >
           rotate me!
         </p>

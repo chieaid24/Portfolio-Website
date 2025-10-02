@@ -250,8 +250,8 @@ export default function HeroSlot() {
         lg:w-16 lg:h-16 
         5xl:w-20 5xl:h-20 -rotate-90" />
       </div>
-      <div className="grid grid-cols-[minmax(0,4fr)_minmax(0,3fr)] lg:grid-cols-[5fr_3fr] lg:gap-10 5xl:gap-30"> 
-        <div className="self-center translate-x-[50px] lg:translate-x-[180px] 5xl:translate-x-[220px] cursor-default"> 
+      <div className="grid grid-cols-[minmax(0,4fr)_minmax(0,3fr)] lg:grid-cols-[5fr_3fr] lg:gap-10 5xl:gap-30">
+        <div className="self-center translate-x-[50px] lg:translate-x-[180px] 5xl:translate-x-[220px] cursor-default">
           {/* Rotating Text */}
           <RotatingHeroText
             ref={textRef}
@@ -295,6 +295,8 @@ export default function HeroSlot() {
               height={"300"}
               viewBox="0 0 100 270"
               className="absolute translate-x-[25px] translate-y-[-3px] scale-[0.5] lg:translate-x-[45px] lg:translate-y-0 lg:scale-100 5xl:translate-x-[56px] 5xl:scale-125"
+
+
             > {/*lever svg*/}
               <motion.rect
                 ref={leverRef}
@@ -305,6 +307,7 @@ export default function HeroSlot() {
                 fill="#D9D9D9"
                 initial={{ rotate: 30 }}
                 className="translate-x-[-5px] lg:translate-x-[-10px]"
+
               />
             </svg>
           </div>
@@ -314,6 +317,7 @@ export default function HeroSlot() {
             height={"500"}
             viewBox="0 0 150 100"
             className="z-10 translate-x-[-30px] translate-y-[-5px] lg:translate-x-[-49px] lg:translate-y-[-10px] scale-120 lg:scale-100 5xl:scale-125 5xl:translate-x-[-27px] 5xl:translate-y-[-10px]"
+
           > {/**lever ball svg */}
             <defs>
               <filter id="dropShadow" x="-10%" y="-10%" width="120%" height="120%">
@@ -322,9 +326,9 @@ export default function HeroSlot() {
             </defs>
             <motion.circle
               ref={scope}
-              cx={isLgUp ? "50" : '50'}
-              cy={isLgUp ? "-55" : '-55'}
-              r={isLgUp ? "28" : '28'}
+              cx={'50'}
+              cy={'-55'}
+              r={'28'}
               fill="#FF7D7D"
               filter="url(#dropShadow)"
               whileTap={{ scale: 0.9 }}

@@ -29,19 +29,8 @@ export default function RootLayout({ children }) {
   const pathname = usePathname();
 
   return (
-    <html lang="en" className={`${dmSans.variable} text-[16px] bg-background-light`}>
+    <html lang="en" className={`${dmSans.variable} text-[16px] bg-background-light`} suppressHydrationWarning>
       <head>
-        <Script id="theme-init" strategy="beforeInteractive">
-          {`
-            try {
-              var saved = localStorage.getItem('theme');
-              var isDark = saved === 'dark';
-              var root = document.documentElement;
-              root.classList.toggle('dark', isDark);
-              root.style.colorScheme = isDark ? 'dark' : 'light';
-            } catch (_) {}
-          `}
-        </Script>
         {/* Charset & Viewport */}
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
