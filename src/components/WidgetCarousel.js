@@ -77,7 +77,7 @@ export default function WidgetCarousel({
             </header>
 
             {/* Slides: transform-based, no scrolling */}
-            <div className="overflow-hidden rounded-xl translate-y-[21px]">
+            <div className="overflow-hidden rounded-xl translate-y-[29px] md:translate-y-[21px]">
                 <div
                     className="flex w-full transition-transform duration-300 ease-out will-change-transform"
                     style={{ transform: `translateX(-${index * 100}%)` }}

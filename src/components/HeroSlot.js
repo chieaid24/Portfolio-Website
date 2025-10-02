@@ -14,8 +14,8 @@ function useIsLgUp() {
     const mq = window.matchMedia('(min-width: 1024px)'); // Tailwind lg
     const onChange = (e) => setIsLgUp(e.matches);
     setIsLgUp(mq.matches); // initial
-    mq.addEventListener?.('change', onChange) ?? mq.addListener(onChange);
-    return () => mq.removeEventListener?.('change', onChange) ?? mq.removeListener(onChange);
+    mq.addEventListener?.('change', onChange);
+    return () => mq.removeEventListener?.('change', onChange);
   }, []);
   return isLgUp;
 }
@@ -24,6 +24,7 @@ function useIsLgUp() {
 export default function HeroSlot() {
   const textRef = useRef(null);
   const leverRef = useRef(null);
+  const mobileBallRef = useRef(null);
   const shadowRef = useRef(null);
   const leverGroupRef = useRef(null);
   const isLgUp = useIsLgUp();
@@ -158,6 +159,7 @@ export default function HeroSlot() {
     });
   };
 
+
   const pullLever = async () => {
     // Mark as clicked and clear any pending jiggle timeouts
     markClicked();
@@ -218,6 +220,16 @@ export default function HeroSlot() {
         ease: 'easeInOut',
       }
     );
+
+    if (!isLgUp) {
+      const mobileBall = mobileBallRef.current;
+      if (!mobileBall) return;
+      mobileBall.style.display = "none"; // disappears instantly
+      // if you want to bring it back later:
+      setTimeout(() => {
+        mobileBall.style.display = "block";
+      }, duration * 1000);
+    }
 
 
     // Trigger textRef.next() halfway through the animation
@@ -306,17 +318,44 @@ export default function HeroSlot() {
                 height={"270"}
                 fill="#D9D9D9"
                 initial={{ rotate: 30 }}
-                className="translate-x-[-5px] lg:translate-x-[-10px]"
+                className="translate-x-[-5px] lg:translate-x-[-10px] cursor-pointer"
 
               />
             </svg>
+            {/**larger svg for mobile view so lever is easier to click */}
+            {!isLgUp && (
+              <svg
+                width={"60"}
+                height={"60"}
+                viewBox="0 0 50 50"
+                className="z-10 -translate-x-10 -translate-y-13"
+
+              >
+                <motion.circle
+                  ref={mobileBallRef}
+                  cx={'25'}
+                  cy={'20'}
+                  r={'30'}
+                  fill="transparent"
+                  transition={{
+                    type: 'spring',
+                    stiffness: 300,
+                    damping: 20,
+                  }}
+                  className="cursor-pointer"
+                  onClick={pullLever}
+
+                >
+                </motion.circle>
+              </svg>
+            )}
           </div>
 
           <svg
-            width={"150"}
+            width={"100"}
             height={"500"}
-            viewBox="0 0 150 100"
-            className="z-10 translate-x-[-30px] translate-y-[-5px] lg:translate-x-[-49px] lg:translate-y-[-10px] scale-120 lg:scale-100 5xl:scale-125 5xl:translate-x-[-27px] 5xl:translate-y-[-10px]"
+            viewBox="0 0 100 100"
+            className="absolute lg:relative translate-x-[27px] translate-y-[-5px] lg:translate-x-[-49px] lg:translate-y-[-10px] scale-47 lg:scale-100 5xl:scale-125 5xl:translate-x-[-27px] 5xl:translate-y-[-10px]"
 
           > {/**lever ball svg */}
             <defs>
